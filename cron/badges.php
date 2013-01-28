@@ -104,9 +104,9 @@ foreach($database->query("SELECT * FROM badges") as $badge){
 	}
 }
 
-$tocheck = $database->query("SELECT * FROM players WHERE paid = 0 LIMIT 100");
+$tocheck = $database->query("SELECT * FROM players WHERE paid = 0 LIMIT 300");
 foreach($tocheck as $p){
 	$paid = (file_get_contents('http://minecraft.net/haspaid.jsp?user='.$p['username']) == 'true' ? 2 : 1);
-	$database->query("UPDATE players SET paid = $paid WHERE username = $p[username]");
+	$database->query("UPDATE players SET paid = '$paid' WHERE username = '$p[username]'");
 }
 ?>
