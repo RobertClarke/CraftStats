@@ -631,7 +631,7 @@ class csAPI{
 		
 			foreach($dps3 as $user){ // inserting new players and formatting query to create server-player relationships
 				$user = mysql_real_escape_string($user);
-				$this->database->query("INSERT INTO players VALUES ('','$user','$server[ID]')");
+				$this->database->query("INSERT INTO players VALUES ('','$user','$server[ID]',0)");
 				if($first == false){
 					$spvalues .= ' ,';
 				}
