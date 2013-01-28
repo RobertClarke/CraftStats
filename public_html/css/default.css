@@ -136,6 +136,8 @@ button.mcreg-danger:hover{
 #nav{
 	height:30px;
 	border-top:none;
+	padding-left:0px;
+	padding-right:0px;
 }
 
 #nav ul{
@@ -173,10 +175,7 @@ button.mcreg-danger:hover{
 .box{
 	background:#eaeaea;
 	padding:7px;
-	box-shadow:1px 1px 2px white inset;
-	-webkit-box-shadow:1px 1px 2px white inset;
-	border:1px solid #d1d1d1;
-	border-radius:7px;
+	border-bottom:4px solid #d6d6d6;
 	position:relative;
 }
 
@@ -186,7 +185,7 @@ button.mcreg-danger:hover{
 }
 
 .box.inset{
-	background:#dfdfdf;
+	background:#d6d6d6;
 	border:1px solid #ccc;
 	box-shadow:1px 1px 1px #cbcbcb inset;
 	-webkit-box-shadow:1px 1px 1px #cbcbcb inset;
@@ -198,42 +197,6 @@ button.mcreg-danger:hover{
 
 .right{
 	float:right;
-}
-
-.boxmid{
-	border-radius:0px;
-}
-
-.boxleft{
-	border-radius:7px 0px 0px 7px;
-}
-
-.boxright{
-	border-radius:0px 7px 7px 0px;
-	border-left:none;
-}
-
-.boxtop{
-	border-radius:7px 7px 0px 0px;
-	border-bottom:none;
-}
-
-.boxbottom{
-	border-radius:0px 0px 7px 7px;
-}
-
-.boxbottomright{
-	border-radius:0px 0px 7px 0px;
-	border-left:none;
-}
-
-.boxbottomleft{
-	border-radius:0px 0px 0px 7px;
-}
-
-.boxflat{
-	border-radius:0px;
-	border-left:none;
 }
 
 .rotate{
