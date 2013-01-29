@@ -21,7 +21,7 @@ if($auth != '' && stristr($auth,':')){
 		
 		$player = $database->query("SELECT * FROM players WHERE username = '$pn'",db::GET_ROW);
 		if($player['username'] == ''){
-			$database->query("INSERT INTO players VALUES('','$pn','0')");
+			$database->query("INSERT INTO players VALUES('','$pn','0',0)");
 		}
 		
 		header("Location: /player/{$auth[2]}");
