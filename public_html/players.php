@@ -184,10 +184,10 @@ $template->setDesc($playername.' likes to play minecraft! Check out their stats 
 }
 $template->show('header');
 $template->show('nav');
-$template->show('logo');
 ?>
-</div>
-<div id="container" class="clearfix">
+<div class="row">
+	<div class="twelve columns">
+		<div class="twelve columns box">
 
 <?php if($_GET['name'] == '') { ?>
 <div class="box boxtop clearfix" style="padding-left:30px;padding-top:10px;">
@@ -261,10 +261,6 @@ $cip = mysql_real_escape_string($_POST['claimip']);
 	}
 }
 ?>
-
-<div class="box boxtop clearfix" style="padding-left:30px;padding-top:10px;">
-<h2 style="float:left;"><?php echo $playername; ?></h2> 
-
 <?php if($twitter != ''){ ?>
 <div style="float:left;position:relative;top:8px;left:10px;"><a href="https://twitter.com/<?php echo $twitter; ?>" class="twitter-follow-button" data-show-count="true" data-show-screen-name="false" data-lang="en">Follow</a></div>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -280,20 +276,18 @@ if($_SESSION['mcuser'] == $playername){
 	<?php
 }
 ?>
-</div>
+<div class="row">
+	<div class="four columns" style="height:370px;">
+	<h3 style="margin-bottom:25px;text-align:center;"><?php echo $playername; ?></h3> 
+	<img src="/skins.php?user=<?php echo $playername; ?>&size=128" class="skinfront" style="position:absolute;top:70px;left:50%;margin-left:-64px;z-index:10;"/>
+	<img src="/skins.php?user=<?php echo $playername; ?>&size=128&back" class="skinback" style="position:absolute;top:70px;left:50%;margin-left:-64px;z-index:9;"/>
 
-<div class="box <?php echo ($showbadges ? 'boxbottomleft' : 'boxbottom')?> clearfix" style="padding-left:30px;padding-top:10px;<?php echo ($showbadges ? 'width:700px;' : 'width:921px;')?>float:left;height:337px;">
-
-<div class="box boxmiddle inset" style="padding:12px 25px;width:130px;margin:15px -50px 15px 0px;float:left;position:relative;height:280px;">
-	<img src="/skins.php?user=<?php echo $playername; ?>&size=128" class="skinfront" style="margin-top:20px;position:absolute;top:6px;left:25px;z-index:10;"/>
-	<img src="/skins.php?user=<?php echo $playername; ?>&size=128&back" class="skinback" style="margin-top:20px;position:absolute;top:6px;left:25px;z-index:9;"/>
-</div>
-
-<div style="width:200px;float:left;position:relative;left:50px;">
-	<h1 style="font-size:14px;margin-top:11px;">Seen on:</h1>
+	</div>
+	<div class="eight columns">
+	<h1 style="font-size:14px;margin-top:20px;">Seen on:</h1>
 	
-	<div style="height:130px;width:280px;overflow-y:scroll;overflow-x:hidden;">
-	<ul style="position:relative;top:5px;left:27px;font-size:11px;font-weight:bold;margin-bottom:20px;">
+	<div style="height:130px;width:100%;overflow-y:scroll;overflow-x:hidden;">
+	<ul style="position:relative;list-style:none;top:5px;left:5px;font-size:11px;font-weight:bold;margin-bottom:20px;">
 		<?php 
 		$servers = $database->query("SELECT * FROM serverplayers AS sp LEFT JOIN servers AS s ON s.ID = sp.serverID WHERE playerID = '{$player[ID]}' AND s.ID != '' AND found > 0");
 		if(count($servers) == 0){
@@ -305,15 +299,14 @@ if($_SESSION['mcuser'] == $playername){
 		?>
 	</ul>
 	</div>
-	
 	<?php
 	$so = $database->query("SELECT * FROM serverplayers AS sp LEFT JOIN servers AS s ON s.ID = sp.serverID WHERE sp.playerID = '$player[ID]' AND s.ID != '' AND sp.owner = '1'");
 	
 	if($database->num_rows > 0){
 	?>
-	<h1 style="font-size:14px;margin-top:11px;">Owner of:</h1>
-	<div style="height:130px;width:280px;overflow-y:scroll;overflow-x:hidden;">
-	<ul style="position:relative;top:5px;left:27px;font-size:11px;font-weight:bold;">
+	<h1 style="font-size:14px;margin-top:20px;">Owner of:</h1>
+	<div style="height:130px;width:100%;overflow-y:scroll;overflow-x:hidden;">
+	<ul style="position:relative;top:5px;list-style:none;left:5px;font-size:11px;font-weight:bold;">
 		<?php
 		foreach($so as $server){
 			echo '<li style="width:300px;"><img src="/images/flags/'.strtolower($server['country']).'.png" class="flag" style="margin-right:7px;position:relative;top:2px;"/><a href="/server/'.$server['ip'].'">'.$server['ip'].'</a></li>';
@@ -321,14 +314,15 @@ if($_SESSION['mcuser'] == $playername){
 		?>
 	</ul>
 	</div>
+	</div>
 	<?php
 	}
 	?>
 </div>
 
-</div>
+
 <?php if($showbadges){ ?>
-<div class="box boxbottomright badges" style="width:206px;height:340px;float:left;">
+
 <h3 style="font-size:14px;text-align:center;">badges</h3>
 <?php
 	
@@ -336,7 +330,7 @@ if($_SESSION['mcuser'] == $playername){
 		echo '<img  title="'.$b['name'].'" class="pover" data-content="'.str_replace('%PLAYERNAME%',$playername,htmlentities($b['description'])).'" data-trigger="hover" data-placement="top" style="height:87px;width:87px;"src="/images/badges/'.$b['ID'].'.png"/>';
 	}
 ?>
-</div>
+
 <?php } ?>
 <?php /*
 <div <?php echo ($_GET[nofade] == 1 ? '' : 'class="lazyload"'); ?>>
@@ -348,6 +342,12 @@ foreach($database->query("SELECT username FROM players ORDER BY RAND(MINUTE(NOW(
 
 <?php 
 }
+?>
+</div>
+</div>
+</div>
+
+<?
 	$template->show('footer');
 	
 	/*<script type="text/javascript" src="https://www.google.com/jsapi"></script>
