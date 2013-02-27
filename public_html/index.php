@@ -23,65 +23,56 @@ if($_GET['blacklist'] == 2){ echo ('<div class="alert alert-success fade in"><st
 ?>
 
 <div class="servers">
+	<div class="row">
+	  <div class="four columns">
+		<div class="twelve columns box heading">
+		  <h6>featured servers</h6>
+		</div>
+	  </div>
+	</div>
+	<div class="twelve columns box">
+        
         <div class="row">
           <div class="four columns">
-            <div class="twelve columns box heading">
-              <h6>featured servers</h6>
-            </div>
+              <h5 class="subheader">play.mcserver.com</h5>
+              <span class="subtitle">14/100 Players - 100% Uptime</span><br/>
+              <a class="button tiny secondary">1.4.7</a>
+           <a class="button tiny secondary">Hunger Games</a>
+          </div>
+          <div class="four columns">
+              <h5 class="subheader">play.mcserver.com</h5>
+              <span class="subtitle">14/100 Players - 100% Uptime</span><br/>
+              <a class="button tiny secondary">1.4.7</a>
+           <a class="button tiny secondary">Hunger Games</a>
+          </div>
+          <div class="four columns">
+              <h5 class="subheader">play.mcserver.com</h5>
+              <span class="subtitle">14/100 Players - 100% Uptime</span><br/>
+              <a class="button tiny secondary">1.4.7</a>
+           <a class="button tiny secondary">Hunger Games</a>
           </div>
         </div>
         <div class="row">
           <div class="four columns">
-            <div class="twelve columns box">
               <h5 class="subheader">play.mcserver.com</h5>
-              <span class="subtitle">14/100 Players - 100% Uptime</span>
+              <span class="subtitle">14/100 Players - 100% Uptime</span><br/>
               <a class="button tiny secondary">1.4.7</a>
            <a class="button tiny secondary">Hunger Games</a>
-            </div>
           </div>
           <div class="four columns">
-            <div class="twelve columns box">
               <h5 class="subheader">play.mcserver.com</h5>
-              <span class="subtitle">14/100 Players - 100% Uptime</span>
+              <span class="subtitle">14/100 Players - 100% Uptime</span><br/>
               <a class="button tiny secondary">1.4.7</a>
            <a class="button tiny secondary">Hunger Games</a>
-            </div>
           </div>
           <div class="four columns">
-            <div class="twelve columns box">
               <h5 class="subheader">play.mcserver.com</h5>
-              <span class="subtitle">14/100 Players - 100% Uptime</span>
+              <span class="subtitle">14/100 Players - 100% Uptime</span><br/>
               <a class="button tiny secondary">1.4.7</a>
-           <a class="button tiny secondary">Hunger Games</a>
-            </div>
+			<a class="button tiny secondary">Hunger Games</a>
           </div>
         </div>
-        <div class="row">
-          <div class="four columns">
-            <div class="twelve columns box">
-              <h5 class="subheader">play.mcserver.com</h5>
-              <span class="subtitle">14/100 Players - 100% Uptime</span>
-              <a class="button tiny secondary">1.4.7</a>
-           <a class="button tiny secondary">Hunger Games</a>
-            </div>
-          </div>
-          <div class="four columns">
-            <div class="twelve columns box">
-              <h5 class="subheader">play.mcserver.com</h5>
-              <span class="subtitle">14/100 Players - 100% Uptime</span>
-              <a class="button tiny secondary">1.4.7</a>
-           <a class="button tiny secondary">Hunger Games</a>
-            </div>
-          </div>
-          <div class="four columns">
-            <div class="twelve columns box">
-              <h5 class="subheader">play.mcserver.com</h5>
-              <span class="subtitle">14/100 Players - 100% Uptime</span>
-              <a class="button tiny secondary">1.4.7</a>
-           <a class="button tiny secondary">Hunger Games</a>
-            </div>
-          </div>
-        </div>
+	</div>
         <div class="row">
           <div class="six columns theading">
             <div class="twelve columns box heading">
@@ -97,8 +88,7 @@ if($_GET['blacklist'] == 2){ echo ('<div class="alert alert-success fade in"><st
                 <tr>
                   <th>Connect to</th>
                   <th>Uptime</th>
-                  <th>Players Online</th>
-                  <th>Last Ping</th>
+                  <th>Players</th>
                 </tr>
               </thead>
               <tbody>
@@ -166,10 +156,10 @@ $servers = FosMerge($servers,$sponsored);
 }
 $time = time();
 foreach($servers as $server){
-	echo '<tr onclick="document.location=\'/server/'.$server['ip'].'\';" '.($server['st'] > $time ? 'style="background-color:#f5f5f5;"':'').'class="slink">
-	<td> '.$server['ip'].' '.($server['version'] != '' ? '<div style="float:right;margin-left:7px;"><a href="/version/'.$server['version'].'"><span class="button tiny">'.$server['version'].'</span></a></div>' : '').' 
+	echo '<tr onclick="document.location=\'/server/'.$server['ip'].'\';" class="slink '.($server['uptime'] <= 0 ? 'down':'').'">
+	<td> '.($server['st'] > time() ? '&#9733;':'').' '.$server['ip'].' '.($server['version'] != '' ? '<div style="float:right;margin-left:7px;"><a href="/version/'.$server['version'].'"><span class="button tiny">'.$server['version'].'</span></a></div>' : '').' 
 	'.($server['category'] != '' ? '<div style="float:right;margin-left:7px;"><a href="/category/'.$server['category'].'"><span class="button tiny">'.$server['category'].'</span></a></div>' : '').'
-	'.($server['advCheck'] == 2 ? '<div style="float:right;"><span class="button tiny">DirtBlock</span></div>' : '').'</td><td><span style="padding:3px 0px;display:block;width:50px !important;text-align:center;" class="button tiny '.($server['uptime'] <= 0 ? 'alert' : ($server['uptimeavg'] > 90 ? 'success' : ($server['uptimeavg'] > 70 ? 'secondary' : ($server['uptimeavg'] > 50 ? 'secondary' : 'alert')))).'">'.($server['uptime'] <= 0 ? 'down' : $server['uptimeavg'].'%').'</span></td><td>'.$server['cp'].' / '.$server['mp'].'</td><td>'.($time - $server['lastUpdate'] > 60 ? round(($time - $server['lastUpdate'])/60).'m' : $time - $server['lastUpdate'].'s').'</td></tr>';
+	'.($server['advCheck'] == 2 ? '<div style="float:right;"><span class="button tiny">DirtBlock</span></div>' : '').'</td><td><span style="padding:3px 0px;display:block;width:50px !important;text-align:center;" class="button tiny '.($server['uptime'] <= 0 ? 'alert' : ($server['uptimeavg'] > 90 ? 'success' : ($server['uptimeavg'] > 70 ? 'secondary' : ($server['uptimeavg'] > 50 ? 'secondary' : 'alert')))).'">'.($server['uptime'] <= 0 ? 'down' : $server['uptimeavg'].'%').'</span></td><td>'.$server['cp'].' / '.$server['mp'].'</td></tr>';
 }
 
 ?>
