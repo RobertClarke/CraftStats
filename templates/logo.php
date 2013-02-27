@@ -5,8 +5,19 @@
 echo 'currently tracking <div class="spinner0 spinner"></div> players on <div class="spinner1 spinner"></div> servers with <div class="spinner2 spinner"></div> plugins'; ?></div>
 </div>
 <div class="box boxmiddle clearfix" style="width:338px;height:270px;float:right;margin-top:5px;">
-
-<a href="/refer.php?url=bit.ly/SowYaa"><img src="/images/mclayerad.png" style="margin:10px auto;display:block;width:300px;height:250px;" /></a>
+	<div style="margin:10px auto;display:block;width:300px;height:250px;" />
+		<script type="text/javascript"><!--
+			google_ad_client = "ca-pub-8782622759360356";
+			/* CraftStats Home Large Square */
+			google_ad_slot = "9484045437";
+			google_ad_width = 300;
+			google_ad_height = 250;
+			//-->
+			</script>
+			<script type="text/javascript"
+			src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+			</script>
+	</div>
 </div>
 <?php }else{ ?>
 <a href="/" alt="home"><div id="logo" style="float:left;margin:20px 20px 30px 20px;background:url(/images/cstatssmall.png) no-repeat;width:399px;height:58px;"></div></a>

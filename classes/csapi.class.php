@@ -301,7 +301,7 @@ class csAPI{
 				if(!isset($_SESSION['mcuser'])){
 					$this->database->query("UPDATE users SET mcuser = '$user' WHERE id = '$_SESSION[id]'");
 				}
-				file_get_contents('http://199.241.28.223/api.php?a=2&ip='.$info['votifierIP'].'&user='.$user.'&port='.$info['votifierPort'].'&key='.base64_encode($info['votifierKey']));
+				file_get_contents('http://192.119.145.28/api.php?a=2&ip='.$info['votifierIP'].'&user='.$user.'&port='.$info['votifierPort'].'&key='.base64_encode($info['votifierKey']));
 			}
 			$this->database->query("INSERT INTO uservotes VALUES('$_SESSION[id]','$sid','$time')");
 		}else{
@@ -830,7 +830,7 @@ class csAPI{
 		$this->log->log('generic','action',print_r($result,true));
 		
 		return $result;*/
-		return json_decode(file_get_contents('http://199.241.28.223/api.php?a=1&ip='.$ip.'&l='.$level),true);
+		return json_decode(file_get_contents('http://192.119.145.28/api.php?a=1&ip='.$ip.'&l='.$level),true);
 	}
 	
 	private function formatResponse($status,$info,$extra = ''){
