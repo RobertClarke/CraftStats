@@ -4,7 +4,7 @@
 Powered by <a href="http://twitter.com/redream_">@redream_</a> and <a href="http://twitter.com/robertjfclarke">@RobertJFClarke</a>
 
 <br/>
-<span style="color:#888;">hosted by <a href="http://rjfc.net/vpshosting" style="color:#666;">RamNode</a> & <a href="http://roberthost.com" style="color:#666;">RobertHost</a></span><br/>
+<span style="color:#888;">hosted by <a href="http://servercrate.com" style="color:#666;">ServerCrate</a></span><br/>
 <span style="color:#888;">inspired by <a href="http://mcservers.org" style="color:#666;">mcservers.org</a></span><br/>
 <br/>
 <a href="https://twitter.com/craftstats_" class="twitter-follow-button" data-show-count="true" data-lang="en">Follow @craftstats_</a>
