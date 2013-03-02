@@ -1,22 +1,6 @@
 <?php
 include '../inc/global.inc.php';
 
-if($_GET['skins'] == 1){
-$template->setTitle('Player Skins');
-
-$template->show('header');
-$template->show('nav');
-$template->show('logo');
-	?>
-<div style="margin-top:50px;" <?php echo ($_GET[nofade] == 1 ? '' : 'class="lazyload"'); ?>>
-<?php
-foreach($database->query("SELECT username FROM players ORDER BY RAND(MINUTE(NOW())) LIMIT 0,600") as $player){
-	echo '<img style="margin-bottom:-7px;" src="http://mag.racked.eu/tools/avatar.php?size=32&forceImage&name='.$player['username'].'"/>';
-}
-?></div> 
-
-<?php
-}else{
 
 if($_GET['name'] == ''){
 $time = time();
@@ -169,6 +153,7 @@ if($database->num_rows == 0){
 $playername = $player['username'];
 $showbadges = false;
 $user = $database->query("SELECT id, username FROM users WHERE mcuser = '$playername'",db::GET_ROW);
+
 if($database->num_rows != 0){
 	$userid = $user['id'];
 	$twitter = $user['username'];
@@ -261,10 +246,6 @@ $cip = mysql_real_escape_string($_POST['claimip']);
 	}
 }
 ?>
-<?php if($twitter != ''){ ?>
-<div style="float:left;position:relative;top:8px;left:10px;"><a href="https://twitter.com/<?php echo $twitter; ?>" class="twitter-follow-button" data-show-count="true" data-show-screen-name="false" data-lang="en">Follow</a></div>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-<?php } ?>
 
 <?php
 if($_SESSION['mcuser'] == $playername){
@@ -327,62 +308,17 @@ if($_SESSION['mcuser'] == $playername){
 <?php
 	
 	foreach($badges as $b){
-		echo '<img  title="'.$b['name'].'" class="pover" data-content="'.str_replace('%PLAYERNAME%',$playername,htmlentities($b['description'])).'" data-trigger="hover" data-placement="top" style="height:87px;width:87px;"src="/images/badges/'.$b['ID'].'.png"/>';
+		echo '<img   class="has-tip tip-left" data-width="120" title="'.$b['name'].': '.str_replace('%PLAYERNAME%',$playername,htmlentities($b['description'])).'" style="height:87px;width:87px;margin:0px 7px;"src="/images/badges/'.$b['ID'].'.png"/>';
 	}
 ?>
 
-<?php } ?>
-<?php /*
-<div <?php echo ($_GET[nofade] == 1 ? '' : 'class="lazyload"'); ?>>
-<?php
-foreach($database->query("SELECT username FROM players ORDER BY RAND(MINUTE(NOW())) LIMIT 0,3000") as $player){
-	echo '<img style="margin-bottom:-7px;" src="http://mag.racked.eu/tools/avatar.php?size=128&forceImage&name='.$player['username'].'"/>';
-}
-?></div> */ ?>
-
-<?php 
+<?php } 
 }
 ?>
 </div>
 </div>
 </div>
-
+</div>
 <?
 	$template->show('footer');
-	
-	/*<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-		var data = new google.visualization.DataTable();
-        data.addColumn("datetime", "Time");
-        data.addColumn("number", "Online Players (Worldwide)");
-		data.addColumn("number", "Online Players (American Servers)");
-		data.addColumn("number", "Online Players (European Servers)");
-		data.addColumn("number", "Online Players (Asian Servers)");
-		data.addColumn("number", "Online Players (Oceanian Servers)");
-		data.addRows([
-          '.$rows.'
-        ]);
-		
-		var options = {
-          title: \'\',
-		  focusTarget: \'category\',
-		  curveType: "function",
-		  interpolateNulls: false,
-		  backgroundColor: \'transparent\',
-		  vAxis: {viewWindow:{min:0}},
-		  hAxis: { format: \'d MMM\' },
-		  legend: {position:\'bottom\'},
-		  chartarea:{width:\'100%\',height:\'80%\'},
-		  width:1120,
-		  height:400,
-        };
-		
-		var chart = new google.visualization.AreaChart(document.getElementById(\'chart_div\'));
-        chart.draw(data, options);
-      }
-    </script>*/
-	}
 ?>

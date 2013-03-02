@@ -9,7 +9,7 @@
   <!-- Set the viewport width to device width for mobile -->
   <meta name="viewport" content="width=device-width" />
 
-  <title>CraftStats</title>
+  <title><?php echo $this->title; ?></title>
 
   
   <!-- Included CSS Files (Compressed) -->
@@ -20,6 +20,12 @@
     #wrap {display:table;height:100%}
   </style>
 <![endif]-->
-
-  <script src="/Wjavascripts/modernizr.foundation.js"></script>
+	  <!-- Included JS Files (Compressed) -->
+  <script src="/javascripts/jquery.js"></script>
+  <script src="/javascripts/foundation.min.js"></script>
+  
+  <!-- Initialize JS Plugins -->
+  <script src="/javascripts/app.js"></script>
+  <script src="/javascripts/modernizr.foundation.js"></script>
+  <?php echo $this->headscripts; ?>
 </head>

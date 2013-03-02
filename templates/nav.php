@@ -6,12 +6,12 @@
   <div id="wrap">
     <div class="row" id="main">
     
-    <div class="three columns">
+    <div class="three columns sidecontainer">
       <div class="row"> 
         <a href="/"><div class="twelve columns box logo">
         </div></a>
       </div>
-      <div class="row"> 
+      <div class="row sidebar"> 
         <div class="twelve columns box">
           <h6 class="subheader">Find a server</h6>
           <div class="row collapse">
@@ -90,7 +90,7 @@
               <!-- Right Nav Section -->
               <ul class="right">
                 <li>
-                  <a href="#">login</a>
+                  <a href="/oauth.php?login=twitter">login</a>
                 </li>
               </ul>
             </section>

@@ -6,25 +6,31 @@
         made by <a href="http://twitter.com/redream_" target="_new">redream</a>
       </div>
       <div class="five columns">
-        &lt;'s to <a href="http://twitter.com/robertjfclarke" target="_new">robertjfclarke</a>, <a href="http://mcservers.org" target="_new">mcservers</a> and <a href="http://ramnode.com" target="_new">ramnode</a>
+        &lt;3's to <a href="http://twitter.com/robertjfclarke" target="_new">robertjfclarke</a>, <a href="http://mcservers.org" target="_new">mcservers</a> and <a href="http://ramnode.com" target="_new">ramnode</a>
       </div>
     </div>
   </div>
   
   
-  <!-- Included JS Files (Compressed) -->
-  <script src="/javascripts/jquery.js"></script>
-  <script src="/javascripts/foundation.min.js"></script>
-  
-  <!-- Initialize JS Plugins -->
-  <script src="/javascripts/app.js"></script>
+
 
   
     <script>
     $(window).load(function(){
-      $("#featured").orbit();
+		$("#featured").orbit();
+		
     });
+	jQuery(document).ready(function($) {
+		$(window).scroll(function () { 
+			if ($(this).scrollTop() > 75) {
+				$('.sidebar').addClass('sidebar-stick');
+			} else {
+				$('.sidebar').removeClass('sidebar-stick');
+			}
+		});
+	});
     </script> 
+	
 	<script type="text/javascript">
   var uvOptions = {};
   (function() {
@@ -33,6 +39,8 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
   })();
 </script>
+
+
   
 </body>
 <!-- this has absolutely nothing to do with bundlebyte or simplenode. Just to prove my point, here's a velociraptor:
