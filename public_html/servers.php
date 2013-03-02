@@ -34,7 +34,7 @@ if($isowner){
 
 if($isowner && $_POST['votip'] != ''){
 $vottry = 1;
-	$votfail = file_get_contents('http://199.241.28.223/api.php?a=2&ip='.$_POST[votip].'&user=CraftStats&port='.$_POST[votport].'&key='.base64_encode($_POST[votkey]));
+	$votfail = file_get_contents('http://192.119.145.28/api.php?a=2&ip='.$_POST[votip].'&user=CraftStats&port='.$_POST[votport].'&key='.base64_encode($_POST[votkey]));
 	if($votfail == 'true')$database->query("UPDATE servers SET votifierIP = '$_POST[votip]', votifierPort = '$_POST[votport]', votifierKey = '$_POST[votkey]' WHERE (resolved = '$_GET[ip]' AND resolved != '') OR ip = '$_GET[ip]'");
 }
 

@@ -206,7 +206,7 @@ class csAPI{
 			$maxupdates = round(($execinterval)/(($prv['avgTime'] == 0 ? 1000 : $prv['avgTime'])*1.1));
 			$svcount = $this->database->query("SELECT COUNT(*) AS svcount FROM servers WHERE $time - lastUpdate > 60 AND id % $totalthreads >= $thread AND id % $totalthreads <= $thread + {$this->threads} - 1 ",db::GET_ROW);
 			$info = $this->database->query("SELECT COUNT(*) as c FROM servers",db::GET_ROW);
-			$servers = $info['c'];
+			$servers = round($info['c']/count($slaves));
 			array_push($final,array($time,(int)$svcount['svcount'],(int)$servers,$maxupdates,$i));
 			
 			$i++;

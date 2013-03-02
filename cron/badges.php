@@ -109,4 +109,6 @@ foreach($tocheck as $p){
 	$paid = (file_get_contents('http://minecraft.net/haspaid.jsp?user='.$p['username']) == 'true' ? 2 : 1);
 	$database->query("UPDATE players SET paid = '$paid' WHERE username = '".mysql_real_escape_string($p['username'])."'");
 }
+
+$database->query("DELETE FROM players WHERE paid = 1");
 ?>
