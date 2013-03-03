@@ -138,7 +138,10 @@ $.plot($("#pie1"), ['.$series4.'],
                 innerRadius: 0.5,
                 show: true
             }
-        }
+        },
+		legend:{
+		position:"se"
+		}
 });
 
 $.plot($("#pie2"), ['.$series5.'],
@@ -148,7 +151,10 @@ $.plot($("#pie2"), ['.$series5.'],
                 innerRadius: 0.5,
                 show: true
             }
-        }
+        },
+		legend:{
+		position:"se"
+		}
 });
 
 });
@@ -204,27 +210,35 @@ $template->show('nav');
 		<div class="twelve columns box">
 
 <?php if($_GET['name'] == '') { ?>
-<div class="box boxtop clearfix" style="padding-left:30px;padding-top:10px;">
-<h2 style="float:left;">Minecraft Statistics</h2>
-<div style="float:left;margin-left:20px;margin-top:9px;">
-<a href="https://twitter.com/share" class="twitter-share-button"  data-lang="en">Tweet</a>
-<div class="fb-like" style="margin-left:-15px;position:relative;bottom:3px;margin-right:15px;" data-href="http://craftstats.org/players.php" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="arial"></div>
-<div id="fb-root"></div>
-</div></div>
-<div class="box boxbottom clearfix" style="padding-left:30px;padding-top:10px;min-height:410px;">
-<h2 style="margin-left:120px;margin-top:20px;margin-bottom:-10px;">48H Player Activity</h2>
-<div id="chart_div" style="width:900px;height:300px;margin-top:20px;"></div>
-<h2 style="margin-left:135px;margin-top:20px;margin-bottom:-10px;float:left;">Version Adoption</h2>
-<h2 style="margin-left:230px;margin-top:20px;margin-bottom:-10px;float:left;">Server OS Usage</h2>
-<div id="chart_div2" style="width:435px;height:300px;margin-top:20px;margin-left:11px;float:left;"></div>
-
-<div id="chart_div3" style="width:435px;height:300px;margin-top:20px;margin-left:11px;float:left;"></div>
-
-<h2 style="margin-left:135px;margin-top:20px;margin-bottom:-10px;float:left;">Client Mods</h2>
-<h2 style="margin-left:230px;margin-top:20px;margin-bottom:-10px;float:left;">Texture Pack Usage</h2>
-<div id="pie1" width="435" height="300" style="width:435px;height:300px;margin-top:20px;margin-left:11px;float:left;"></div>
-<div id="pie2" width="435" height="300" style="width:435px;height:300px;margin-top:20px;margin-left:11px;float:left;"></div>
+<div class="row">
+<h2 style="text-align:center;">Minecraft Statistics</h2>
 </div>
+
+<div class="row">
+	<h5 style="text-align:center;">48H Player Activity</h5>
+	<div id="chart_div"  style="width:600px;height:280px;margin:20px 30px;float:left;"></div>
+</div>
+
+<div class="row">
+	<h5 style="text-align:center;">Version Adoption</h5>
+	<div id="chart_div2"  style="width:600px;height:280px;margin:20px 30px;float:left;"></div>
+</div>
+<div class="row">
+	<h5 style="text-align:center;">Server OS Usage</h5>
+	<div id="chart_div3"  style="width:600px;height:280px;margin:20px 30px;float:left;"></div>
+</div>
+
+<div class="row">
+	<div class="six columns">
+		<h5 style="text-align:center;">Client Mods</h5>
+		<div id="pie1"  style="width:290px;height:280px;margin:20px auto;float:left;"></div>
+	</div>
+	<div class="six columns">
+		<h5 style="text-align:center;">Texture Pack Usage</h5>
+		<div id="pie2"  style="width:290px;height:280px;margin:20px auto;float:left;"></div>
+	</div>
+</div>
+
 
 <?php }else{ ?>
 
