@@ -23,7 +23,7 @@ if($_GET['blacklist'] == 2){ echo ('<div class="alert alert-success fade in"><st
 ?>
 
 <div class="servers">
-	<div class="row">
+	<!--<div class="row">
 	  <div class="four columns">
 		<div class="twelve columns box heading">
 		  <h6>featured servers</h6>
@@ -72,7 +72,7 @@ if($_GET['blacklist'] == 2){ echo ('<div class="alert alert-success fade in"><st
 			<a class="button tiny secondary">Hunger Games</a>
           </div>
         </div>
-	</div>
+	</div>-->
         <div class="row">
           <div class="six columns theading">
             <div class="twelve columns box heading">
