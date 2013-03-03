@@ -74,16 +74,16 @@
               <!-- Left Nav Section -->
               <ul class="left">
                 <li>
-                  <a class="active" href="#">get more players</a>
+                  <a class="active" href="/promote">get more players</a>
                 </li>
                 <li>
                   <a href="#">downtime alerts</a>
                 </li>
                 <li>
-                  <a href="#">stats</a>
+                  <a href="/players">stats</a>
                 </li>
                 <li>
-                  <a href="#">hosting reviews</a>
+                  <a href="/hosting#">hosting reviews</a>
                 </li>
               </ul>
 
