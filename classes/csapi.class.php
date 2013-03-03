@@ -206,7 +206,7 @@ class csAPI{
 			$maxupdates = round(($execinterval)/(($prv['avgTime'] == 0 ? 1000 : $prv['avgTime'])*1.1));
 			$svcount = $this->database->query("SELECT COUNT(*) AS svcount FROM servers WHERE $time - lastUpdate > 60 AND id % $totalthreads >= $thread AND id % $totalthreads <= $thread + {$this->threads} - 1 ",db::GET_ROW);
 			$info = $this->database->query("SELECT COUNT(*) as c FROM servers",db::GET_ROW);
-			$servers = $info['c'];
+			$servers = round($info['c']/count($slaves));
 			array_push($final,array($time,(int)$svcount['svcount'],(int)$servers,$maxupdates,$i));
 			
 			$i++;
@@ -301,7 +301,7 @@ class csAPI{
 				if(!isset($_SESSION['mcuser'])){
 					$this->database->query("UPDATE users SET mcuser = '$user' WHERE id = '$_SESSION[id]'");
 				}
-				file_get_contents('http://199.241.28.223/api.php?a=2&ip='.$info['votifierIP'].'&user='.$user.'&port='.$info['votifierPort'].'&key='.base64_encode($info['votifierKey']));
+				file_get_contents('http://192.119.145.28/api.php?a=2&ip='.$info['votifierIP'].'&user='.$user.'&port='.$info['votifierPort'].'&key='.base64_encode($info['votifierKey']));
 			}
 			$this->database->query("INSERT INTO uservotes VALUES('$_SESSION[id]','$sid','$time')");
 		}else{
@@ -830,7 +830,7 @@ class csAPI{
 		$this->log->log('generic','action',print_r($result,true));
 		
 		return $result;*/
-		return json_decode(file_get_contents('http://199.241.28.223/api.php?a=1&ip='.$ip.'&l='.$level),true);
+		return json_decode(file_get_contents('http://192.119.145.28/api.php?a=1&ip='.$ip.'&l='.$level),true);
 	}
 	
 	private function formatResponse($status,$info,$extra = ''){

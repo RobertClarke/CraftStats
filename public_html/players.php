@@ -25,14 +25,25 @@ foreach($data as $row){
 
 $series1 = '{data:['.$r0.'],label:"Total Players Online"},{data:['.$r1.'],label:"Players on American Servers"},{data:['.$r2.'],label:"Players on European Servers"},{data:['.$r3.'],label:"Players on Asian Servers"}';
 
-$data = $database->query("SELECT SUM(amount) AS sum, time FROM playerevent GROUP BY time ORDER BY time DESC LIMIT 1,31");
+//$data = $database->query("SELECT SUM(amount) AS sum, time FROM playerevent GROUP BY time ORDER BY time DESC LIMIT 1,31");
 
-foreach($data as $row){
-	$g3 .= $first4.'['.($row['time']*86400000).','.$row['sum'].']';
-	$first4 = ',';
-}
+//foreach($data as $row){
+	//$g3 .= $first4.'['.($row['time']*86400000).','.$row['sum'].']';
+	//$first4 = ',';
+//}
+$g3='["Win7",19389107],["Linux",11074736],["XP",4495376],["OSX",2142686],["Vista",1741447],["Win8",1672349]';
 
-$series3 = '{data:['.$g3.'],label:"Events Tracked"}';
+$series3 = '{data:['.$g3.'],label:"Server Count"}';
+
+
+$series4 = '{ label: "Vanilla",  data: 70.13},
+{ label: "Forge",  data: 14.94},
+{ label: "MCPVP",  data: 14.92}';
+$series5 = '{ label: "Default",  data: 80.8},
+{ label: "Faithful32",  data: 1.89},
+{ label: "Sphax",  data: 1.74},
+{ label: "Soartex Fanver", data:0.63},
+{ label: "HD Mortal Kombat", data:0.37}';
 $plc = time() - 2592000;
 $a1 = $database->query("SELECT * FROM versions WHERE time > $plc ORDER BY time DESC, percent DESC");
 
@@ -73,6 +84,8 @@ $template->setHeadScripts('
 <script language="javascript" type="text/javascript" src="/js/flot.js"></script>
 <script language="javascript" type="text/javascript" src="/js/flot.time.js"></script>
 <script language="javascript" type="text/javascript" src="/js/flot.stack.js"></script>
+<script language="javascript" type="text/javascript" src="/js/flot.pie.js"></script>
+<script language="javascript" type="text/javascript" src="/js/flot.categories.js"></script>
 <script type="text/javascript">
 $(function () {
 $.plot($("#chart_div"), ['.$series1.'],{
@@ -107,21 +120,37 @@ grid:{
 	}
 	});
 	
-$.plot($("#chart_div3"), ['.$series3.'],{
-	grid:{
+
+
+
+$.plot($("#chart_div3"), ['.$series3.'],{grid:{
 		labelMargin:20
-	},
-	series:{
-		stack:true,
-		lines: { show: true, fill: true, steps: false }
-	},
-	xaxis:{
-		show:false
-	},
-	legend:{
-		position:"nw"
-	}
-	});
+	},series:{bars:{show:true,align:"center"}},
+			xaxis: {
+				mode: "categories",
+				tickLength: 0
+			}});
+
+$.plot($("#pie1"), ['.$series4.'],
+{
+        series: {
+            pie: { 
+                innerRadius: 0.5,
+                show: true
+            }
+        }
+});
+
+$.plot($("#pie2"), ['.$series5.'],
+{
+        series: {
+            pie: { 
+                innerRadius: 0.5,
+                show: true
+            }
+        }
+});
+
 });
 </script>
 
@@ -186,10 +215,15 @@ $template->show('nav');
 <h2 style="margin-left:120px;margin-top:20px;margin-bottom:-10px;">48H Player Activity</h2>
 <div id="chart_div" style="width:900px;height:300px;margin-top:20px;"></div>
 <h2 style="margin-left:135px;margin-top:20px;margin-bottom:-10px;float:left;">Version Adoption</h2>
-<h2 style="margin-left:230px;margin-top:20px;margin-bottom:-10px;float:left;">DirtBlock.com Activity</h2>
+<h2 style="margin-left:230px;margin-top:20px;margin-bottom:-10px;float:left;">Server OS Usage</h2>
 <div id="chart_div2" style="width:435px;height:300px;margin-top:20px;margin-left:11px;float:left;"></div>
 
 <div id="chart_div3" style="width:435px;height:300px;margin-top:20px;margin-left:11px;float:left;"></div>
+
+<h2 style="margin-left:135px;margin-top:20px;margin-bottom:-10px;float:left;">Client Mods</h2>
+<h2 style="margin-left:230px;margin-top:20px;margin-bottom:-10px;float:left;">Texture Pack Usage</h2>
+<div id="pie1" width="435" height="300" style="width:435px;height:300px;margin-top:20px;margin-left:11px;float:left;"></div>
+<div id="pie2" width="435" height="300" style="width:435px;height:300px;margin-top:20px;margin-left:11px;float:left;"></div>
 </div>
 
 <?php }else{ ?>

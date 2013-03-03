@@ -13,7 +13,7 @@ if($_POST['buym'] > 0 && $svvalid){
 	require_once( '../lib/paypal.php' );
 	$r = new PayPal(true);
 	
-	$prices = array(1=>20,2=>35);
+	$prices = array(1=>25,2=>40);
 	
 	$ret = ($r->doExpressCheckout($prices[$_POST['buym']], $_POST['buym'].' Month Promotion for server '.$_POST['promoip']));
 
@@ -44,9 +44,11 @@ if($_GET['paypal'] == 'paid'){
 			$cstats = new TwitterOAuth('HyI8Rfv5NwhU2pP3pZ3TA', 'nKVSmnejMIgRBWZT2ZSOJAHTzslBo2ZmHhqxvG7otM','822604988-MrKWIjH8xH3eb5TvI6d0XIowqnkV3FE1YLE6u2zq','J9TiF64znmZaR3I4zxFAyB0HeNJbvlU8mQCuXbNnd78');
 			
 			$responses = array(
-			'Check out this server! http://cstats.co/'.$sv['ip'],
-			'This server looks pretty awesome! http://cstats.co/'.$sv['ip'],
-			'This is a great server: http://cstats.co/'.$sv['ip']);
+			'Check out this Minecraft server! http://cstats.co/'.$sv['ip'],
+			'This  Minecraft server looks pretty awesome! http://cstats.co/'.$sv['ip'],
+			'This is a great Minecraft server http://cstats.co/'.$sv['ip'],
+			'If you have a second be sure to say hi to this Minecraft server http://cstats.co/'.$sv['ip'],
+			'This Minecraft server gets the thumbs up from CraftStats http://cstats.co/'.$sv['ip']);
 			$cstats->post('statuses/update', array('status' => $responses[array_rand($responses)])); 
 			
 			$stime = ($order['length']*60*60*24*31) + max($sv['sponsorTime'],time());
@@ -96,6 +98,7 @@ if($database->num_rows < 18){
 }else{
 	$instock = false;
 }
+//$instock = false;
 ?>
 	<div class="box boxtop clearfix" style="padding-left:30px;padding-top:10px;">
 <h2 style="float:left;">Promote a Server</h2>
@@ -129,7 +132,7 @@ if($database->num_rows < 18){
 		<div style="width:240px;float:right;" class="clearfix">
 			<div class="box boxmiddle inset" style="padding:12px 25px;height:170px;width:150px;margin:15px 0px;position:relative;">
 				<h2 style="text-align:center;margin-bottom:-10px;" >One Month</h2>
-				<h2 style="text-align:center;color:#3A87AD;font-size:42px;font-weight:bold;">$20</h2>
+				<h2 style="text-align:center;color:#3A87AD;font-size:42px;font-weight:bold;">$25</h2>
 				<?php echo ($instock?'<form class="form-inline" action="/promote" method="post">':''); ?>
 					<input type="hidden" name="buym" value="1">
 					<input type="text" name="promoip" class="input-medium" placeholder="Server IP"  value="<?php if($_POST['buym'] == 1)echo $_POST['promoip']; ?>" style="position:relative;right:7px;margin-bottom:7px;">
@@ -139,7 +142,7 @@ if($database->num_rows < 18){
 			
 			<div class="box boxmiddle inset" style="padding:12px 25px;height:170px;width:150px;margin:15px 0px;position:relative;">
 				<h2 style="text-align:center;margin-bottom:-10px;">Two Months</h2>
-				<h2 style="text-align:center;color:#3A87AD;font-size:42px;font-weight:bold;">$35</h2>
+				<h2 style="text-align:center;color:#3A87AD;font-size:42px;font-weight:bold;">$40</h2>
 				<?php echo ($instock?'<form class="form-inline" action="/promote" method="post">':''); ?>
 				
 					<input type="hidden" name="buym" value="2">
