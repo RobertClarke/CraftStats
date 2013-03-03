@@ -33,19 +33,23 @@
           </div>
           <h6 class="subheader">Server Categories</h6>
           <div class="row collapse tags">
-		   <a href="/" class="button tiny secondary" >Top Ranked</a>
+		   <a href="/" class="button tiny" >Top Ranked</a>
 	<a href="/category/new" class="button tiny secondary" >New</a>
 	<a href="/category/reliable" class="button tiny secondary" >Uptime</a>
 	<a href="/category/active" class="button tiny secondary" >Activity</a>
 	
   <?php $vs = array_reverse($database->query("SELECT version FROM versions ORDER BY time DESC, percent DESC LIMIT 5")); 
+  $first = true;
   foreach($vs as $vb){
-	echo '<a href="/version/'.$vb['version'].'" class="button tiny secondary">'.$vb['version'].'</a>';
+	echo '<a href="/version/'.$vb['version'].'" class="button tiny '.(!$first ? 'secondary':'').'">'.$vb['version'].'</a>';
+	$first = false;
   }
   ?>
   <?php $vs = array_reverse($database->query("SELECT category FROM servers WHERE category != '' GROUP BY category ORDER BY COUNT(category) DESC LIMIT 5")); 
+  $first = true;
   foreach($vs as $vb){
-	echo '<a href="/category/'.$vb['category'].'" class="button tiny secondary" >'.$vb['category'].'</a>';
+	echo '<a href="/category/'.$vb['category'].'" class="button tiny '.(!$first ? 'secondary':'').'" >'.$vb['category'].'</a>';
+	$first = false;
   }
   ?>
           </div>
