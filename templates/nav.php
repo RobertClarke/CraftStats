@@ -1,7 +1,14 @@
 <body>
+  <?php global $index; 
+  if($index){
+?>  <div class="featurebg">
+    
+  </div> <?php } ?>
   <div class="navigation">
     
   </div>
+  
+
 
   <div id="wrap">
     <div class="row" id="main">

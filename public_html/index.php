@@ -1,5 +1,5 @@
 <?php include '../inc/global.inc.php';
-
+$index = true;
 $stats = $database->query("SELECT * FROM sitegrowth ORDER BY time DESC LIMIT 10");
 
 if(strtolower($_GET['cat']) == 'new'){
@@ -23,64 +23,38 @@ if($_GET['blacklist'] == 2){ echo ('<div class="alert alert-success fade in"><st
 ?>
 
 <div class="servers">
-	<!--<div class="row">
-	  <div class="four columns">
-		<div class="twelve columns box heading">
-		  <h6>featured servers</h6>
+	<div class="twelve columns prepromote">
+		<div class="row">
+			<?php
+ echo ($_GET['version'] ? '<h2>'.$_GET['version'].' Minecraft Servers</h2>' : ($_GET['cat'] ? '<h2>'.$_GET['cat'].' Minecraft Servers</h2>':'<h2>Best Minecraft Servers</h2>')); ?>
 		</div>
-	  </div>
+        <div class="row">
+			<div class="four columns">
+				<div class="twelve columns box">
+					<h5 class="subheader">play.mcserver.com</h5>
+					<span class="subtitle">14/100 Players - 100% Uptime</span><br/>
+					<a class="button tiny secondary">1.4.7</a>
+					<a class="button tiny secondary">Hunger Games</a>
+				</div>
+			</div>
+			<div class="four columns">
+				<div class="twelve columns box">
+					<h5 class="subheader">play.mcserver.com</h5>
+					<span class="subtitle">14/100 Players - 100% Uptime</span><br/>
+					<a class="button tiny secondary">1.4.7</a>
+					<a class="button tiny secondary">Hunger Games</a>
+				</div>
+			</div>
+			<div class="four columns">
+				<div class="twelve columns box">
+					<h5 class="subheader">play.mcserver.com</h5>
+					<span class="subtitle">14/100 Players - 100% Uptime</span><br/>
+					<a class="button tiny secondary">1.4.7</a>
+					<a class="button tiny secondary">Hunger Games</a>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="twelve columns box">
-        
-        <div class="row">
-          <div class="four columns">
-              <h5 class="subheader">play.mcserver.com</h5>
-              <span class="subtitle">14/100 Players - 100% Uptime</span><br/>
-              <a class="button tiny secondary">1.4.7</a>
-           <a class="button tiny secondary">Hunger Games</a>
-          </div>
-          <div class="four columns">
-              <h5 class="subheader">play.mcserver.com</h5>
-              <span class="subtitle">14/100 Players - 100% Uptime</span><br/>
-              <a class="button tiny secondary">1.4.7</a>
-           <a class="button tiny secondary">Hunger Games</a>
-          </div>
-          <div class="four columns">
-              <h5 class="subheader">play.mcserver.com</h5>
-              <span class="subtitle">14/100 Players - 100% Uptime</span><br/>
-              <a class="button tiny secondary">1.4.7</a>
-           <a class="button tiny secondary">Hunger Games</a>
-          </div>
-        </div>
-        <div class="row">
-          <div class="four columns">
-              <h5 class="subheader">play.mcserver.com</h5>
-              <span class="subtitle">14/100 Players - 100% Uptime</span><br/>
-              <a class="button tiny secondary">1.4.7</a>
-           <a class="button tiny secondary">Hunger Games</a>
-          </div>
-          <div class="four columns">
-              <h5 class="subheader">play.mcserver.com</h5>
-              <span class="subtitle">14/100 Players - 100% Uptime</span><br/>
-              <a class="button tiny secondary">1.4.7</a>
-           <a class="button tiny secondary">Hunger Games</a>
-          </div>
-          <div class="four columns">
-              <h5 class="subheader">play.mcserver.com</h5>
-              <span class="subtitle">14/100 Players - 100% Uptime</span><br/>
-              <a class="button tiny secondary">1.4.7</a>
-			<a class="button tiny secondary">Hunger Games</a>
-          </div>
-        </div>
-	</div>-->
-        <div class="row">
-          <div class="six columns theading">
-            <div class="twelve columns box heading">
-              <?php
- echo ($_GET['version'] ? '<h6>'.$_GET['version'].' Minecraft Servers</h6>' : ($_GET['cat'] ? '<h6>'.$_GET['cat'].' Minecraft Servers</h6>':'<h6>Best Minecraft Servers</h6>')); ?>
-            </div>
-          </div>
-        </div>
         <div class="row table">
           <div class="twelve columns">
             <table class="twelve">
