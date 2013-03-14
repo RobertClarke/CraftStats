@@ -29,30 +29,22 @@ if($_GET['blacklist'] == 2){ echo ('<div class="alert alert-success fade in"><st
  echo ($_GET['version'] ? '<h2>'.$_GET['version'].' Minecraft Servers</h2>' : ($_GET['cat'] ? '<h2>'.$_GET['cat'].' Minecraft Servers</h2>':'<h2>Best Minecraft Servers</h2>')); ?>
 		</div>
         <div class="row">
+			<?php $sponsoredp = $database->query("SELECT 
+  ID as sid, country, category,
+  name, ip, advCheck,
+  connPlayers AS cp, maxPlayers AS mp, version, motd, lastUpdate, uptimeavg, ranking
+FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 AND sponsorType = 1 ORDER BY sponsorRank DESC, ranking ASC LIMIT 3");
+			foreach($sponsoredp as $sp){
+?>
 			<div class="four columns">
 				<div class="twelve columns box">
-					<h5 class="subheader">play.mcserver.com</h5>
-					<span class="subtitle">14/100 Players - 100% Uptime</span><br/>
-					<a class="button tiny secondary">1.4.7</a>
-					<a class="button tiny secondary">Hunger Games</a>
+					<h5 class="subheader"><?php echo $sp['ip']; ?></h5>
+					<span class="subtitle"><?php echo $sp['cp'].'/'.$sp['mp'].' Players - '.$sp['uptimeavg'].'% Uptime'; ?></span><br/>
+					<?php if($sp['version'] != ''){ ?><a class="button tiny"><?php echo $sp['version']; ?></a><?php } ?>
+					<?php if($sp['category'] != ''){ ?><a class="button tiny"><?php echo $sp['category']; ?></a><?php } ?>
 				</div>
 			</div>
-			<div class="four columns">
-				<div class="twelve columns box">
-					<h5 class="subheader">play.mcserver.com</h5>
-					<span class="subtitle">14/100 Players - 100% Uptime</span><br/>
-					<a class="button tiny secondary">1.4.7</a>
-					<a class="button tiny secondary">Hunger Games</a>
-				</div>
-			</div>
-			<div class="four columns">
-				<div class="twelve columns box">
-					<h5 class="subheader">play.mcserver.com</h5>
-					<span class="subtitle">14/100 Players - 100% Uptime</span><br/>
-					<a class="button tiny secondary">1.4.7</a>
-					<a class="button tiny secondary">Hunger Games</a>
-				</div>
-			</div>
+<?php } ?> 
 		</div>
 	</div>
         <div class="row table">
