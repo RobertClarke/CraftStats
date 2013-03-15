@@ -29,15 +29,14 @@ $template->setHeadScripts('
 </script>');
 $template->show('header');
 $template->show('nav');
-$template->show('logo');
 ?>
-</div>
-<div id="container" class="clearfix">
+<div class="row">
+	<div class="twelve columns">
+		<div class="twelve columns box">
 <?php if($_GET['slug']){ 
 ?>
-<div class="box boxtop clearfix" style="position:relative;width:944px;margin-top:15px;">
 
-<h1 style="margin-left:20px;text-align:left;"><a href="/hosting" style="color:#069;">&laquo;</a><a href="http://<?php echo $h['url']; ?>" style="margin-left:30px;"><?php echo $h['name']; ?></a></h1>
+<h3 style="margin-left:20px;margin-top:30px;text-align:left;"><a href="/hosting" style="color:#069;">&laquo;</a><a href="http://<?php echo $h['url']; ?>" style="margin-left:30px;"><?php echo $h['name']; ?></a></h3>
 
 <div style="position:absolute;top:5px;right:10px;">
 
@@ -53,11 +52,6 @@ $template->show('logo');
 	</div>
 
 </div>
-
-
-</div>
-
-<div class="box boxbottom clearfix" style="padding:30px 0px;">
 
 	<div class="clearfix" style="position:relative;">
 	<style type="text/css">
@@ -76,46 +70,68 @@ $template->show('logo');
 	margin-bottom:20px;
 }
 	</style>
-		<div style="float:left;margin: 0px 30px;font-size:14px;width:530px;" class="hostdesc"><?php echo $h['longdesc']; ?>
+		<div style="margin: 0px 30px;font-size:14px;width:530px;" class="hostdesc"><?php echo $h['longdesc']; ?>
 		<?php
 		$database->query("SELECT * FROM hostreview WHERE hostID = '$h[ID]' AND positive = 1",db::GET_ROW);
 		$rpos = $database->num_rows;
 		$database->query("SELECT * FROM hostreview WHERE hostID = '$h[ID]' AND positive = 0",db::GET_ROW);
 		$rneg = $database->num_rows;
 		?>
-		<br/><br/><b style="font-size:12px;position:absolute;bottom:0px;left:30px;"><i class="icon-info-sign"></i> <?php echo $h['name']; ?> has received <?php echo $rpos; ?> positive and <?php echo $rneg; ?> negative reviews</b></div>
-		<img style="float:right;border:2px solid #ccc; margin:0px 40px;width:280px;height:180px;" src="<?php echo 'http://api.webthumbnail.org?width=280&height=200&format=png&screen=1024&url='.$h['domain']?>"/>
-		
+			<b><?php echo $h['name']; ?> has received <?php echo $rpos; ?> positive and <?php echo $rneg; ?> negative reviews</b></div>
+		<!--<img style="float:right;border:2px solid #ccc; margin:0px 40px;width:280px;height:180px;" src="<?php echo 'http://api.webthumbnail.org?width=280&height=200&format=png&screen=1024&url='.$h['domain']?>"/>
+		-->
 	</div>
 
 	
-	
-
-</div>
 
 <div class="box clearfix" style="padding:30px;margin:20px 0px;">
-<h2 style="margin:-10px auto 0px auto;text-align:center;" >Hosting Plans</h2>
-<div style="margin:0 auto;width:710px;">
+<h3 style="text-align:center;" >Hosting Plans</h3>
+<div  class="row">
 <?php $pr = $database->query("SELECT * FROM hostproduct WHERE hostID = '$h[ID]' ORDER BY ppm ASC");
 
 foreach($pr as $p){ ?>
-<div class="box inset" style="float:left;margin-left:20px;width:140px;margin-top:20px;">
+<div class="three columns">
 
 <h3 style="font-size:16px;text-align:center;margin-bottom:10px;"><?php echo $p['name'];?></h3>
-<table class="table table-striped">
+<style type="text/css">
+	table tbody tr td{
+		font-size:12px;
+	}
+</style>
+<table class="table table-striped" style="border-top:1px solid #ccc;font-size:11px;width:100%;">
  <tr><td><b>RAM</b></td><td><?php echo $p['ram'];?></td></tr>
  <tr><td><b>Disk</b></td><td><?php echo $p['hdd'];?></td></tr>
  <tr><td><b>Slots</b></td><td><?php echo $p['recslots'];?></td></tr>
 </table>
-<a href="http://<?php echo $h['url']; ?>" style="font-weight:normal;" class="btn btn-large btn-block btn-primary" type="button">$<?php echo $p['ppm'];?>/month</a>
+<a href="http://<?php echo $h['url']; ?>" style="font-weight:normal;width:100%;" class="button expand" type="button">$<?php echo $p['ppm'];?>/month</a>
 </div>
 <?php } ?>
 </div>
 </div>
 
 <div class="box clearfix" style="padding:30px 0px;margin:20px 0px;">
-<div style="float:left;width:430px;padding-left:30px;">
-	<h2 style="margin-bottom:10px;margin-top:-10px;">Write a Review</h2>
+
+	<div class="row">
+		<h3 style="margin-bottom:10px;margin-left:30px;">Recent Reviews</h3>
+		
+		<?php
+			$reviews = $database->query("SELECT * FROM hostreview hr LEFT JOIN users u ON u.ID = hr.userID WHERE hr.hostID = '$h[ID]' ORDER BY hr.time ASC");
+			foreach($reviews as $r){
+				echo '<blockquote style="width:80%;margin:0 auto;border-left: 5px solid '.($r['positive'] == 0 ? '#b13c33':'#4fa54a').';">
+			<p>'.stripslashes($r['text']).'</p>
+			<small>'.($r['username'] == '' ? 'Anonymous' : '<a href="http://twitter.com/'.$r['username'].'" target="_new" style="font-weight:normal;font-size:16px;color:#3A87AD;">@'.$r['username'].'</a>').' '.($r['username'] == $_SESSION['username'] && $r['username'] != '' ? ' <br/> <br/><form action="/host/'.$_GET['slug'].'" method="POST"><input type="hidden" name="remove" value="'.$r['ID'].'"><button class="btn btn-small btn-inverse" type="submit">Remove</button></form>' : '').'</small>
+		</blockquote>';
+			}
+			
+			if($database->num_rows == 0){
+				echo '<i>no reviews yet! :(</i>';
+			}
+		?>
+		
+		
+	</div>
+	<div style="padding-left:30px;" class="row">
+	<h3 style="margin-bottom:10px;margin-top:30px;">Write a Review</h3>
 	<?php if(!isset($_SESSION['username'])){
 	?>
 	<a href="/oauth.php?login=twitter"><img style="width:151px;height:24px;margin-top:10px;" src="/images/signintwitter.png"></a>
@@ -151,39 +167,20 @@ foreach($pr as $p){ ?>
 	</form>
 	<?php } ?>
 	</div>
-	<div style="float:right;width:480px;margin-top:-10px;">
-		<h2 style="margin-bottom:10px;">Recent Reviews</h2>
-		
-		<?php
-			$reviews = $database->query("SELECT * FROM hostreview hr LEFT JOIN users u ON u.ID = hr.userID WHERE hr.hostID = '$h[ID]' ORDER BY hr.time ASC");
-			foreach($reviews as $r){
-				echo '<blockquote style="border-left: 5px solid '.($r['positive'] == 0 ? '#b13c33':'#4fa54a').';">
-			<p>'.stripslashes($r['text']).'</p>
-			<small>'.($r['username'] == '' ? 'Anonymous' : '<a href="http://twitter.com/'.$r['username'].'" target="_new" style="font-weight:normal;font-size:16px;color:#3A87AD;">@'.$r['username'].'</a>').' '.($r['username'] == $_SESSION['username'] && $r['username'] != '' ? ' <br/> <br/><form action="/host/'.$_GET['slug'].'" method="POST"><input type="hidden" name="remove" value="'.$r['ID'].'"><button class="btn btn-small btn-inverse" type="submit">Remove</button></form>' : '').'</small>
-		</blockquote>';
-			}
-			
-			if($database->num_rows == 0){
-				echo '<i>no reviews yet! :(</i>';
-			}
-		?>
-		
-		
-	</div>
 </div>
 <?php if($h['demoIP'] != '' ){ ?>
 <div class="box clearfix" style="padding:30px;margin:20px 0px;">
-<h2 style="margin-bottom:20px;margin-top:-10px;">Demo Server</h2>
+<h3 style="margin-bottom:20px;margin-top:-10px;">Demo Server</h3>
 <a href="/server/<?php echo $h['demoIP']; ?>"><img style="border-radius:3px;" src="/banner/<?php echo $h['demoIP']; ?>"/></a>
 </div>
 <?php } ?>
 </div>
 
 <?php }else{ ?>
-<div class="box boxtop clearfix" style="padding-left:30px;padding-top:10px;">
-<h2 style="float:left;">Minecraft Server Hosts</h2>
+<div class="row">
+<h3 style="float:left;padding-left:20px;margin-bottom:20px;">Minecraft Server Hosts</h3>
 </div>
-<div class="box boxbottom clearfix" style="padding:30px 0px;">
+<div class="row" style="margin-bottom:30px;">
 	<?php $hosts = $database->query("SELECT * FROM hosts");
 	
 	foreach($hosts as $h){?>
@@ -196,9 +193,14 @@ foreach($pr as $p){ ?>
 	</div>
 	<?php } ?>
 	
-	<div style="text-align:center;color:#777;font-size:12px;float:left;margin-top:20px;position:absolute;bottom:15px;left:25px;">If you're a minecraft host, you can <a href="https://docs.google.com/spreadsheet/viewform?formkey=dC1kQ3FhX1lsUkFqN0R6TFd0c0gtb0E6MQ#gid=0">apply here</a></div>
+	<div style="text-align:center;color:#777;font-size:12px;float:left;position:absolute;bottom:15px;left:25px;">If you're a minecraft host, you can <a href="https://docs.google.com/spreadsheet/viewform?formkey=dC1kQ3FhX1lsUkFqN0R6TFd0c0gtb0E6MQ#gid=0">apply here</a></div>
 </div> 
 <?php
 }
+?>
+</div>
+</div>
+</div>
+<?php
 $template->show('footer');
 ?>
