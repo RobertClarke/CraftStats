@@ -29,6 +29,7 @@
               <a class="button expand postfix">Search</a>
             </div>
           </div>
+		  <a class="button expand">Add a server</a>
           <h6 class="subheader">Find a player</h6>
           <div class="row collapse">
             <div class="eight mobile-three columns">
@@ -67,7 +68,7 @@
              <a href="#"><img src="http://placehold.it/200x125"/></a>
             </div>
             <div class="row collapse ad">
-            <a href="#"><img src="http://placehold.it/200x125"/></a>
+            <a href="#"><img src="/images/ads/pytohost_sidebar.png"/></a>
             </div>
           </div>
         </div>
@@ -85,10 +86,7 @@
               <!-- Left Nav Section -->
               <ul class="left">
                 <li>
-                  <a class="active" href="/promote">get more players</a>
-                </li>
-                <li>
-                  <a href="#">downtime alerts</a>
+                  <a href="/promote">get more players</a>
                 </li>
                 <li>
                   <a href="/players">stats</a>
