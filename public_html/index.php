@@ -44,7 +44,17 @@ FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 AND spons
 					<?php if($sp['category'] != ''){ ?><a class="button tiny"><?php echo $sp['category']; ?></a><?php } ?>
 				</div>
 			</div>
-<?php } ?> 
+<?php }
+
+	if(count($sponsoredp) == 0){
+	?>
+	<div class="four columns">
+				<div class="twelve columns box" style="text-align:center;color:#999 !important;margin-top:70px;padding-bottom:4px;margin-bottom:-35px;">
+					<h5 class="subheader"><a href="/promote" style="color:#999;">your server here!</a></h5>
+				</div>
+			</div>
+	<?php	
+	}?> 
 		</div>
 	</div>
         <div class="row table">
