@@ -79,7 +79,6 @@ h6.subheader{
 	position:absolute;
 	top:45px;
 	left:0px;
-	background:url(/images/bigbg.png) no-repeat center;
 	background-size:100%;
 	border-bottom:2px solid #fff;
 }
@@ -145,6 +144,11 @@ h6.subheader{
 .servers .subtitle{
 	font-size:12px;
 	color:#b0b0b0;
+	margin:10px 0px;
+}
+
+.box.prempromo .button{
+	margin:8px 0px;
 }
 
 .servers a.button.secondary{
