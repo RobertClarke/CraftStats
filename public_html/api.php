@@ -119,6 +119,9 @@ if($_GET[req] == 'm11'){
 	$r = $api->trackServer($_GET[ip],true);
 	if($r['extra']!=''){
 		header('Location: /server/'.$r['extra']);
+		if(filter_var($_GET['email'], FILTER_VALIDATE_EMAIL)){
+			$database->query('UPDATE users SET email = \''.$_GET['email'].'\' WHERE id = \''.$_SESSION['id'].'\'');
+		}
 	}else{
 		header('Location: /submit?se='.urlencode($r['info']).'&ev='.urlencode($_GET['email']));
 	}
