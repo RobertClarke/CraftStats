@@ -87,7 +87,7 @@
           
           <div class="adsection hide-for-small">
             <div class="row collapse ad">
-            <a href="#"><img src="/images/ads/pytohost_sidebar.png"/></a>
+            <a href="http://www.pytohost.com/"><img src="/images/ads/pytohost_sidebar.png"/></a>
             </div>
           </div>
         </div>
