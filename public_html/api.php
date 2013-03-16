@@ -56,12 +56,12 @@ if($_GET[req] == 'm04'){
 
 //vote for server ID
 if($_POST[req] == 'm05'){
-	echo $api->addvote($_POST[id],$_POST[usr]);	
+	echo json_encode($api->addvote($_POST[id],$_POST[usr]));	
 	exit;
 }
 
 if($_GET[req] == 'm05'){
-	echo $api->addvote($_GET[id],$_GET[usr]);	
+	echo json_encode($api->addvote($_GET[id],$_GET[usr]));	
 	exit;
 }
 
@@ -128,6 +128,18 @@ if($_GET[req] == 'm11'){
 	exit;
 }
 
+
+//vote for server ID
+if($_POST[req] == 'm12'){
+	echo json_encode($api->addvote($_POST[id],$_POST[usr]));	
+	exit;
+}
+
+if($_GET[req] == 'm12'){
+	$r = $api->addvote($_GET[id],$_GET[usr]);	
+	if($r['extra']!='')header('Location: /server/'.$r['extra']);
+	exit;
+}
 
 
 ?>

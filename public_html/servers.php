@@ -184,14 +184,17 @@ $template->show('nav');
 						
 						$database->query("SELECT * FROM uservotes WHERE serverID = '$server[ID]'");
 						$votes = $database->num_rows;
-						if($diasbled == ''){
-					?>
-						<div class="eight mobile-three columns">
-							<input type="text" placeholder="Minecraft Username" />
-						</div>
-						<div class="four mobile-one columns">
-							<a class="button expand postfix">Vote</a>
-						</div>
+						if($disabled == ''){
+					?>	<form action="/api" method="get">
+							<input type="hidden" name="req" value="m12"/>
+							<input type="hidden" name="id" value="<?php echo $server['ID']; ?>"/>
+							<div class="eight mobile-three columns">
+								<input type="text" placeholder="Minecraft Username" name="usr"/>
+							</div>
+							<div class="four mobile-one columns">
+								<button class="button expand postfix">Vote</button>
+							</div>
+						</form>
 					<?php
 						}else{
 						?>

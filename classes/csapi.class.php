@@ -284,14 +284,13 @@ class csAPI{
 	
 	public function addvote($sid,$user){
 		if(!isset($_SESSION['id'])){
-			$this->endCall($this->formatResponse('error','User not logged in'));
-			return false;
+			return $this->formatResponse('error','User not logged in');
 		}
 		$time = time();
 		$max = $time - 86400;
 		$this->database->query("SELECT * FROM uservotes WHERE userID = '$_SESSION[id]' AND serverID = '$sid' AND time > '$max'");
 		if($this->database->num_rows == 0){
-			$info = $this->database->query("SELECT votifierIP, votifierPort, votifierKey FROM servers WHERE ID = '$sid'",db::GET_ROW);
+			$info = $this->database->query("SELECT votifierIP, votifierPort, votifierKey,ip FROM servers WHERE ID = '$sid'",db::GET_ROW);
 			if($info['votifierIP'] != ''){
 				if(!isset($_SESSION['mcuser'])){
 					$this->database->query("UPDATE users SET mcuser = '$user' WHERE id = '$_SESSION[id]'");
@@ -299,9 +298,9 @@ class csAPI{
 				file_get_contents('http://192.119.145.28/api.php?a=2&ip='.$info['votifierIP'].'&user='.$user.'&port='.$info['votifierPort'].'&key='.base64_encode($info['votifierKey']));
 			}
 			$this->database->query("INSERT INTO uservotes VALUES('$_SESSION[id]','$sid','$time')");
+			return $this->formatResponse('success','vote success',$info['ip']);
 		}else{
-			$this->endCall($this->formatResponse('error','Already voted'));
-			return false;
+			return $this->formatResponse('error','Already voted');
 		}
 	}
 	
