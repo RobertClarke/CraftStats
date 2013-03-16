@@ -87,9 +87,6 @@
           
           <div class="adsection hide-for-small">
             <div class="row collapse ad">
-             <a href="#"><img src="http://placehold.it/200x125"/></a>
-            </div>
-            <div class="row collapse ad">
             <a href="#"><img src="/images/ads/pytohost_sidebar.png"/></a>
             </div>
           </div>
@@ -121,7 +118,7 @@
               <!-- Right Nav Section -->
               <ul class="right">
                 <li>
-                  <a href="/oauth.php?login=twitter">login</a>
+                  <a href="<?php echo ($_SESSION['username'] != '' ? '/account.php' : '/oauth.php?login=twitter')?>"><?php echo ($_SESSION['username'] != '' ? 'logged in as '.$_SESSION['username'] : 'login')?></a>
                 </li>
               </ul>
             </section>
