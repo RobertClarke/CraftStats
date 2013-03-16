@@ -33,7 +33,7 @@
 				<input type="hidden" name="v1" value="server"/>
 				  <input type="hidden" name="req" value="m10"/>
 				<div class="eight mobile-three columns">
-				  <input type="text" name="v2" />
+				  <input type="text" name="v2" placeholder="Server IP"/>
 				</div>
 				<div class="four mobile-one columns">
 				  <button class="button expand postfix" style="padding:0px;">Search</button>
@@ -41,7 +41,7 @@
 			</form>
           </div>
 		  
-          <h6 class="subheader">Find a player</h6>
+          <h6 class="subheader" style="margin-top:0px;">Find a player</h6>
 		   <?php if($_GET['pf']){ ?>
 			<div class="alert-box alert">
 				  Player not found
@@ -53,14 +53,14 @@
 				<input type="hidden" name="v1" value="player"/>
 				  <input type="hidden" name="req" value="m10"/>
 				<div class="eight mobile-three columns">
-				  <input type="text" name="v2" />
+				  <input type="text" name="v2" placeholder="Username"/>
 				</div>
 				<div class="four mobile-one columns">
 				  <button class="button expand postfix" style="padding:0px;">Search</button>
 				</div>
 			</form>
           </div>
-		  <a class="button expand" href="/server/new">Add a server</a>
+		  <a class="button expand" href="/submit">Add a server</a>
           <h6 class="subheader">Server Categories</h6>
           <div class="row collapse tags">
 		   <a href="/" class="button tiny" >Top Ranked</a>

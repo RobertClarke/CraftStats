@@ -115,4 +115,16 @@ if($_GET[req] == 'm10'){
 }
 
 
+if($_GET[req] == 'm11'){
+	$r = $api->trackServer($_GET[ip],true);
+	if($r['extra']!=''){
+		header('Location: /server/'.$r['extra']);
+	}else{
+		header('Location: /submit?se='.urlencode($r['info']).'&ev='.urlencode($_GET['email']));
+	}
+	exit;
+}
+
+
+
 ?>

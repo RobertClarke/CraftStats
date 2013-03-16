@@ -253,37 +253,32 @@ class csAPI{
 		}
 		
 		if(in_array($ip,$bannedIPs)){
-			if(!$quiet)$this->endCall($this->formatResponse('error','The IP you entered is blacklisted.'));
-			return false;
+			return $this->formatResponse('error','The IP you entered is blacklisted.');
 		}
 		
 		if($lookupip != false){
 			$server = $this->database->query("SELECT ip FROM servers WHERE resolved = '$lookupip' AND resolved != ''",db::GET_ROW);
 
 			if($this->database->num_rows != 0){
-				if(!$quiet)$this->endCall($this->formatResponse('success','Server found, redirecting',$server['ip']));
-				return true;
+				return $this->formatResponse('success','Server found, redirecting',$server['ip']);
 			}else{
 				$result = $this->pingServer($ip,1);
 				
 				if($result['fail'] == true || !isset($result['fail'])){
-					if(!$quiet)$this->endCall($this->formatResponse('error','Failed to connect to Minecraft Server'));
-					return false;
+					return $this->formatResponse('error','Failed to connect to Minecraft Server');
 				}
 		
-				$this->database->query("INSERT INTO servers VALUES ('','$ip','$lookupip','',0,0,'US','NA',0,0,'','','','','',0,'',0,0,0,0,100,'',0,0,FALSE,0,'0','0')");
+				$this->database->query("INSERT INTO servers VALUES ('','$ip','$lookupip','',0,0,0,'US','NA',0,0,'','','','','',0,'',0,0,0,0,100,'',0,0,FALSE,0,'0','0')");
 				
 				$this->updateServerFromPing($result);
 				
 				$this->updateRanks();
 				
 				$sid = mysql_insert_id();
-				if(!$quiet)$this->endCall($this->formatResponse('success','Server added, redirecting',$ip));
-				return true;
+				return $this->formatResponse('success','Server added, redirecting',$ip);
 			}
 		}else{
-			if(!$quiet)$this->endCall($this->formatResponse('error','Invalid Server Address'));
-			return false;
+			return $this->formatResponse('error','Invalid Server Address');
 		}
 	}
 	
