@@ -6,7 +6,7 @@
         lovingly made in <a href="http://twitter.com/redream_" target="_new">new zealand</a>, the <a href="http://twitter.com/robertjfclarke" target="_new">united states</a> and <a href="http://twitter.com/chrisoneillwood" target="_new">canada</a> 
       </div>
       <div class="four columns" style="text-align:right;">
-        &lt;3's to <a href="http://mcservers.org" target="_new">mcservers</a> & <a href="http://simpleno.de" target="_new">simplenode</a>
+        &lt;3's to <a href="http://mcservers.org" target="_new">mcservers</a>
       </div>
     </div>
   </div>
@@ -34,7 +34,7 @@
 
   
 </body>
-<!-- this has absolutely nothing to do with bundlebyte or simplenode. Just to prove my point, here's a velociraptor:
+<!-- this has absolutely nothing to do with robertbyte-crate-host (see lolrobert.com) or simplenode. Just to prove my point, here's a velociraptor:
 
                                        O_
                                       /  >
