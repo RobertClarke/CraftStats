@@ -2,11 +2,11 @@
 </div>
   <div class="footer">
     <div class="row">
-      <div class="five columns">
-        made by <a href="http://twitter.com/redream_" target="_new">redream</a>
+      <div class="eight columns">
+        lovingly made in <a href="http://twitter.com/redream_" target="_new">new zealand</a>, the <a href="http://twitter.com/robertjfclarke" target="_new">united states</a> and <a href="http://twitter.com/chrisoneillwood" target="_new">canada</a> 
       </div>
-      <div class="five columns">
-        &lt;3's to <a href="http://twitter.com/robertjfclarke" target="_new">robertjfclarke</a>, <a href="http://mcservers.org" target="_new">mcservers</a> and <a href="http://ramnode.com" target="_new">ramnode</a>
+      <div class="four columns" style="text-align:right;">
+        &lt;3's to <a href="http://mcservers.org" target="_new">mcservers</a> & <a href="http://simpleno.de" target="_new">simplenode</a>
       </div>
     </div>
   </div>
@@ -30,15 +30,6 @@
 		});
 	});
     </script> 
-	
-	<script type="text/javascript">
-  var uvOptions = {};
-  (function() {
-    var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
-    uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/V2G9EmZgVc1orOgkMcNcg.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-  })();
-</script>
 
 
   
