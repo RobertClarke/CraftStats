@@ -17,11 +17,6 @@ $template->show('nav');
 
 ?>
 
-<?php
-/*if($_GET['blacklist'] == 1){ echo ('<div class="alert alert-error fade in"><strong>Error!</strong> That server has been blacklisted!</div> ');}
-if($_GET['blacklist'] == 2){ echo ('<div class="alert alert-success fade in"><strong>Success!</strong> Your server has been blacklisted.</div> ');}*/
-?>
-
 <div class="servers">
 	<div class="twelve columns prepromote">
 		<div class="row">

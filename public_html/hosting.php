@@ -38,9 +38,8 @@ $template->show('nav');
 
 <h3 style="margin-left:20px;margin-top:30px;text-align:left;"><a href="/hosting" style="color:#069;">&laquo;</a><a href="http://<?php echo $h['url']; ?>" style="margin-left:30px;"><?php echo $h['name']; ?></a></h3>
 
-<div style="position:absolute;top:5px;right:10px;">
 
-	<div style="position:absolute;right:0px;top:21px;font-size:12px;color:#444;padding-right:90px;">
+	<div style="position:absolute;left:50px;top:71px;font-size:12px;color:#444;padding-right:90px;">
 	<a href="https://twitter.com/share" class="twitter-share-button" data-text="I just found an awesome minecraft host!" data-via="craftstats_" data-url="http://craftstats.com/host/<?php echo $h['slug']; ?>" data-count="none" data-lang="en">Tweet</a>
 
 	<div class="fb-like" style="float:right;position:absolute;right:-8px;top:0px;margin-right:15px;" data-href="http://craftstats.com/host/<?php echo $h['slug']; ?>" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="arial"></div>
@@ -51,9 +50,7 @@ $template->show('nav');
 
 	</div>
 
-</div>
-
-	<div class="clearfix" style="position:relative;">
+	<div class="clearfix" style="position:relative;top:30px;">
 	<style type="text/css">
 	
 .hostdesc ul{

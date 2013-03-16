@@ -89,11 +89,18 @@ if ($final['ACK'] == 'Success') {
 		</div>
 	<?php
 }
-$database->query("SELECT * FROM servers WHERE sponsorTime > UNIX_TIMESTAMP()"); 
+$database->query("SELECT * FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() && sponsorType = 0"); 
 if($database->num_rows < 18){
 	$instock = true;
 }else{
 	$instock = false;
+}
+
+$database->query("SELECT * FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() && sponsorType = 1"); 
+if($database->num_rows < 3){
+	$instock2 = true;
+}else{
+	$instock2 = false;
 }
 ?>
 
@@ -161,21 +168,21 @@ if($database->num_rows < 18){
 						<div class="row">
 							<h5 style="text-align:center;margin-bottom:-10px;" >One Month</h5>
 							<h5 style="text-align:center;color:#3A87AD;font-size:42px;font-weight:bold;">$50</h5>
-							<?php echo ($instock?'<form class="form-inline" action="/promote" method="post">':''); ?>
+							<?php echo ($instock2?'<form class="form-inline" action="/promote" method="post">':''); ?>
 								<input type="hidden" name="buyi" value="3">
 								<input type="text" name="promoip" class="input-medium" placeholder="Server IP"  value="<?php if($_POST['buym'] == 3)echo $_POST['promoip']; ?>">
 								<button class="button expand" type="submit"><?php echo ($instock?'Buy now':'Sold out!'); ?></a>
-							<?php echo ($instock?'</form>':''); ?>
+							<?php echo ($instock2?'</form>':''); ?>
 						</div>
 						<div class="row">
 							<h5 style="text-align:center;margin-bottom:-10px;">Two Months</h5>
 							<h5 style="text-align:center;color:#3A87AD;font-size:42px;font-weight:bold;">$90</h5>
-							<?php echo ($instock?'<form class="form-inline" action="/promote" method="post">':''); ?>
+							<?php echo ($instock2?'<form class="form-inline" action="/promote" method="post">':''); ?>
 							
 								<input type="hidden" name="buyi" value="4">
 								<input type="text" name="promoip" class="input-medium" placeholder="Server IP"  value="<?php if($_POST['buym'] == 4)echo $_POST['promoip']; ?>">
 								<button class="button expand"  type="submit"><?php echo ($instock?'Buy now':'Sold out!'); ?></a>
-							<?php echo ($instock?'</form>':''); ?>
+							<?php echo ($instock2?'</form>':''); ?>
 						</div>
 					</div>
 				</div>
