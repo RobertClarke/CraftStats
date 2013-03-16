@@ -183,7 +183,7 @@ $pn2 = mysql_real_escape_string($_GET['name']);
 $player = $database->query("SELECT * FROM players WHERE username = '$pn2'",db::GET_ROW);
 
 if($database->num_rows == 0){
-	header('Location: /');
+	header('Location: /?pf=1');
 }
 $playername = $player['username'];
 $showbadges = false;

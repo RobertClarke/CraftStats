@@ -57,7 +57,7 @@ $server = $database->query("SELECT * FROM servers WHERE (resolved = '$_GET[ip]' 
 $template->setTitle($server['ip']);
 $template->setDesc($server['ip'].' is being tracked by CraftStats. Check it out!');
 if($server['ID'] == ''){
-	header("Location: /");exit;
+	header("Location: /?sf=1");exit;
 }
 $dpoints = $database->query("SELECT * FROM (SELECT * FROM updates WHERE serverID = '$server[ID]' ORDER BY time DESC) AS u ORDER BY u.time ASC");
 $uptimeavg = array();
@@ -141,7 +141,7 @@ $template->show('nav');
 			if($votfail != 'true'){
 				?>
 				
-				<div class="alert-box alert" style="margin-top:20px;">
+				<div class="alert-box" style="margin-top:20px;">
 					Unable to connect to votifier server
 				</div>
 				

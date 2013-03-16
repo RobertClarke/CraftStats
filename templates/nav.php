@@ -1,7 +1,7 @@
 <body>
   <?php global $index; 
   if($index){
-?>  <div class="featurebg" style="background:url(/images/bigbg<?php echo rand(1,10); ?>.png) no-repeat center;background-size:100%;">
+?>  <div class="featurebg" style="background:url(/images/bigbg<?php echo rand(1,12); ?>.png) no-repeat center;background-size:100%;">
     
   </div> <?php } ?>
   <div class="navigation">
@@ -20,25 +20,47 @@
       </div>
       <div class="row sidebar"> 
         <div class="twelve columns box">
+			
           <h6 class="subheader">Find a server</h6>
+		  <?php if($_GET['sf']){ ?>
+			<div class="alert-box alert">
+				  Server not found
+				  <a href="" class="close">&times;</a>
+				</div>
+		  <?php } ?>
           <div class="row collapse">
-            <div class="eight mobile-three columns">
-              <input type="text" />
-            </div>
-            <div class="four mobile-one columns">
-              <a class="button expand postfix">Search</a>
-            </div>
+			<form action="/api" method="get">
+				<input type="hidden" name="v1" value="server"/>
+				  <input type="hidden" name="req" value="m10"/>
+				<div class="eight mobile-three columns">
+				  <input type="text" name="v2" />
+				</div>
+				<div class="four mobile-one columns">
+				  <button class="button expand postfix" style="padding:0px;">Search</button>
+				</div>
+			</form>
           </div>
-		  <a class="button expand">Add a server</a>
+		  
           <h6 class="subheader">Find a player</h6>
+		   <?php if($_GET['pf']){ ?>
+			<div class="alert-box alert">
+				  Player not found
+				  <a href="" class="close">&times;</a>
+				</div>
+		  <?php } ?>
           <div class="row collapse">
-            <div class="eight mobile-three columns">
-              <input type="text" />
-            </div>
-            <div class="four mobile-one columns">
-              <a class="button expand postfix">Search</a>
-            </div>
+			<form action="/api" method="get">
+				<input type="hidden" name="v1" value="player"/>
+				  <input type="hidden" name="req" value="m10"/>
+				<div class="eight mobile-three columns">
+				  <input type="text" name="v2" />
+				</div>
+				<div class="four mobile-one columns">
+				  <button class="button expand postfix" style="padding:0px;">Search</button>
+				</div>
+			</form>
           </div>
+		  <a class="button expand" href="/server/new">Add a server</a>
           <h6 class="subheader">Server Categories</h6>
           <div class="row collapse tags">
 		   <a href="/" class="button tiny" >Top Ranked</a>

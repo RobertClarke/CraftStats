@@ -109,6 +109,10 @@ if($_GET[req] == 'm09'){
 	exit;
 }
 
+if($_GET[req] == 'm10'){
+	header('Location: /'.$_GET['v1'].'/'.$_GET['v2']);
+	exit;
+}
 
 
 ?>
