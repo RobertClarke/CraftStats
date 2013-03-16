@@ -28,6 +28,23 @@
   <script src="/javascripts/app.js"></script>
   <script src="/javascripts/modernizr.foundation.js"></script>
   <script type="text/javascript">
+  var GoSquared = {};
+  GoSquared.acct = "GSN-354646-Z";
+  (function(w){
+    function gs(){
+      w._gstc_lt = +new Date;
+      var d = document, g = d.createElement("script");
+      g.type = "text/javascript";
+      g.src = "//d1l6p2sc9645hc.cloudfront.net/tracker.js";
+      var s = d.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(g, s);
+    }
+    w.addEventListener ?
+      w.addEventListener("load", gs, false) :
+      w.attachEvent("onload", gs);
+  })(window);
+</script>
+  <script type="text/javascript">
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-17509155-7']);
