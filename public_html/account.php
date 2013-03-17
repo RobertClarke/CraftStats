@@ -29,30 +29,32 @@ if($auth != '' && stristr($auth,':')){
 $template->setTitle('Your Account');
 $template->show('header');
 $template->show('nav');
-$template->show('logo');
 ?>
-</div>
-<div id="container">
-<div class="box boxtop clearfix" style="padding-left:20px;"> 
-<h2>@<?php echo $_SESSION['username']; ?></h2>
-</div>
-<div class="box boxbottom clearfix" style="padding:30px;font-size:12px;font-weight:bold;"> 
-<?php
+<div class="row">
+	<div class="twelve columns">
+	<?php
 	if($auth != '' && !stristr($auth,':')){
-		echo '<div class="alert alert-error">'.$auth.'</div>';
+		echo '<div class="alert-box alert" style="margin-top:20px;">'.$auth.'</div>';
 	}
 ?>
+		<div class="twelve columns box">
+<h3>@<?php echo $_SESSION['username']; ?></h3>
+
 
 <?php if($_SESSION['mcuser'] == ''){ ?>
-Please link your minecraft account, this page is very boring without it!<br/><br/>
-
+Please link your minecraft account, this page is very boring without it!<br/> Authentication is done directly via mojang's servers.<br/><br/>
+<div class="row">
+<div class="four columns">
 <form action="/account.php" method="post">
-<input name="user" type="text" class="mcreg" placeholder="minecraft username"/>
-<input name="pass" type="password" class="mcreg" placeholder="minecraft password"/>
-<button class="mcreg">Link Account</button>
+<input name="user" type="text" placeholder="minecraft username"/>
+<input name="pass" type="password" placeholder="minecraft password"/>
+<button class="button">Link Account</button>
 </form>
-
+</div>
+</div>
 <?php } ?>
+</div>
+</div>
 </div>
 <?php
 $template->show('footer');
