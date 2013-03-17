@@ -207,6 +207,57 @@ $template->show('nav');
 ?>
 <div class="row">
 	<div class="twelve columns">
+	<?php
+if($_POST['claimip'] != '' && $_SESSION['mcuser'] == $playername){
+$cip = mysql_real_escape_string($_POST['claimip']);
+	$server = $database->query("SELECT * FROM servers WHERE (resolved = '$cip' AND resolved != '') OR ip = '$cip'",db::GET_ROW);
+	if($database->num_rows == 0 ){
+		?>
+		<div class="alert-box" style="margin-top:20px;">
+			We're not currently tracking that server! Make sure you entered the IP address correctly and try again.
+		</div>
+		<?php
+	}else{
+	
+		$sp = $database->query("SELECT * FROM serverplayers WHERE playerID = '$player[ID]' AND serverID = '$server[ID]'",db::GET_ROW);
+		if($database->num_rows == 0){
+			$database->query("INSERT INTO serverplayers VALUES ('$player[ID]',$server[ID],'0','0')");
+		}
+		if($sp['owner'] == 1){
+			?>
+			<div class="alert-box" style="margin-top:20px;">
+				You're already an owner of <?php echo $server['ip']; ?>.
+			</div>
+			<?php
+		}else{
+			$vs = 'CS'.$server['ID'].'-'.$player['ID'];
+			$ping = $api->pingServer($server['ip'],1);
+			if(stristr($ping['info']['HostName'],$vs)){
+				?>
+				<div class="alert-box success" style="margin-top:20px;">
+					We have successfully verified your ownership of <?php echo $server['ip']; ?>!
+				</div>
+				<?php
+				
+				$database->query("UPDATE serverplayers SET owner = '1' WHERE playerID = '$player[ID]' AND serverID = '$server[ID]'");
+				
+			}elseif($ping['fail'] == true){
+				?>
+				<div class="alert-box" style="margin-top:20px;">
+					We were unable to contact <?php echo $server['ip']; ?> to verify your ownership.
+				</div>
+				<?php
+			}else{
+				?>
+				<div class="alert-box" style="margin-top:20px;">
+					To verify your ownership of this server, add '<?php echo $vs; ?>' to the MOTD and try to claim the server again.
+				</div>
+				<?php
+			}
+		}
+	}
+}
+?>
 		<div class="twelve columns box">
 
 <?php if($_GET['name'] == '') { ?>
@@ -243,65 +294,26 @@ $template->show('nav');
 <?php }else{ ?>
 
 
-<?php
-if($_POST['claimip'] != '' && $_SESSION['mcuser'] == $playername){
-$cip = mysql_real_escape_string($_POST['claimip']);
-	$server = $database->query("SELECT * FROM servers WHERE (resolved = '$cip' AND resolved != '') OR ip = '$cip'",db::GET_ROW);
-	if($database->num_rows == 0 ){
-		?>
-		<div class="alert alert-info" style="margin-right:10px;">
-			We're not currently tracking that server! Make sure you entered the IP address correctly and try again.
-		</div>
-		<?php
-	}else{
-	
-		$sp = $database->query("SELECT * FROM serverplayers WHERE playerID = '$player[ID]' AND serverID = '$server[ID]'",db::GET_ROW);
-		if($database->num_rows == 0){
-			$database->query("INSERT INTO serverplayers VALUES ('$player[ID]',$server[ID],'0','0')");
-		}
-		if($sp['owner'] == 1){
-			?>
-			<div class="alert alert-info" style="margin-right:10px;">
-				You're already an owner of <?php echo $server['ip']; ?>.
-			</div>
-			<?php
-		}else{
-			$vs = 'CS'.$server['ID'].'-'.$player['ID'];
-			$ping = $api->pingServer($server['ip'],1);
-			if(stristr($ping['info']['HostName'],$vs)){
-				?>
-				<div class="alert alert-success" style="margin-right:10px;">
-					We have successfully verified your ownership of <?php echo $server['ip']; ?>!
-				</div>
-				<?php
-				
-				$database->query("UPDATE serverplayers SET owner = '1' WHERE playerID = '$player[ID]' AND serverID = '$server[ID]'");
-				
-			}elseif($ping['fail'] == true){
-				?>
-				<div class="alert" style="margin-right:10px;">
-					We were unable to contact <?php echo $server['ip']; ?> to verify your ownership.
-				</div>
-				<?php
-			}else{
-				?>
-				<div class="alert alert-info" style="margin-right:10px;">
-					To verify your ownership of this server, add '<?php echo $vs; ?>' to the MOTD and try to claim the server again.
-				</div>
-				<?php
-			}
-		}
-	}
-}
-?>
+
 
 <?php
 if($_SESSION['mcuser'] == $playername){
 	?>
-	<form class="form-inline" action="<?php echo $_SERVER['REQUEST_URI'];?>" method="post" style="float:right;position:absolute;top:9px;right:12px;">
-		<input type="text" name="claimip" class="input-medium" placeholder="Server IP" style="position:relative;top:1px;">
-		<button type="submit" class="btn">Claim this Server</button>
-	</form>
+	<div class="row">
+	<div class="four columns" style="padding-top:20px;">
+	
+		<div class="row collapse">
+			<form action="<?php echo $_SERVER['REQUEST_URI'];?>" method="post" >
+				<div class="eight mobile-three columns">
+					<input type="text" name="claimip" placeholder="Server IP"/>
+				</div>
+				<div class="four mobile-one columns">
+					<button class="button expand postfix" style="padding:0px;">Claim IP</button>
+				</div>
+			</form>
+		</div>
+	</div>	
+	</div>
 	<?php
 }
 ?>
@@ -312,10 +324,9 @@ if($_SESSION['mcuser'] == $playername){
 	<img src="/skins.php?user=<?php echo $playername; ?>&size=128&back" class="skinback" style="position:absolute;top:70px;left:50%;margin-left:-64px;z-index:9;"/>
 
 	</div>
-	<div class="eight columns">
+	<div class="eight columns" style="padding-bottom:30px;">
 	<h1 style="font-size:14px;margin-top:20px;">Seen on:</h1>
 	
-	<div style="height:130px;width:100%;overflow-y:scroll;overflow-x:hidden;">
 	<ul style="position:relative;list-style:none;top:5px;left:5px;font-size:11px;font-weight:bold;margin-bottom:20px;">
 		<?php 
 		$servers = $database->query("SELECT * FROM serverplayers AS sp LEFT JOIN servers AS s ON s.ID = sp.serverID WHERE playerID = '{$player[ID]}' AND s.ID != '' AND found > 0");
@@ -327,14 +338,12 @@ if($_SESSION['mcuser'] == $playername){
 		}
 		?>
 	</ul>
-	</div>
 	<?php
 	$so = $database->query("SELECT * FROM serverplayers AS sp LEFT JOIN servers AS s ON s.ID = sp.serverID WHERE sp.playerID = '$player[ID]' AND s.ID != '' AND sp.owner = '1'");
 	
 	if($database->num_rows > 0){
 	?>
 	<h1 style="font-size:14px;margin-top:20px;">Owner of:</h1>
-	<div style="height:130px;width:100%;overflow-y:scroll;overflow-x:hidden;">
 	<ul style="position:relative;top:5px;list-style:none;left:5px;font-size:11px;font-weight:bold;">
 		<?php
 		foreach($so as $server){
@@ -343,16 +352,14 @@ if($_SESSION['mcuser'] == $playername){
 		?>
 	</ul>
 	</div>
-	</div>
 	<?php
 	}
 	?>
-</div>
 
 
 <?php if($showbadges){ ?>
 
-<h3 style="font-size:14px;text-align:center;">badges</h3>
+<h3 style="font-size:14px;text-align:center;margin-top:20px;">badges</h3>
 <?php
 	
 	foreach($badges as $b){
