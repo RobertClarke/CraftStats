@@ -2,7 +2,7 @@
 include '../inc/global.inc.php';
 
 if($_GET['url'] == ''){
-	header('Location: http://craftstats.org/');
+	header('Location: http://craftstats.com/');
 	exit;
 }
 
