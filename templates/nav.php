@@ -87,7 +87,7 @@
           
           <div class="adsection hide-for-small">
             <div class="row collapse ad">
-            <a href="/refer.php?url=mcprohosting.com"><img src="/images/ads/mcp_sidebar.gif"/></a>
+            <a href="/refer.php?url=mcprohosting.com"><img  alt="Minecraft Server Hosting" src="/images/ads/mcp_sidebar.png"/></a>
             </div>
             <div class="row collapse ad">
             <a href="/refer.php?url=pytohost.com"><img src="/images/ads/pytohost_sidebar.png"/></a>
