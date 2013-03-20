@@ -1,7 +1,7 @@
 <body>
   <?php global $index; 
   if($index){
-?>  <div class="featurebg" style="background:url(/images/bigbg<?php echo rand(1,12); ?>.png) no-repeat center;background-size:100%;">
+?>  <div class="featurebg" style="background:url(/images/bigbg<?php echo rand(1,12); ?>.jpg) no-repeat center;background-size:100%;">
     
   </div> <?php } ?>
   <div class="navigation">
@@ -87,7 +87,7 @@
           
           <div class="adsection hide-for-small">
             <div class="row collapse ad">
-            <a href="/refer.php?url=mcprohosting.com"><img  alt="Minecraft Server Hosting" src="/images/ads/mcp_sidebar.png"/></a>
+            <a href="/refer.php?url=mcprohosting.com"><img  alt="Minecraft Server Hosting" src="/images/ads/mcp_sidebar.gif"/></a>
             </div>
             <div class="row collapse ad">
             <a href="/refer.php?url=pytohost.com"><img src="/images/ads/pytohost_sidebar.png"/></a>
