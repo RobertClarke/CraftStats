@@ -90,7 +90,7 @@ if ($final['ACK'] == 'Success') {
 	<?php
 }
 $database->query("SELECT * FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() && sponsorType = 0"); 
-if($database->num_rows < 18){
+if($database->num_rows < 10){
 	$instock = true;
 }else{
 	$instock = false;
