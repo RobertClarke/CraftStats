@@ -166,11 +166,11 @@ $template->show('nav');
 		}
 	?>
 		<div class="twelve columns box">
-			<div class="seven columns">
+			<div class="eight columns">
 				<h5 style="padding-top:5px;"><?php echo $server['ip']; ?> <small><?php echo $server['connPlayers']; ?> players online as of <?php echo ($time - $server['lastUpdate'] > 60 ? round(($time - $server['lastUpdate'])/60).'m' : $time - $server['lastUpdate'].'s'); ?> ago</small></h5>
 			</div>
 			<div class="row">
-				<div class="five columns" style="padding-top:12px;">
+				<div class="four columns" style="padding-top:12px;">
 					<div class="row collapse">
 					<?php
 						$time = time();
@@ -192,13 +192,13 @@ $template->show('nav');
 								<input type="text" placeholder="Minecraft Username" name="usr"/>
 							</div>
 							<div class="four mobile-one columns">
-								<button class="button expand postfix">Vote</button>
+								<button class="button expand postfix small">Vote</button>
 							</div>
 						</form>
 					<?php
 						}else{
 						?>
-						<a class="button expand" style="margin-top:-4px;"><?php echo $msg; ?></a>
+						<a class="button expand small" style="margin-top:-4px;"><?php echo $msg; ?></a>
 						<?php
 						}
 					?>

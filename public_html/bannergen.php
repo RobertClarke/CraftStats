@@ -33,6 +33,7 @@ if($banneroption1 == '' || $banneroption1 > 10 || $banneroption1 == 'hills'){
 $offline = false;
 
 $server = $database->query("SELECT * FROM servers WHERE ip = '$sip' LIMIT 0,1",db::GET_ROW);
+
 if($server['uptime'] < 0){
 	$offline = true;
 }
