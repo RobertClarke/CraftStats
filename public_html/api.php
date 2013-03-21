@@ -33,7 +33,7 @@ if($_POST[req] == 'm02'){
 }
 
 if($_GET[req] == 'm02'){
-	$api->getUpdateStats($_GET[since]);	
+	$api->getUpdateStats($_GET[since]);
 	exit;
 }
 

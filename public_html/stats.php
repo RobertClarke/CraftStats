@@ -107,9 +107,12 @@ $template->show('footer');
 ?>*/
 
 ?>
-
+<style type="text/css">
+*{
+	font-size:14px !important;
+}
+</style>
 <h1 style="position:absolute;top:20px;left:20px;">CraftStats Server Activity</h1> <h3 style="position:absolute;top:30px;left:400px;">currently updating at a rate of <span class="srate">0</span> servers per minute over <span class="ptrate">0</span> threads</h3>
-<h3 style="position:absolute;top:45px;left:400px;color:#888;"><span class="drate">0</span> server updates performed in the last 24 hours</h3>
 
 
 <?php 

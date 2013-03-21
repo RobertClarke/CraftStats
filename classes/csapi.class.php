@@ -217,13 +217,10 @@ class csAPI{
 		
 		$updated = $this->database->query("SELECT ip FROM servers WHERE lastUpdate > $since LIMIT 0,50");
 		
-		$svcount = $this->database->query("SELECT COUNT(*) AS svcount FROM updates WHERE $time - time < 86400",db::GET_ROW);
-		$rate2 = number_format($svcount['svcount']);
-		
 		$svcount = $this->database->query("SELECT COUNT(*) AS svcount FROM batchqueue WHERE processing = 1",db::GET_ROW);
 		$pc = number_format($svcount['svcount']);
 		
-		$this->endCall($this->formatResponse('success','transmitting data',array($final,$rate,$time,$updated,$rate2,$pc)));
+		$this->endCall($this->formatResponse('success','transmitting data',array($final,$rate,$time,$updated,0,$pc)));
 	}
 	
 	public function updateRanks(){
