@@ -1,6 +1,6 @@
 <?php
 include '../inc/global.inc.php';
-
+$time = time();
 if($_POST['advc'] == true){
 	$database->query("UPDATE servers SET advCheck = 1 WHERE (resolved = '$_GET[ip]' AND resolved != '') OR ip = '$_GET[ip]'");
 }
@@ -167,7 +167,7 @@ $template->show('nav');
 	?>
 		<div class="twelve columns box">
 			<div class="seven columns">
-				<h5 style="padding-top:5px;"><?php echo $server['ip']; ?> <small><?php echo $server['connPlayers']; ?> players online</small></h5>
+				<h5 style="padding-top:5px;"><?php echo $server['ip']; ?> <small><?php echo $server['connPlayers']; ?> players online as of <?php echo ($time - $server['lastUpdate'] > 60 ? round(($time - $server['lastUpdate'])/60).'m' : $time - $server['lastUpdate'].'s'); ?> ago</small></h5>
 			</div>
 			<div class="row">
 				<div class="five columns" style="padding-top:12px;">
