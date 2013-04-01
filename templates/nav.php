@@ -111,6 +111,9 @@
                   <a href="/promote">get more players</a>
                 </li>
                 <li>
+                  <a href="http://minecraftservers.com/hosting/">start a server</a>
+                </li>
+                <li>
                   <a href="/players">stats</a>
                 </li>
                 <li>
