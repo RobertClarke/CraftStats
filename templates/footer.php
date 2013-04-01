@@ -6,7 +6,7 @@
         lovingly made in <a href="http://twitter.com/redream_" target="_new">new zealand</a>, the <a href="http://twitter.com/robertjfclarke" target="_new">united states</a> and <a href="http://twitter.com/chrisoneillwood" target="_new">canada</a> 
       </div>
       <div class="four columns" style="text-align:right;">
-        &lt;3's to <a href="http://mcservers.org" target="_new">mcservers</a> and <a href="http://servercrate.com" target="_new">servercrate</a>
+        &lt;3's to <a href="http://minecraftservers.com/hosting/" target="_new">mcservers</a> and <a href="http://servercrate.com/minecraft" target="_new">servercrate</a>
       </div>
     </div>
   </div>
