@@ -115,13 +115,13 @@
                   <a href="/promote">get more players</a>
                 </li>
                 <li>
-                  <a href="http://minecraftservers.com/hosting/">start a server</a>
+                  <a href="http://servercrate.com.com/minecraft/">start a server</a>
                 </li>
                 <li>
                   <a href="/players">stats</a>
                 </li>
                 <li>
-                  <a href="/hosting#">hosting reviews</a>
+                  <a href="/hosting#">hosting</a>
                 </li>
               </ul>
 
