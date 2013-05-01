@@ -87,10 +87,10 @@
           
           <div class="adsection hide-for-small">
             <div class="row collapse ad">
-            <a href="/refer.php?url=mcprohosting.com"><img  alt="Minecraft Server Hosting" src="/images/ads/mcp_sidebar.gif"/></a>
+            <a href="mailto:billing@craftstats.com?Subject=Sidebar%20advertisement"><img src="http://placehold.it/200x125"/></a>
             </div>
             <div class="row collapse ad">
-            <a href="/refer.php?url=pytohost.com"><img src="/images/ads/pytohost_sidebar.png"/></a>
+            <a href="mailto:billing@craftstats.com?Subject=Sidebar%20advertisement"><img src="http://placehold.it/200x125"/></a>
             </div>
           </div>
         </div>
