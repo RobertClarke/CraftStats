@@ -91,8 +91,6 @@
           
           <div class="adsection hide-for-small">
             <div class="row collapse ad">
-            <a href="mailto:billing@craftstats.com?Subject=Sidebar%20advertisement"><img src="http://placehold.it/200x125"/></a>
-            </div>
             	<script type="text/javascript"><!--
 		google_ad_client = "ca-pub-8782622759360356";
 		/* CraftStats Sidebar */
@@ -104,6 +102,10 @@
 		<script type="text/javascript"
 		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 		</script>
+	     </div>
+            <div class="row collapse ad">
+            <a href="mailto:billing@craftstats.com?Subject=Sidebar%20advertisement"><img src="http://placehold.it/200x125"/></a>
+            </div>
           </div>
         </div>
       </div>
