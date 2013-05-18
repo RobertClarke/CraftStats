@@ -21,9 +21,9 @@
       <div class="row sidebar"> 
          <div class="twelve columns box">
                         <div class="adsection hide-for-small">
-            <div class="row collapse ad">
-            <!-- <a href="/refer.php?url=ultimatenode.com"><img alt="UltimateNode.com" src="/images/ads/cs-b.gif"/></a> -->
-            </div>
+            <!-- <div class="row collapse ad">
+            <a href="/refer.php?url=ultimatenode.com"><img alt="UltimateNode.com" src="/images/ads/cs-b.gif"/></a> 
+            </div> -->
           </div>
           <h6 class="subheader">Find a server</h6>
 		  <?php if($_GET['sf']){ ?>
