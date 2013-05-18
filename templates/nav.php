@@ -115,7 +115,7 @@
                   <a href="/promote">get more players</a>
                 </li>
                 <li>
-                  <a href="http://servercrate.com.com/minecraft/">start a server</a>
+                  <a href="http://servercrate.com/minecraft/">start a server</a>
                 </li>
                 <li>
                   <a href="/players">stats</a>
@@ -126,14 +126,14 @@
               </ul>
 
               <!-- Right Nav Section -->
-              <ul class="right">
+              <!--<ul class="right">
                 <li>
                   <a href="<?php echo ($_SESSION['username'] != '' ? '/account.php' : '/oauth.php?login=twitter')?>"><?php echo ($_SESSION['username'] != '' ? 'logged in as @'.$_SESSION['username'] : 'login')?></a>
                 </li>
 				
 				<?php echo ($_SESSION['username'] != '' ? '<li><a href="/oauth.php?logout=true">logout</a></li>' : '')?>
               </ul>
-            </section>
+            </section> -->
           </nav>
        </div>
       </div>
