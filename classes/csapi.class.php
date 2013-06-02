@@ -261,7 +261,7 @@ class csAPI{
 			}else{
 				$result = $this->pingServer($ip,1);
 				
-				if($result['fail'] == true || !isset($result['fail'])){
+				if($result['fail'] == true){
 					return $this->formatResponse('error','Failed to connect to Minecraft Server');
 				}
 		

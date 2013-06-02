@@ -31,7 +31,7 @@ if($_POST['buyi'] > 0 && $svvalid){
 if($_GET['paypal'] == 'paid'){
 	require_once( '../lib/httprequest.php' );
 	require_once( '../lib/paypal.php' );
-	include_once '../lib/twitteroauth.php';
+	//include_once '../lib/twitteroauth.php';
 	$r = new PayPal(true);
 	
 	$final = $r->doPayment();
@@ -42,13 +42,13 @@ if($_GET['paypal'] == 'paid'){
 		if($order['paid'] == 0 && $database->num_rows == 1){
 			$sv = $database->query("SELECT * FROM servers WHERE ID = '$order[serverID]'",db::GET_ROW);
 			
-			$cstats = new TwitterOAuth('HyI8Rfv5NwhU2pP3pZ3TA', 'nKVSmnejMIgRBWZT2ZSOJAHTzslBo2ZmHhqxvG7otM','822604988-MrKWIjH8xH3eb5TvI6d0XIowqnkV3FE1YLE6u2zq','J9TiF64znmZaR3I4zxFAyB0HeNJbvlU8mQCuXbNnd78');
+			//$cstats = new TwitterOAuth('HyI8Rfv5NwhU2pP3pZ3TA', 'nKVSmnejMIgRBWZT2ZSOJAHTzslBo2ZmHhqxvG7otM','822604988-MrKWIjH8xH3eb5TvI6d0XIowqnkV3FE1YLE6u2zq','J9TiF64znmZaR3I4zxFAyB0HeNJbvlU8mQCuXbNnd78');
 			
-			$responses = array(
-			'Check out this server! http://cstats.co/'.$sv['ip'],
-			'This server looks pretty awesome! http://cstats.co/'.$sv['ip'],
-			'This is a great server: http://cstats.co/'.$sv['ip']);
-			$cstats->post('statuses/update', array('status' => $responses[array_rand($responses)])); 
+			//$responses = array(
+			//'Check out this server! http://cstats.co/'.$sv['ip'],
+		//	'This server looks pretty awesome! http://cstats.co/'.$sv['ip'],
+		//	'This is a great server: http://cstats.co/'.$sv['ip']);
+			//$cstats->post('statuses/update', array('status' => $responses[array_rand($responses)])); 
 			
 			$stime = ($order['length']*60*60*24*31) + max($sv['sponsorTime'],time());
 			

@@ -374,6 +374,7 @@ if($_SESSION['mcuser'] == $playername){
 </div>
 </div>
 </div>
+</div>
 <?
 	$template->show('footer');
 ?>

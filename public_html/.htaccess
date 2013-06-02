@@ -2,34 +2,33 @@ RewriteEngine On
 
 ErrorDocument 404 /404.php
 
-#rewritecond %{http_host} ^master.craftstats.org [nc]
-#rewriterule ^(.*)$ http://www.craftstats.com/$1 [r=301,nc]
+rewritecond %{http_host} ^master.craftstats.org [nc]
+rewriterule ^(.*)$ http://www.craftstats.com/$1 [r=301,nc]
 
-#rewritecond %{http_host} ^direct.craftstats.org [nc]
-#rewriterule ^(.*)$ http://www.craftstats.com/$1 [r=301,nc]
+rewritecond %{http_host} ^direct.craftstats.org [nc]
+rewriterule ^(.*)$ http://www.craftstats.com/$1 [r=301,nc]
 
-#rewritecond %{http_host} ^craftstats.redream.co.nz [nc]
-#rewriterule ^(.*)$ http://www.craftstats.com/$1 [r=301,nc]
+rewritecond %{http_host} ^craftstats.redream.co.nz [nc]
+rewriterule ^(.*)$ http://www.craftstats.com/$1 [r=301,nc]
 
-#rewritecond %{http_host} ^craftstats.org [nc]
-#rewriterule ^(.*)$ http://www.craftstats.com/$1 [r=301,nc]
+rewritecond %{http_host} ^craftstats.org [nc]
+rewriterule ^(.*)$ http://www.craftstats.com/$1 [r=301,nc]
 
-#RewriteCond %{HTTP_HOST} ^cstats.co$
-#RewriteRule ^(.*) http://www.craftstats.com/server/$1 [r=301,nc,L]
+RewriteCond %{HTTP_HOST} ^cstats.co$
+RewriteRule ^(.*) http://www.craftstats.com/server/$1 [r=301,nc,L]
 
-#RewriteCond %{HTTP_HOST} ^craftstats\.com$ [NC]
-#RewriteRule ^(.*)$ http://www.craftstats.com/$1 [R=301,L]
+RewriteCond %{HTTP_HOST} ^craftstats\.com$ [NC]
+RewriteRule ^(.*)$ http://www.craftstats.com/$1 [R=301,L]
 
 RewriteRule ^p/([^/]+)?$ index.php?p=$1 [L]
 RewriteRule ^server/([^/]+)?$ servers.php?ip=$1 [L]
 RewriteRule ^server/([^/]+)/([^/]+)?$ servers.php?ip=$1&tab=$2 [L]
 RewriteRule ^player/([^/]+)?$ players.php?name=$1 [L]
-RewriteRule ^stats/$ stats.php
 RewriteRule ^plugin/([^/]+)?$ plugins.php?name=$1 [L]
-RewriteRule ^banner/switch/([^/]+)/([^/]+)?$ banner.php?ip=$1&back=$2&switch=1 [L]
-RewriteRule ^banner/switch/([^/]+)?$ banner.php?ip=$1&switch=1 [L]
-RewriteRule ^banner/([^/]+)/([^/]+)?$ banner.php?ip=$1&back=$2 [L]
-RewriteRule ^banner/([^/]+)?$ banner.php?ip=$1 [L]
+RewriteRule ^banner/switch/([^/]+)/([^/]+)?$ bannergen.php?ip=$1&back=$2&switch=1 [L]
+RewriteRule ^banner/switch/([^/]+)?$ bannergen.php?ip=$1&switch=1 [L]
+RewriteRule ^banner/([^/]+)/([^/]+)?$ bannergen.php?ip=$1&back=$2 [L]
+RewriteRule ^banner/([^/]+)?$ bannergen.php?ip=$1 [L]
 RewriteRule ^host/([^/]+)?$ hosting.php?slug=$1 [L]
 RewriteRule ^version/([^/]+)/p/([^/]+)?$ index.php?version=$1&p=$2 [L]
 RewriteRule ^version/([^/]+)?$ index.php?version=$1 [L]
@@ -47,11 +46,3 @@ rewriteCond %{REQUEST_URI} !(\.¦/$)
 rewriteCond %{REQUEST_FILENAME}.php -f
 rewriteRule (.+) /$1.php [L]
 
-
-<Files 403.shtml>
-order allow,deny
-allow from all
-</Files>
-
-deny from 86.27.247.195
-deny from 82.44.96.29

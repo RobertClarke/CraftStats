@@ -20,7 +20,7 @@
 		$("#featured").orbit();
 		
     });
-	jQuery(document).ready(function($) {
+	/*jQuery(document).ready(function($) {
 		$(window).scroll(function () { 
 			if ($(this).scrollTop() > 75) {
 				$('.sidebar').addClass('sidebar-stick');
@@ -28,7 +28,7 @@
 				$('.sidebar').removeClass('sidebar-stick');
 			}
 		});
-	});
+	});*/
     </script> 
 
 

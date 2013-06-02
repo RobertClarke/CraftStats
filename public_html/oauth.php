@@ -11,10 +11,10 @@ if($_GET['logout']){
 }
 if($_GET['login'] == 'twitter'){
 	// The TwitterOAuth instance  
-	$twitteroauth = new TwitterOAuth('HyI8Rfv5NwhU2pP3pZ3TA', 'nKVSmnejMIgRBWZT2ZSOJAHTzslBo2ZmHhqxvG7otM');  
+	$twitteroauth = new TwitterOAuth('LikmqUGSLAAWgZ8zCVC2A', '6PlWlXC6ugcwpY0SrlZ48uvc9KNHCPpVhpGjH6O6U');  
 	// Requesting authentication tokens, the parameter is the URL we will be redirected to  
-	$request_token = $twitteroauth->getRequestToken('http://craftstats.org/oauth.php?process=twitter');  
-	
+	$request_token = $twitteroauth->getRequestToken('http://craftstats.com/oauth.php?process=twitter');  
+	print_r($request_token);
 	// Saving them into the session  
 	$_SESSION['oauth_token'] = $request_token['oauth_token'];  
 	$_SESSION['oauth_token_secret'] = $request_token['oauth_token_secret'];  
@@ -34,7 +34,7 @@ if($_GET['process'] == 'twitter'){
 	if(!empty($_GET['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !empty($_SESSION['oauth_token_secret'])){  
 		// TwitterOAuth instance, with two new parameters we got in twitter_login.php  
 	
-		$twitteroauth = new TwitterOAuth('HyI8Rfv5NwhU2pP3pZ3TA', 'nKVSmnejMIgRBWZT2ZSOJAHTzslBo2ZmHhqxvG7otM', $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);  
+		$twitteroauth = new TwitterOAuth('LikmqUGSLAAWgZ8zCVC2A', '6PlWlXC6ugcwpY0SrlZ48uvc9KNHCPpVhpGjH6O6U', $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);  
 		// Let's request the access token  
 		$access_token = $twitteroauth->getAccessToken($_GET['oauth_verifier']); 
 		// Save it in a session var 
@@ -73,9 +73,9 @@ if($_GET['process'] == 'twitter'){
 				}
 			}  
 			
-			$cstats = new TwitterOAuth('HyI8Rfv5NwhU2pP3pZ3TA', 'nKVSmnejMIgRBWZT2ZSOJAHTzslBo2ZmHhqxvG7otM','822604988-0XI1o1HZIt1qAYliqgohLlDx7eghL89jEQOWDjWN','5CwbdSxnjnZPDjIXO8ZXW71UIMOopt3c2wlUBUQ5o78');
+			$cstats = new TwitterOAuth('LikmqUGSLAAWgZ8zCVC2A', '6PlWlXC6ugcwpY0SrlZ48uvc9KNHCPpVhpGjH6O6U','272185424-hEXUiEhHPjSCLpkmYgmcJm6T3liEWCfs6MCccsdD','tI1uaMUggheZtC0J55xPhS0GMeHRqR1xqoMx9THbZ4');
 			
-			$isfollowing = $cstats->get('friendships/exists', array('screen_name_a'=>'craftstats_','screen_name_b'=>$user_info->screen_name));
+			$isfollowing = $cstats->get('friendships/exists', array('screen_name_a'=>'craftstats','screen_name_b'=>$user_info->screen_name));
 
 			if(!$isfollowing){  
 				$cstats->post('friendships/create', array('screen_name' => $user_info->screen_name));  
