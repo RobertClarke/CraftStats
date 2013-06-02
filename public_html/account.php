@@ -4,7 +4,7 @@ if($_SESSION['username'] == ''){
 	header("Location: /");
 }
 if($_SESSION['mcuser'] != ''){
-header('Location: /player/'.$_SESSION['mcuser']);
+	header('Location: /player/'.$_SESSION['mcuser']);
 }
 
 if(isset($_POST['user']) && isset($_POST['pass'])){

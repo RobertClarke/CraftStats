@@ -42,13 +42,23 @@ if($_GET['paypal'] == 'paid'){
 		if($order['paid'] == 0 && $database->num_rows == 1){
 			$sv = $database->query("SELECT * FROM servers WHERE ID = '$order[serverID]'",db::GET_ROW);
 			
-			//$cstats = new TwitterOAuth('HyI8Rfv5NwhU2pP3pZ3TA', 'nKVSmnejMIgRBWZT2ZSOJAHTzslBo2ZmHhqxvG7otM','822604988-MrKWIjH8xH3eb5TvI6d0XIowqnkV3FE1YLE6u2zq','J9TiF64znmZaR3I4zxFAyB0HeNJbvlU8mQCuXbNnd78');
+			$responses = array(
+			'Check out this server! http://cstats.co/'.$sv['ip'],
+			'This server looks pretty awesome! http://cstats.co/'.$sv['ip'],
+			'This is a great server: http://cstats.co/'.$sv['ip']);
 			
-			//$responses = array(
-			//'Check out this server! http://cstats.co/'.$sv['ip'],
-		//	'This server looks pretty awesome! http://cstats.co/'.$sv['ip'],
-		//	'This is a great server: http://cstats.co/'.$sv['ip']);
-			//$cstats->post('statuses/update', array('status' => $responses[array_rand($responses)])); 
+			$tmhOAuth = new tmhOAuth(array(
+				'consumer_key'    => 'LikmqUGSLAAWgZ8zCVC2A',
+				'consumer_secret' => '6PlWlXC6ugcwpY0SrlZ48uvc9KNHCPpVhpGjH6O6U',
+				'user_token'      => '822604988-MrKWIjH8xH3eb5TvI6d0XIowqnkV3FE1YLE6u2zq',
+				'user_secret'     => 'J9TiF64znmZaR3I4zxFAyB0HeNJbvlU8mQCuXbNnd78',
+			));
+
+			$code = $tmhOAuth->request('POST', $tmhOAuth->url('1/statuses/update'), array(
+				'status' => $responses[array_rand($responses)],
+			));
+
+			
 			
 			$stime = ($order['length']*60*60*24*31) + max($sv['sponsorTime'],time());
 			
