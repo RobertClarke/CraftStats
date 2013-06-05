@@ -234,7 +234,7 @@ class csAPI{
 		SET      servers.ranking = ranks.rank;");
 	}
 	
-	public function trackServer($ip,$quiet = false){
+	public function trackServer($ip,$quiet = false,$info = false){
 		//$this->endCall($this->formatResponse('error','no new servers are currently being accepted'));
 		//return false;
 		$ip = strtolower($ip);
@@ -254,9 +254,15 @@ class csAPI{
 		}
 		
 		if($lookupip != false){
-			$server = $this->database->query("SELECT ip FROM servers WHERE resolved = '$lookupip' AND resolved != ''",db::GET_ROW);
+			$server = $this->database->query("SELECT * FROM servers WHERE resolved = '$lookupip' AND resolved != ''",db::GET_ROW);
 
 			if($this->database->num_rows != 0){
+				if($info){
+					unset($server['votifierKey']);
+					unset($server['plCache']);
+					unset($server['advCheck']);
+					echo json_encode($server);
+				}
 				return $this->formatResponse('success','Server found, redirecting',$server['ip']);
 			}else{
 				$result = $this->pingServer($ip,1);
@@ -272,6 +278,13 @@ class csAPI{
 				$this->updateRanks();
 				
 				$sid = mysql_insert_id();
+				if($info){
+					$server = $this->database->query("SELECT * FROM servers WHERE resolved = '$lookupip' AND resolved != ''",db::GET_ROW);
+					unset($server['votifierKey']);
+					unset($server['plCache']);
+					unset($server['advCheck']);
+					echo json_encode($server);
+				}
 				return $this->formatResponse('success','Server added, redirecting',$ip);
 			}
 		}else{

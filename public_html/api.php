@@ -6,7 +6,7 @@ include '../inc/global.inc.php';
 include_once '../lib/twitteroauth.php';
 
 if($_GET['test'] != ''){
-	print_r($api->pingServer($_GET['test'],2));
+	print_r($api->pingServer($_GET['test'],1));
 	//$sr = $database->query("SELECT * 
 //FROM  `servers` 
 //WHERE  `ip` LIKE  '%mcsg.in'");
@@ -23,6 +23,12 @@ if($_POST[req] == 'm01'){
 
 if($_GET[req] == 'm01'){
 	$api->trackServer($_GET[ip]);	
+	exit;
+}
+
+if($_GET[req] == 'm011'){
+	$status = $api->trackServer($_GET[ip],false,true);	
+	if($status['status'] != 'success')print_r($status);
 	exit;
 }
 
