@@ -28,7 +28,7 @@ if($_GET[req] == 'm01'){
 
 if($_GET[req] == 'm011'){
 	$status = $api->trackServer($_GET[ip],false,true);	
-	if($status['status'] != 'success')print_r($status);
+	if($status['status'] != 'success')echo json_encode($status);
 	exit;
 }
 
