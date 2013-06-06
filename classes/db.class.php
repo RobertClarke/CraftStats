@@ -108,7 +108,7 @@ class db {
 		$this->memcache = $memcache;
         $this->db_host = 'localhost';
         $this->db_user = 'cstats_main';
-        $this->db_pass = '51u274jraK5w9cu23WOP';
+        $this->db_pass = 'P3L5JpUyFyH4WdJkxu6ujdPU';
         $this->db_name = 'cstats_main';
         $this->qcount = 0;
     $this->maxqueries = 100000;
