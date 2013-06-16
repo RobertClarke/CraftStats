@@ -125,7 +125,7 @@
                   <a href="/promote">get more players</a>
                 </li>
                 <li>
-                  <a href="http://servercrate.com/minecraft/">start a server</a>
+                  <a href="http://servercrate.com/minecraft">start a server</a>
                 </li>
                 <li>
                   <a href="/players">stats</a>
