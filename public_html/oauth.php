@@ -40,7 +40,6 @@ function request_token($tmhOAuth) {
     $_SESSION['oauth'] = $tmhOAuth->extract_params($tmhOAuth->response['response']);
     authorize($tmhOAuth);
   } else {
-	print_r($tmhOAuth);
     outputError($tmhOAuth);
   }
 }
