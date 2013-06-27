@@ -87,6 +87,7 @@ function verify_credentials($tmhOAuth) {
   if ($code == 200) {
     return json_decode($tmhOAuth->response['response']);
   } else {
+  
     outputError($tmhOAuth);
   }
 }
@@ -94,6 +95,7 @@ function verify_credentials($tmhOAuth) {
 if($_GET['login'] == 'twitter'){
 	request_token($tmhOAuth);
 }
+
 if (isset($_REQUEST['oauth_verifier'])){
 
 	$access_token = access_token($tmhOAuth);
@@ -132,4 +134,5 @@ if (isset($_REQUEST['oauth_verifier'])){
 		header('Location: '.$_SERVER['HTTP_REFERER']);
 	}
 }
+if($_GET['a'])print_r($tmhOAuth); 
 ?>

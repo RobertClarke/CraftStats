@@ -31,7 +31,7 @@ if($_POST['buyi'] > 0 && $svvalid){
 if($_GET['paypal'] == 'paid'){
 	require_once( '../lib/httprequest.php' );
 	require_once( '../lib/paypal.php' );
-	//include_once '../lib/twitteroauth.php';
+	include_once '../lib/twitteroauth.php';
 	$r = new PayPal(true);
 	
 	$final = $r->doPayment();
