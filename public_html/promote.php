@@ -117,7 +117,7 @@ if($database->num_rows < 3){
 		<div class="twelve columns box">
 
 			<div class="row" style="padding:20px;">
-				<h3>Promote a Server</h3>
+				<h3>Promote a Minecraft Server</h3>
 				<div style="width:100%;margin-top:15px;color:#777;font-size:14px;padding:15px;border-radius:10px;background:#eee;">
 					<span style="font-weight:bold;font-size:18px;">thousands of minecraft players visit craftstats to find servers</span><br/><br/> you can purchase a slice of that traffic for your own server!
 				</div>
@@ -127,8 +127,8 @@ if($database->num_rows < 3){
 						<h4 style="color:#333;">What you'll get</h4>
 						<ul style="list-style:disc inside;margin-left:15px;margin-top:5px;font-size:14px;">
 							<li>Featured listing on the front page</li>
-							<li>Server banners around the website</li>
-							<li>Tweet from the craftstats twitter account</li>
+							<li>Minecraft Server banners around the website</li>
+							<li>Tweet from the CraftStats twitter account</li>
 						</ul>
 					</div>
 					<img src="/images/promprev.png" style="margin-top:10px;border-radius:5px;"/>
