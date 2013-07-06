@@ -262,7 +262,7 @@ $cip = mysql_real_escape_string($_POST['claimip']);
 
 <?php if($_GET['name'] == '') { ?>
 <div class="row">
-<h2 style="text-align:center;">Minecraft Statistics</h2>
+<h2 style="text-align:center;">Minecraft Server Statistics</h2>
 </div>
 
 <div class="row">

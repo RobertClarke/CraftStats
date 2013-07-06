@@ -65,7 +65,7 @@
 			</form>
           </div>
 		  <a class="button expand" href="/submit">Add a server</a>
-          <h6 class="subheader">Server Categories</h6>
+          <h6 class="subheader">Minecraft Server Categories</h6>
           <div class="row collapse tags">
 		   <a href="/" class="button tiny" >Top Ranked</a>
 	<a href="/category/new" class="button tiny secondary" >New</a>

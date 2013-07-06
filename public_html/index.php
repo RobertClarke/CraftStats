@@ -21,7 +21,7 @@ $template->show('nav');
 	<div class="twelve columns prepromote">
 		<div class="row">
 			<?php
- echo ($_GET['version'] ? '<h2>'.$_GET['version'].' Minecraft Servers</h2>' : ($_GET['cat'] ? '<h2>'.$_GET['cat'].' Minecraft Servers</h2>':'<h2>Best Minecraft Servers</h2>')); ?>
+ echo ($_GET['version'] ? '<h1>'.$_GET['version'].' Minecraft Servers</h2>' : ($_GET['cat'] ? '<h1>'.$_GET['cat'].' Minecraft Servers</h1>':'<h1>Best Minecraft Servers</h1>')); ?>
 		</div>
         <div class="row">
 			<?php $sponsoredp = $database->query("SELECT 
@@ -128,7 +128,7 @@ $servers = FosMerge($servers,$sponsored);
 $time = time();
 foreach($servers as $server){
 	echo '<tr onclick="document.location=\'/server/'.$server['ip'].'\';" class="slink '.($server['uptime'] <= 0 ? 'down':'').'">
-	<td> '.($server['st'] > time() ? '&#9733;':'').' '.$server['ip'].' '.($server['version'] != '' ? '<div style="float:right;margin-left:7px;"><a href="/version/'.$server['version'].'"><span class="button tiny">'.$server['version'].'</span></a></div>' : '').' 
+	<td><strong> '.($server['st'] > time() ? '&#9733;':'').' '.$server['ip'].' '.($server['version'] != '' ? '</strong><div style="float:right;margin-left:7px;"><a href="/version/'.$server['version'].'"><span class="button tiny">'.$server['version'].'</span></a></div>' : '').' 
 	'.($server['category'] != '' ? '<div style="float:right;margin-left:7px;"><a href="/category/'.$server['category'].'"><span class="button tiny">'.$server['category'].'</span></a></div>' : '').'
 	'.($server['advCheck'] == 2 ? '<div style="float:right;"><span class="button tiny">DirtBlock</span></div>' : '').'</td><td><span style="padding:3px 0px;display:block;width:50px !important;text-align:center;" class="button tiny '.($server['uptime'] <= 0 ? 'alert' : ($server['uptimeavg'] > 90 ? 'success' : ($server['uptimeavg'] > 70 ? 'secondary' : ($server['uptimeavg'] > 50 ? 'secondary' : 'alert')))).'">'.($server['uptime'] <= 0 ? 'down' : $server['uptimeavg'].'%').'</span></td><td>'.$server['cp'].' / '.$server['mp'].'</td></tr>';
 }

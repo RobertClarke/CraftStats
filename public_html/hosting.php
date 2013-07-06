@@ -11,7 +11,7 @@ $h = $database->query("SELECT * FROM hosts WHERE slug = '$_GET[slug]'",db::GET_R
 
 
 
-$template->setTitle(($h['name'] != '' ? $h['name']: 'Minecraft Hosts'));
+$template->setTitle(($h['name'] != '' ? $h['name']: 'Minecraft Server Hosting Suggestions'));
 $template->setHeadScripts('
 	<script type="text/javascript">
 	$(document).ready(function() {
