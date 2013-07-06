@@ -8,7 +8,11 @@
 
   <!-- Set the viewport width to device width for mobile -->
   <meta name="viewport" content="width=device-width" />
-
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Lang" content="en">
+  <meta name="description" content="Find the best Minecraft servers with our minecraft server multiplayer list. Browse detailed information on each server and vote for your favourite server.">
+  <meta name="keywords" content="minecraft, minecraft servers, minecraft server list, best minecraft servers, minecraft servers list">
   <title><?php echo $this->title; ?></title>
 
   
