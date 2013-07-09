@@ -11,7 +11,7 @@ class csAPI{
 	public function __construct($db,$log){
 		$this->database = $db;
 		$this->log = $log;
-		$mv = $this->database->query("SELECT MAX(votes) AS mv FROM servers",db::GET_ROW);
+		$mv = $this->database->query("SELECT MAX(votes) AS mv FROM servers WHERE game ='minecraft'",db::GET_ROW);
 		$this->maxvotes = $mv['mv'];
 		$translate = $this->database->query("SELECT * FROM mctranslation");
 		foreach($translate as $t){
@@ -60,7 +60,7 @@ class csAPI{
 			) tmp
 		);
 		");
-		$return = $this->database->query("SELECT ip,version,advCheck FROM servers WHERE updatingBy='$thread-$time-$rand' GROUP BY ip");
+		$return = $this->database->query("SELECT ip,version,advCheck,game FROM servers WHERE updatingBy='$thread-$time-$rand' GROUP BY ip");
 		return json_encode($return); 
 	}
 	
@@ -205,17 +205,17 @@ class csAPI{
 			$prv = $this->database->query("SELECT avgTime FROM serviceinfo WHERE slaveID = '{$slave[id]}' ORDER BY time DESC LIMIT 1",db::GET_ROW);
 			$maxupdates = round(($execinterval)/(($prv['avgTime'] == 0 ? 1000 : $prv['avgTime'])*1.1));
 			$svcount = $this->database->query("SELECT COUNT(*) AS svcount FROM servers WHERE $time - lastUpdate > 60 AND id % $totalthreads >= $thread AND id % $totalthreads <= $thread + {$this->threads} - 1 ",db::GET_ROW);
-			$info = $this->database->query("SELECT COUNT(*) as c FROM servers",db::GET_ROW);
+			$info = $this->database->query("SELECT COUNT(*) as c FROM servers WHERE game ='minecraft'",db::GET_ROW);
 			$servers = round($info['c']/count($slaves));
 			array_push($final,array($time,(int)$svcount['svcount'],(int)$servers,$maxupdates,$i));
 			
 			$i++;
 		}
 		$time = time();
-		$svcount = $this->database->query("SELECT COUNT(*) AS svcount FROM servers WHERE $time - lastUpdate < 180",db::GET_ROW);
+		$svcount = $this->database->query("SELECT COUNT(*) AS svcount FROM servers WHERE $time - lastUpdate < 180 AND game='minecraft'",db::GET_ROW);
 		$rate = round($svcount['svcount']/3);
 		
-		$updated = $this->database->query("SELECT ip FROM servers WHERE lastUpdate > $since LIMIT 0,50");
+		$updated = $this->database->query("SELECT ip FROM servers WHERE lastUpdate > $since AND game='minecraft' LIMIT 0,50");
 		
 		$svcount = $this->database->query("SELECT COUNT(*) AS svcount FROM batchqueue WHERE processing = 1",db::GET_ROW);
 		$pc = number_format($svcount['svcount']);
@@ -271,7 +271,7 @@ class csAPI{
 					return $this->formatResponse('error','Failed to connect to Minecraft Server');
 				}
 		
-				$this->database->query("INSERT INTO servers VALUES ('','$ip','$lookupip','',0,0,0,'US','NA',0,0,'','','','','',0,'',0,0,0,0,100,'',0,0,FALSE,0,'0','0')");
+				$this->database->query("INSERT INTO servers VALUES ('','minecraft','$ip','$lookupip','',0,0,0,'US','NA',0,0,'','','','','',0,'',0,0,0,0,100,'',0,0,FALSE,0,'0','0')");
 				
 				$this->updateServerFromPing($result);
 				

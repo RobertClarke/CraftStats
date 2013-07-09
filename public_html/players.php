@@ -210,7 +210,7 @@ $template->show('nav');
 	<?php
 if($_POST['claimip'] != '' && $_SESSION['mcuser'] == $playername){
 $cip = mysql_real_escape_string($_POST['claimip']);
-	$server = $database->query("SELECT * FROM servers WHERE (resolved = '$cip' AND resolved != '') OR ip = '$cip'",db::GET_ROW);
+	$server = $database->query("SELECT * FROM servers WHERE ((resolved = '$cip' AND resolved != '') OR ip = '$cip') AND game = 'minecraft'",db::GET_ROW);
 	if($database->num_rows == 0 ){
 		?>
 		<div class="alert-box" style="margin-top:20px;">

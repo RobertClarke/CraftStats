@@ -18,6 +18,7 @@ session_start();
 
 function outputError($tmhOAuth) {
   echo 'There was an error: ' . $tmhOAuth->response['response'] . PHP_EOL;
+  if($_GET['a'])print_r($tmhOAuth);
 }
 
 function wipe() {

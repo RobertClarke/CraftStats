@@ -2,7 +2,7 @@
 include '../inc/global.inc.php';
 $svvalid = false;
 if($_POST['buyi'] > 0){
-	$sv = $database->query("SELECT * FROM servers WHERE (resolved = '$_POST[promoip]' AND resolved != '') OR ip = '$_POST[promoip]'",db::GET_ROW);
+	$sv = $database->query("SELECT * FROM servers WHERE ((resolved = '$_POST[promoip]' AND resolved != '') OR ip = '$_POST[promoip]') AND game = 'minecraft'",db::GET_ROW);
 	if($database->num_rows == 1){
 		$svvalid = true;
 		$svid = $sv['ID'];
@@ -40,7 +40,7 @@ if($_GET['paypal'] == 'paid'){
 		$token = $final['TOKEN'];
 		$order = $database->query("SELECT * FROM promo_order WHERE token = '$token'",db::GET_ROW);
 		if($order['paid'] == 0 && $database->num_rows == 1){
-			$sv = $database->query("SELECT * FROM servers WHERE ID = '$order[serverID]'",db::GET_ROW);
+			$sv = $database->query("SELECT * FROM servers WHERE game = 'minecraft' AND ID = '$order[serverID]'",db::GET_ROW);
 			
 			$responses = array(
 			'Check out this server! http://cstats.co/'.$sv['ip'],
