@@ -106,11 +106,11 @@ if($database->num_rows < 18){
 	$instock = false;
 }
 
-$database->query("SELECT * FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() && sponsorType = 1"); 
-if($database->num_rows < 3){
-	$instock2 = true;
-}else{
+$a = $database->query("SELECT * FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 AND sponsorType = 1 AND game = 'minecraft'"); 
+if($database->num_rows == 3){
 	$instock2 = false;
+}else{
+	$instock2 = true;
 }
 ?>
 
@@ -181,7 +181,7 @@ if($database->num_rows < 3){
 							<?php echo ($instock2?'<form class="form-inline" action="/promote" method="post">':''); ?>
 								<input type="hidden" name="buyi" value="3">
 								<input type="text" name="promoip" class="input-medium" placeholder="Server IP"  value="<?php if($_POST['buym'] == 3)echo $_POST['promoip']; ?>">
-								<button class="button expand" type="submit"><?php echo ($instock?'Buy now':'Sold out!'); ?></a>
+								<button class="button expand" type="submit"><?php echo ($instock2?'Buy now':'Sold out!'); ?></a>
 							<?php echo ($instock2?'</form>':''); ?>
 						</div>
 						<div class="row">
@@ -191,7 +191,7 @@ if($database->num_rows < 3){
 							
 								<input type="hidden" name="buyi" value="4">
 								<input type="text" name="promoip" class="input-medium" placeholder="Server IP"  value="<?php if($_POST['buym'] == 4)echo $_POST['promoip']; ?>">
-								<button class="button expand"  type="submit"><?php echo ($instock?'Buy now':'Sold out!'); ?></a>
+								<button class="button expand"  type="submit"><?php echo ($instock2?'Buy now':'Sold out!'); ?></a>
 							<?php echo ($instock2?'</form>':''); ?>
 						</div>
 					</div>
