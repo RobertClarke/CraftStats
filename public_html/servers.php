@@ -167,7 +167,7 @@ $template->show('nav');
 	?>
 		<div class="twelve columns box">
 			<div class="eight columns">
-				<h5 style="padding-top:5px;"><?php echo $server['ip']; ?> <small><?php echo $server['connPlayers']; ?> players online as of <?php echo ($time - $server['lastUpdate'] > 60 ? round(($time - $server['lastUpdate'])/60).'m' : $time - $server['lastUpdate'].'s'); ?> ago</small></h5>
+				<h5 style="padding-top:5px;"><?php echo $server['ip']; ?> <small><?php echo $server['connPlayers']; ?> players online <?php if($time - $server['lastUpdate'] > -1300442333 ){ ?> as of <?php echo ($time - $server['lastUpdate'] > 60 ? round(($time - $server['lastUpdate'])/60).'m' : $time - $server['lastUpdate'].'s'); ?> ago<?php } ?></small></h5>
 			</div>
 			<div class="row">
 				<div class="four columns" style="padding-top:12px;">

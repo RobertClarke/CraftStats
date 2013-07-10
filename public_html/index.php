@@ -28,7 +28,7 @@ $template->show('nav');
   ID as sid, country, category,
   name, ip, advCheck,
   connPlayers AS cp, maxPlayers AS mp, version, motd, lastUpdate, uptimeavg, ranking
-FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 AND sponsorType = 1 AND game ='minecraft' ORDER BY sponsorRank DESC, ranking ASC LIMIT 3");
+FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 AND sponsorType = 1 AND game = 'minecraft' ORDER BY sponsorRank DESC, ranking ASC LIMIT 3");
 			foreach($sponsoredp as $sp){
 ?>
 			<div class="four columns">
@@ -122,7 +122,7 @@ if($cpage == 0 && $new == ''){
   ID as sid, country,sponsorTime AS st, category,
   name, ip, advCheck,
   connPlayers AS cp, maxPlayers AS mp, version, motd, lastUpdate, uptimeavg, ranking, uptime
-FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 game = 'minecraft' $version ORDER BY sponsorRank DESC, ranking ASC");
+FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 AND game = 'minecraft' $version ORDER BY sponsorRank DESC, ranking ASC");
 $servers = FosMerge($servers,$sponsored);
 }
 $time = time();
