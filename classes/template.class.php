@@ -42,7 +42,7 @@
 	
 	public function setDesc($desc){
 		if(strlen($desc) < 1){ 
-			$this->desc = 'CraftStats is an awesome Minecraft server list. Find a Minecraft server you can call home';  
+			$this->desc = 'Find the best Minecraft servers with our minecraft server multiplayer list. Browse detailed information on each server and vote for your favourite server.';  
 		}else{
 			$this->desc = $desc;  
 		}

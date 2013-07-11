@@ -9,6 +9,8 @@ $data = array();
 
 $server = $database->query("SELECT * FROM servers WHERE (resolved = '$_GET[ip]' AND resolved != '') OR ip = '$_GET[ip]' LIMIT 0,1",db::GET_ROW);
 
+$template->setDesc($server['ip'].', '.($server['name'] != '' ? $server['name'].'. ':'').''.($server['motd'] != '' ? $server['motd'].'. ':'').''.($server['category'] != '' ? 'Minecraft '.$server['category'].' server.':'').' Vote for this minecraft server now!');
+
 if($server[blacklisted] == 1)
 {
 	header('Location: http://craftstats.com/?blacklist=1');
@@ -55,7 +57,6 @@ if($_POST['blcklst'] && $isowner){
 
 $server = $database->query("SELECT * FROM servers WHERE (resolved = '$_GET[ip]' AND resolved != '') OR ip = '$_GET[ip]' LIMIT 0,1",db::GET_ROW);
 $template->setTitle($server['ip']);
-$template->setDesc($server['ip'].' is being tracked by CraftStats. Check it out!');
 if($server['ID'] == ''){
 	header("Location: /?sf=1");exit;
 }
@@ -170,7 +171,7 @@ $template->show('nav');
 	?>
 		<div class="twelve columns box">
 			<div class="seven columns">
-				<h2 style="font-size:14px;margin-bottom:-17px;<?php if($server['motd'] == ''){echo 'margin-top:20px;';} ?>"><?php echo $server['ip']; ?></h2> <h5><small><?php if($server['motd']!=''){ echo $server['motd'];} ?></small></h5>
+				<h1 style="font-size:14px;margin-bottom:-17px;<?php if($server['motd'] == ''){echo 'margin-top:20px;';} ?>"><?php echo $server['ip']; ?></h1> <h5><small><?php if($server['motd']!=''){ echo $server['motd'];} ?></small></h5>
 			</div>
 			<div class="row">
 				<div class="five columns" style="padding-top:12px;">
