@@ -128,7 +128,7 @@ $servers = FosMerge($servers,$sponsored);
 $time = time();
 foreach($servers as $server){
 	echo '<tr onclick="document.location=\'/server/'.$server['ip'].'\';" class="slink '.($server['uptime'] <= 0 ? 'down':'').'">
-	<td><strong> '.($server['st'] > time() ? '&#9733;':'').' '.$server['ip'].' '.($server['version'] != '' ? '</strong><div style="float:right;margin-left:7px;"><a href="/version/'.$server['version'].'"><span class="button tiny">'.$server['version'].'</span></a></div>' : '').' 
+	<td>'.($server['st'] > time() ? '<div style="float:left;padding-right:3px;"> &#9733; </div>':'').'<h2 style="font-size:14px;margin:0px;margin-top:3px;padding:0px;float:left;">   '.$server['ip'].' '.($server['version'] != '' ? '</h2><div style="float:right;margin-left:7px;"><a href="/version/'.$server['version'].'"><span class="button tiny">'.$server['version'].'</span></a></div>' : '').' 
 	'.($server['category'] != '' ? '<div style="float:right;margin-left:7px;"><a href="/category/'.$server['category'].'"><span class="button tiny">'.$server['category'].'</span></a></div>' : '').'
 	'.($server['advCheck'] == 2 ? '<div style="float:right;"><span class="button tiny">DirtBlock</span></div>' : '').'</td><td><span style="padding:3px 0px;display:block;width:50px !important;text-align:center;" class="button tiny '.($server['uptime'] <= 0 ? 'alert' : ($server['uptimeavg'] > 90 ? 'success' : ($server['uptimeavg'] > 70 ? 'secondary' : ($server['uptimeavg'] > 50 ? 'secondary' : 'alert')))).'">'.($server['uptime'] <= 0 ? 'down' : $server['uptimeavg'].'%').'</span></td><td>'.$server['cp'].' / '.$server['mp'].'</td></tr>';
 }
