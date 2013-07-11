@@ -9,7 +9,7 @@ $data = array();
 
 $server = $database->query("SELECT * FROM servers WHERE (resolved = '$_GET[ip]' AND resolved != '') OR ip = '$_GET[ip]' LIMIT 0,1",db::GET_ROW);
 
-$template->setDesc($server['ip'].', '.($server['name'] != '' ? $server['name'].'. ':'').''.($server['motd'] != '' ? $server['motd'].'. ':'').''.($server['category'] != '' ? 'Minecraft '.$server['category'].' server.':'').' Vote for this minecraft server now!');
+$template->setDesc($server['ip'].', '.($server['name'] != '' ? $server['name'].'. ':'').''.($server['motd'] != '' ? $server['motd'].'. ':'').$server['connPlayers'].' players online. '.($server['category'] != '' ? 'Minecraft '.$server['category'].' server.':'').' Vote for this minecraft server now!');
 
 if($server[blacklisted] == 1)
 {
