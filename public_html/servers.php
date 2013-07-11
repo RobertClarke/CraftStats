@@ -63,6 +63,8 @@ $dpoints = $database->query("SELECT * FROM (SELECT * FROM updates WHERE serverID
 $uptimeavg = array();
 
 $time = time();
+
+if(count($dpoints) > 1){
 foreach($dpoints as $n => $update){
 	if($time - $update['time'] < 604800){
 		array_push($data,array(($update[time]*1000), ($update[ping] > 0 ? $update[connPlayers] : 'null') ,($update[ping] > 0 ? $update[maxPlayers] : 'null')));
@@ -76,13 +78,14 @@ foreach($data as $row){
 }
 
 $series1 = '{data:['.$r1.'],label:"Max Players",color:"#cdcdcd"},{data:['.$r0.'],label:"Players Online",color:"#3A87AD",hoverable:true}';
-
+}
 $template->setHeadScripts('
 <script language="javascript" type="text/javascript" src="/js/flot.js"></script>
 <script language="javascript" type="text/javascript" src="/js/flot.time.js"></script>
 <script language="javascript" type="text/javascript" src="/js/flot.stack.js"></script>
 <script language="javascript" type="text/javascript" src="/js/cstats.js"></script>
 <script type="text/javascript">
+'.(count($dpoints) > 1 ? '
 $(document).ready(function() {
 $.plot($("#chart_div"), ['.$series1.'],{
 grid:{
@@ -101,8 +104,8 @@ grid:{
 
 });
 });
+':'').'
 </script>
-
 	<script type="text/javascript" src="/js/ZeroClipboard.js"></script>
 	
  	<script type="text/javascript">
@@ -126,7 +129,7 @@ $template->show('nav');
 <div class="row">
 	<div class="twelve columns">
 		<?php
-			if($server['uptime'] <= 0){
+			if($server['uptime'] <= 0 && count($dpoints) > 1){
 			?>
 				<div class="alert-box alert" style="margin-top:20px;">
 				  This server is currently offline
@@ -167,7 +170,7 @@ $template->show('nav');
 	?>
 		<div class="twelve columns box">
 			<div class="eight columns">
-				<h5 style="padding-top:5px;"><?php echo $server['ip']; ?> <small><?php echo $server['connPlayers']; ?> players online <?php if($time - $server['lastUpdate'] > 1300442333 ){ ?> as of <?php echo ($time - $server['lastUpdate'] > 60 ? round(($time - $server['lastUpdate'])/60).'m' : $time - $server['lastUpdate'].'s'); ?> ago<?php } ?></small></h5>
+				<h5 style="padding-top:5px;"><?php echo $server['ip']; ?> <small><?php echo $server['connPlayers']; ?> players online <?php if($time - $server['lastUpdate'] < 1300442333 ){ ?> as of <?php echo ($time - $server['lastUpdate'] > 60 ? round(($time - $server['lastUpdate'])/60).'m' : $time - $server['lastUpdate'].'s'); ?> ago<?php } ?></small></h5>
 			</div>
 			<div class="row">
 				<div class="four columns" style="padding-top:12px;">
@@ -228,7 +231,10 @@ $template->show('nav');
 			
 		</div>
 		<div class="twelve columns box">
-			<div id="chart_div" style="margin:20px 0px;height:300px;width:640px;">
+			<div id="chart_div" style="margin:20px 0px;height:<?php echo(count($dpoints)<2?50:300);?>px;width:640px;text-align:center;">
+				<?php if(count($dpoints < 2)){ ?>
+					<div style="margin-top:50px;">We're currently gathering data for this server. Come back in a few minutes.</div>
+				<?php } ?>
 			</div>
 		</div>
 		
