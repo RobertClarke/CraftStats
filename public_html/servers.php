@@ -209,12 +209,25 @@ $template->show('nav');
 				</div>
 			</div>
 		</div>
-		<div class="twelve columns box"style="padding:10px;">
+		<div class="twelve columns box"style="padding:10px;text-align:center;">
 			<?php if($server['name'] != ''){echo '<h4>'.$server['name'].'</h4>'; } ?>
-			<div class="six columns" style="text-align:center;"><h5>
-		<small><?php if($server['version']!=''){echo ($server['category'] != '' ? 'minecraft '.strtolower($server['category']).' server - ':'').'currently running version '.$server['version'];
-		 echo '</small></h5></div><div class="six columns" style="text-align:center;"><h5><small>'.$server['connPlayers']; ?> players online <?php if($time - $server['lastUpdate'] < 1300442333 ){ ?> as of <?php echo ($time - $server['lastUpdate'] > 60 ? round(($time - $server['lastUpdate'])/60).'m' : $time - $server['lastUpdate'].'s'); ?> ago<?php } 
-		} ?></small></h5></div>
+		
+		
+		<div class="four columns">
+		<h5><small>
+		<?php echo ($server['category'] != '' ? 'minecraft '.strtolower($server['category']).' server':'minecraft survival server'); ?>
+		</small></h5>
+		</div>
+		<div class="four columns">
+		<h5><small>
+		<?php if($server['version']!=''){ echo 'currently running version '.$server['version']; }else{ echo 'currently running custom version'; }?>
+		</small></h5>
+		</div>
+		<div class="four columns">
+		<h5><small>
+		<?php echo $server['connPlayers']; ?> players online <?php if($time - $server['lastUpdate'] < 1300442333 ){ ?> as of <?php echo ($time - $server['lastUpdate'] > 60 ? round(($time - $server['lastUpdate'])/60).'m' : $time - $server['lastUpdate'].'s'); ?> ago<?php } ?>
+		</small></h5>
+		</div>
 		</div>
 		<div class="twelve columns box">
 			<div class="three columns serverstat">
