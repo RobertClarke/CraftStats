@@ -170,7 +170,7 @@ $template->show('nav');
 	?>
 		<div class="twelve columns box">
 			<div class="seven columns">
-				<h2 style="font-size:14px;margin-bottom:-17px;"><?php echo $server['ip']; ?></h2> <h5><small><?php if($server['motd']!=''){ echo $server['motd'];} ?></small></h5>
+				<h2 style="font-size:14px;margin-bottom:-17px;<?php if($server['motd'] == ''){echo 'margin-top:20px;';} ?>"><?php echo $server['ip']; ?></h2> <h5><small><?php if($server['motd']!=''){ echo $server['motd'];} ?></small></h5>
 			</div>
 			<div class="row">
 				<div class="five columns" style="padding-top:12px;">
@@ -213,21 +213,21 @@ $template->show('nav');
 			<?php if($server['name'] != ''){echo '<h4>'.$server['name'].'</h4>'; } ?>
 		
 		
-		<div class="four columns">
-		<h5><small>
-		<?php echo ($server['category'] != '' ? 'minecraft '.strtolower($server['category']).' server':'minecraft survival server'); ?>
-		</small></h5>
-		</div>
-		<div class="four columns">
-		<h5><small>
-		<?php if($server['version']!=''){ echo 'currently running version '.$server['version']; }else{ echo 'currently running custom version'; }?>
-		</small></h5>
-		</div>
-		<div class="four columns">
-		<h5><small>
-		<?php echo $server['connPlayers']; ?> players online <?php if($time - $server['lastUpdate'] < 1300442333 ){ ?> as of <?php echo ($time - $server['lastUpdate'] > 60 ? round(($time - $server['lastUpdate'])/60).'m' : $time - $server['lastUpdate'].'s'); ?> ago<?php } ?>
-		</small></h5>
-		</div>
+			<div class="four columns">
+			<h5><small>
+			<?php echo ($server['category'] != '' ? 'minecraft '.strtolower($server['category']).' server':'minecraft survival server'); ?>
+			</small></h5>
+			</div>
+			<div class="four columns">
+			<h5><small>
+			<?php if($server['version']!=''){ echo 'currently running version '.$server['version']; }else{ echo 'currently running custom version'; }?>
+			</small></h5>
+			</div>
+			<div class="four columns">
+			<h5><small>
+			<?php echo $server['connPlayers']; ?> players online <?php if($time - $server['lastUpdate'] < 1300442333 ){ ?> as of <?php echo ($time - $server['lastUpdate'] > 60 ? round(($time - $server['lastUpdate'])/60).'m' : $time - $server['lastUpdate'].'s'); ?> ago<?php } ?>
+			</small></h5>
+			</div>
 		</div>
 		<div class="twelve columns box">
 			<div class="three columns serverstat">
