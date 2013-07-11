@@ -169,11 +169,11 @@ $template->show('nav');
 		}
 	?>
 		<div class="twelve columns box">
-			<div class="eight columns">
-				<h5 style="padding-top:5px;"><?php echo $server['ip']; ?> <small><?php echo $server['connPlayers']; ?> players online <?php if($time - $server['lastUpdate'] < 1300442333 ){ ?> as of <?php echo ($time - $server['lastUpdate'] > 60 ? round(($time - $server['lastUpdate'])/60).'m' : $time - $server['lastUpdate'].'s'); ?> ago<?php } ?></small></h5>
+			<div class="seven columns">
+				<h2 style="font-size:14px;margin-bottom:-17px;"><?php echo $server['ip']; ?></h2> <h5><small><?php echo $server['connPlayers']; ?> players online <?php if($time - $server['lastUpdate'] < 1300442333 ){ ?> as of <?php echo ($time - $server['lastUpdate'] > 60 ? round(($time - $server['lastUpdate'])/60).'m' : $time - $server['lastUpdate'].'s'); ?> ago<?php } ?></small></h5>
 			</div>
 			<div class="row">
-				<div class="four columns" style="padding-top:12px;">
+				<div class="five columns" style="padding-top:12px;">
 					<div class="row collapse">
 					<?php
 						$time = time();
@@ -208,6 +208,9 @@ $template->show('nav');
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="twelve columns box"style="text-align:center;padding:10px;">
+			<h5><?php if($server['motd'] != ''){echo $server['motd'].'<br/>'; } ?><small><?php if($server['version']!=''){echo ($server['category'] != '' ? 'minecraft '.strtolower($server['category']).' server - ':'').'currently running version '.$server['version'];} ?></small></h5>
 		</div>
 		<div class="twelve columns box">
 			<div class="three columns serverstat">
