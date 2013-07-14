@@ -14,15 +14,15 @@ if($_POST['buyi'] > 0 && $svvalid){
 	$r = new PayPal(true);
 	
 	$prices = array(1=>20,2=>35,3=>50,4=>90);
-	$months = array(1=>1,2=>2,3=>1,4=>2);
+	$week = array(1=>1,2=>2,3=>1,4=>2);
 	$type = ($_POST['buyi']>2 ? 1:0);
 	
-	$ret = ($r->doExpressCheckout($prices[$_POST['buyi']], $months[$_POST['buyi']].' Month '.($type == 1 ? 'Premium' : 'Standard').' Promotion for server '.$_POST['promoip']));
+	$ret = ($r->doExpressCheckout($prices[$_POST['buyi']], $week[$_POST['buyi']].' Week '.($type == 1 ? 'Premium' : 'Standard').' Promotion for server '.$_POST['promoip']));
 
 	if ($ret['ACK'] == 'Success') {
 		$token = $ret['TOKEN'];
 		$cost = $prices[$_POST['buyi']].'.00';
-		$mf=$months[$_POST['buyi']];
+		$mf=$week[$_POST['buyi']];
 		$database->query("INSERT INTO promo_order VALUES ('$token','$svid','$mf','$type','$cost','0',0,'','','')");
 		exit;
 	}
@@ -60,7 +60,7 @@ if($_GET['paypal'] == 'paid'){
 
 			
 			
-			$stime = ($order['length']*60*60*24*31) + max($sv['sponsorTime'],time());
+			$stime = ($order['length']*60*60*24*7) + max($sv['sponsorTime'],time());
 			
 			$database->query("UPDATE promo_order SET paid = '1', expire = '$stime', first='{$r->details[FIRSTNAME]}',last='{$r->details[LASTNAME]}',email='{$r->details[EMAIL]}' WHERE token = '$token'");
 			
@@ -138,7 +138,7 @@ if($database->num_rows == 3){
 					</div>
 					<div class="five columns" style="padding:10px 40px;">
 						<div class="row">
-							<h5 style="text-align:center;margin-bottom:-10px;" >One Month</h5>
+							<h5 style="text-align:center;margin-bottom:-10px;" >One Week</h5>
 							<h5 style="text-align:center;color:#3A87AD;font-size:42px;font-weight:bold;">$20</h5>
 							<?php echo ($instock?'<form class="form-inline" action="/promote" method="post">':''); ?>
 								<input type="hidden" name="buyi" value="1">
@@ -147,7 +147,7 @@ if($database->num_rows == 3){
 							<?php echo ($instock?'</form>':''); ?>
 						</div>
 						<div class="row">
-							<h5 style="text-align:center;margin-bottom:-10px;">Two Months</h5>
+							<h5 style="text-align:center;margin-bottom:-10px;">Two Weeks</h5>
 							<h5 style="text-align:center;color:#3A87AD;font-size:42px;font-weight:bold;">$35</h5>
 							<?php echo ($instock?'<form class="form-inline" action="/promote" method="post">':''); ?>
 							
@@ -176,7 +176,7 @@ if($database->num_rows == 3){
 					</div>
 					<div class="five columns" style="padding:10px 40px;">
 						<div class="row">
-							<h5 style="text-align:center;margin-bottom:-10px;" >One Month</h5>
+							<h5 style="text-align:center;margin-bottom:-10px;" >One Week</h5>
 							<h5 style="text-align:center;color:#3A87AD;font-size:42px;font-weight:bold;">$50</h5>
 							<?php echo ($instock2?'<form class="form-inline" action="/promote" method="post">':''); ?>
 								<input type="hidden" name="buyi" value="3">
@@ -185,7 +185,7 @@ if($database->num_rows == 3){
 							<?php echo ($instock2?'</form>':''); ?>
 						</div>
 						<div class="row">
-							<h5 style="text-align:center;margin-bottom:-10px;">Two Months</h5>
+							<h5 style="text-align:center;margin-bottom:-10px;">Two Weeks</h5>
 							<h5 style="text-align:center;color:#3A87AD;font-size:42px;font-weight:bold;">$90</h5>
 							<?php echo ($instock2?'<form class="form-inline" action="/promote" method="post">':''); ?>
 							
