@@ -171,7 +171,7 @@ $template->show('nav');
 	?>
 		<div class="twelve columns box">
 			<div class="seven columns">
-				<h1 style="font-size:14px;margin-bottom:-17px;<?php if($server['motd'] == ''){echo 'margin-top:20px;';} ?>"><?php echo $server['ip']; ?></h1> <h5><small><?php if($server['motd']!=''){ echo $server['motd'];} ?></small></h5>
+				<h1 style="font-size:14px;margin-bottom:-17px;<?php if($server['motd'] == ''){echo 'margin-top:20px;';} ?>">  <?php echo $server['ip']; ?></h1> <h5><small><?php if($server['motd']!=''){ echo $server['motd'];} ?></small></h5>
 			</div>
 			<div class="row">
 				<div class="five columns" style="padding-top:12px;">
@@ -212,7 +212,7 @@ $template->show('nav');
 		</div>
 		<div class="twelve columns box"style="padding:10px;text-align:center;">
 			<?php if($server['name'] != ''){echo '<h4>'.$server['name'].'</h4>'; } ?>
-		
+			<?php if(time() < $server['sponsorTime']){ echo ' <div style="text-align:center;color:#aaa;font-size:11px;'.($server['name'] != '' ? 'margin-top:-8px;' :'').'">SPONSORED SERVER</div>';} ?>
 		
 			<div class="four columns">
 			<h5><small>
@@ -251,6 +251,13 @@ $template->show('nav');
 			
 			
 		</div>
+		<?php if(time() > $server['sponsorTime']){ ?><div class="twelve columns" style="margin-top:10px;">
+			<div class="six columns offset-by-three">
+				<a href="/promote?ip=<?php echo $server['ip']; ?>" class="button expand">Sponsor this server</a>
+			</div>
+		</div>
+		<?php } ?>
+		
 		<div class="twelve columns box">
 			<div id="chart_div" style="margin:20px 0px;height:<?php echo(count($dpoints)<2?50:300);?>px;width:640px;text-align:center;">
 				<?php if(count($dpoints < 2)){ ?>

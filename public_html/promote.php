@@ -117,9 +117,9 @@ if($database->num_rows == 3){
 		<div class="twelve columns box">
 
 			<div class="row" style="padding:20px;">
-				<h3>Promote a Minecraft Server</h3>
+				<h3><?php echo ($_GET['ip'] ? 'Sponsor '.$_GET['ip'] : 'Promote a Minecraft Server'); ?></h3>
 				<div style="width:100%;margin-top:15px;color:#777;font-size:14px;padding:15px;border-radius:10px;background:#eee;">
-					<span style="font-weight:bold;font-size:18px;">thousands of minecraft players visit craftstats to find servers</span><br/><br/> you can purchase a slice of that traffic for your own server!
+					<span style="font-weight:bold;font-size:18px;">thousands of minecraft players visit craftstats to find servers</span><br/><br/> you can purchase a slice of that traffic for <?php echo ($_GET['ip'] ? $_GET['ip'] : 'your own server'); ?>!
 				</div>
 
 				<div class="row">
@@ -142,7 +142,7 @@ if($database->num_rows == 3){
 							<h5 style="text-align:center;color:#3A87AD;font-size:42px;font-weight:bold;">$20</h5>
 							<?php echo ($instock?'<form class="form-inline" action="/promote" method="post">':''); ?>
 								<input type="hidden" name="buyi" value="1">
-								<input type="text" name="promoip" class="input-medium" placeholder="Server IP"  value="<?php if($_POST['buym'] == 1)echo $_POST['promoip']; ?>">
+								<input type="text" name="promoip" class="input-medium" placeholder="Server IP"  value="<?php if($_POST['buym'] == 1)echo $_POST['promoip'];  if($_GET['ip'])echo $_GET['ip']; ?>">
 								<button class="button expand" type="submit"><?php echo ($instock?'Buy now':'Sold out!'); ?></a>
 							<?php echo ($instock?'</form>':''); ?>
 						</div>
@@ -152,7 +152,7 @@ if($database->num_rows == 3){
 							<?php echo ($instock?'<form class="form-inline" action="/promote" method="post">':''); ?>
 							
 								<input type="hidden" name="buyi" value="2">
-								<input type="text" name="promoip" class="input-medium" placeholder="Server IP"  value="<?php if($_POST['buym'] == 2)echo $_POST['promoip']; ?>">
+								<input type="text" name="promoip" class="input-medium" placeholder="Server IP"  value="<?php if($_POST['buym'] == 2)echo $_POST['promoip']; if($_GET['ip'])echo $_GET['ip']; ?>">
 								<button class="button expand"  type="submit"><?php echo ($instock?'Buy now':'Sold out!'); ?></a>
 							<?php echo ($instock?'</form>':''); ?>
 						</div>
@@ -180,7 +180,7 @@ if($database->num_rows == 3){
 							<h5 style="text-align:center;color:#3A87AD;font-size:42px;font-weight:bold;">$50</h5>
 							<?php echo ($instock2?'<form class="form-inline" action="/promote" method="post">':''); ?>
 								<input type="hidden" name="buyi" value="3">
-								<input type="text" name="promoip" class="input-medium" placeholder="Server IP"  value="<?php if($_POST['buym'] == 3)echo $_POST['promoip']; ?>">
+								<input type="text" name="promoip" class="input-medium" placeholder="Server IP"  value="<?php if($_POST['buym'] == 3)echo $_POST['promoip']; if($_GET['ip'])echo $_GET['ip']; ?>">
 								<button class="button expand" type="submit"><?php echo ($instock2?'Buy now':'Sold out!'); ?></a>
 							<?php echo ($instock2?'</form>':''); ?>
 						</div>
@@ -190,7 +190,7 @@ if($database->num_rows == 3){
 							<?php echo ($instock2?'<form class="form-inline" action="/promote" method="post">':''); ?>
 							
 								<input type="hidden" name="buyi" value="4">
-								<input type="text" name="promoip" class="input-medium" placeholder="Server IP"  value="<?php if($_POST['buym'] == 4)echo $_POST['promoip']; ?>">
+								<input type="text" name="promoip" class="input-medium" placeholder="Server IP"  value="<?php if($_POST['buym'] == 4)echo $_POST['promoip'];  if($_GET['ip'])echo $_GET['ip']; ?>">
 								<button class="button expand"  type="submit"><?php echo ($instock2?'Buy now':'Sold out!'); ?></a>
 							<?php echo ($instock2?'</form>':''); ?>
 						</div>
