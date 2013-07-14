@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
   <meta charset="utf-8" />
+  <meta name="google-site-verification" content="c6waMbcfpptiM7JdeJnTwJrtFl5FZoGO16DVCKTxPVs" />
 
   <!-- Set the viewport width to device width for mobile -->
   <meta name="viewport" content="width=device-width" />
