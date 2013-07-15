@@ -34,7 +34,7 @@ $servers = $database->query("SELECT ip, lastUpdate FROM servers WHERE uptime > -
 foreach($servers as $s){
 	$xml .= '<url>
       <loc>http://www.craftstats.com/server/'.$s['ip'].'</loc>
-	  <lastmod>'.date(DATE_ATOM,$s['lastUpdate']).'</lastmod>
+	  <lastmod>'.date(DATE_ATOM,($s['lastUpdate'] == 0 ? time() : $s['lastUpdate'])).'</lastmod>
    </url>';
 }
 
