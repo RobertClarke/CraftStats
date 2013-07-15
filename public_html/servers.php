@@ -9,7 +9,7 @@ $data = array();
 
 $server = $database->query("SELECT * FROM servers WHERE (resolved = '$_GET[ip]' AND resolved != '') OR ip = '$_GET[ip]' LIMIT 0,1",db::GET_ROW);
 
-$template->setDesc($server['ip'].', '.($server['name'] != '' ? $server['name'].'. ':'').''.($server['motd'] != '' ? $server['motd'].'. ':'').$server['connPlayers'].' players online. '.($server['category'] != '' ? 'Minecraft '.$server['category'].' server.':'').' Vote for this minecraft server now!');
+$template->setDesc($server['ip'].', '.($sname != '' ? $sname.'. ':'').''.($server['motd'] != '' ? $server['motd'].'. ':'').$server['connPlayers'].' players online. '.($scat != '' ? 'Minecraft '.$scat.' server.':'').' Vote for this minecraft server now!');
 
 if($server[blacklisted] == 1)
 {
@@ -25,13 +25,12 @@ $owner = $database->query("SELECT * FROM serverplayers WHERE playerID = '$player
 if($owner['owner'] == 1){
 	$isowner = true;
 }}
-
-if($isowner){
-	$scat = $server['category'];
-	if($_POST['scat']){
-		$database->query("UPDATE servers SET category = '$_POST[scat]' WHERE ID = $server[ID]");
-		$scat = $_POST['scat'];
-	}
+$scat = $server['category'];
+$sname = $server['name'];
+if($isowner && $_POST['scat']){
+	$database->query("UPDATE servers SET category = '$_POST[scat]', name = '$_POST[sname]' WHERE ID = $server[ID]");
+	$scat = $_POST['scat'];
+	$sname = $_POST['sname'];
 }
 
 if($isowner && $_POST['votip'] != ''){
@@ -167,7 +166,7 @@ $template->show('nav');
 		if($isowner && $_POST['scat']){
 		?>
 		<div class="alert-box success" style="margin-top:20px;">
-					Successfully updated server category!
+					Successfully updated server info!
 				</div>
 		<?php
 		
@@ -215,12 +214,12 @@ $template->show('nav');
 			</div>
 		</div>
 		<div class="twelve columns box"style="padding:10px;text-align:center;">
-			<?php if($server['name'] != ''){echo '<h4>'.$server['name'].'</h4>'; } ?>
-			<?php if(time() < $server['sponsorTime']){ echo ' <div style="text-align:center;color:#aaa;font-size:11px;'.($server['name'] != '' ? 'margin-top:-8px;' :'').'">SPONSORED SERVER</div>';} ?>
+			<?php if($sname != ''){echo '<h4>'.$sname.'</h4>'; } ?>
+			<?php if(time() < $server['sponsorTime']){ echo ' <div style="text-align:center;color:#aaa;font-size:11px;'.($sname != '' ? 'margin-top:-8px;' :'').'">SPONSORED SERVER</div>';} ?>
 		
 			<div class="four columns">
 			<h5><small>
-			<?php echo ($server['category'] != '' ? 'minecraft '.strtolower($server['category']).' server':'minecraft survival server'); ?>
+			<?php echo ($scat != '' ? 'minecraft '.strtolower($scat).' server':'minecraft survival server'); ?>
 			</small></h5>
 			</div>
 			<div class="four columns">
@@ -333,10 +332,10 @@ $template->show('nav');
 		<div class="twelve columns box" >
 		<h4>Server Page Settings</h4>
 		
-			<span style="font-size:12px;"><b>Server Category</b> </span><br/>
-			<form action="/server/<?php echo $server['ip']; ?>/edit" method="post">
+			
+			<form action="/server/<?php echo $server['ip']; ?>" method="post">
 				<div class="row">
-				
+				<span style="font-size:12px;"><b>Server Category</b> </span><br/>
 				<div class="four columns"><select name="scat" style="margin:10px;">
 					<?php
 					$options = array(
@@ -360,8 +359,14 @@ $template->show('nav');
 					?>
 				</select>
 				</div>
+				</div>
+				<div class="row">
+				<span style="font-size:12px;"><b>Server Name</b> </span><br/><br/>
 				<div class="four columns">
-				<button class="button">Update Category</button>
+				<input name="sname" type="text" value="<?php echo $sname; ?>"/>
+				</div>
+				<div class="four columns">
+				<button class="button">Update Server Info</button>
 				</div>
 				</div>
 			</form>
