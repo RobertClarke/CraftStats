@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: http://www.craftstats.com/sitemap.xml
+Sitemap: http://www.craftstats.com/sitemap
