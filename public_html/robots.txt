@@ -1,2 +1,3 @@
 User-agent: *
+Disallow: /banner/
 Sitemap: http://www.craftstats.com/sitemap
