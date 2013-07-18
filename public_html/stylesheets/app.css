@@ -59,9 +59,35 @@ h6.subheader{
 
 .box.logo{
 	border-radius: 0px 0px 4px 4px;
+	border:1px solid #cfcfcf;
 	height:77px;
 	margin-top:-2px;
-	background:url(../images/logo.png) center no-repeat #fff;
+	background:#fff;
+	text-indent:-9999em;
+	overflow:hidden;
+	transition:height 1s,box-shadow 1s;
+}
+
+.logo img{
+	margin:14px auto;
+	margin-bottom:30px;
+	display:block;
+}
+
+.box.logo.open{
+	height:180px;
+	box-shadow:0px 1px 7px #999;
+}
+
+.togglelogos{
+	width:13px;
+	height:21px;
+	background:url(/images/toggle.png);
+	position:absolute;
+	display:block;
+	right:8px;
+	top:10px;
+	cursor:pointer;
 }
 
 .navigation{

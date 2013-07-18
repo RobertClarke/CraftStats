@@ -14,9 +14,16 @@
     <div class="row" id="main">
     
     <div class="three columns sidecontainer">
-      <div class="row"> 
-        <a href="/"><div class="twelve columns box logo">
-        </div></a>
+      <div class="row  box logo"> 
+
+        <a href="/">
+		<img src="/images/logo.png"/>
+		</a>
+		<hr/>
+		<a href="http://mcpestats.com">
+		<img src="http://mcpe.redream.co.nz/images/logo.png"/>
+		</a>
+		<a class="togglelogos"></a>
       </div>
       <div class="row sidebar"> 
          <div class="twelve columns box">

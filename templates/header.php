@@ -64,6 +64,13 @@
   })();
 
 </script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".togglelogos").click(function(){
+			 $('.box.logo').toggleClass("open",100);
+		});
+	});
+  </script>
 <link rel="shortcut icon" href="http://craftstats.com/images/favicon.ico" type="image/x-icon" />
   <?php echo $this->headscripts; ?>
 </head>
