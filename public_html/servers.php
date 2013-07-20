@@ -131,12 +131,9 @@ $template->show('nav');
 		<?php
 			if($server['uptime'] <= 0 && count($dpoints) > 1){
 			?>
-				<div class="alert-box secondary" style="margin-top:20px;">
-				  This server is currently offline, here's another while you're waiting.
-				  <?php 
-				  $rs = $database->query("SELECT ip FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND uptime > 1 ORDER BY RAND(NOW()) LIMIT 1",DB::GET_ROW);
-				  echo '<div style="margin:0px auto;width:600px;height:120px;margin-top:20px;"><a href="/server/'.$rs['ip'].'"><img src="/banner/'.$rs['ip'].'" class="banner"/></a></div>';
-				  ?>
+				<div class="alert-box secondary" style="margin-top:20px;text-align:center;font-size:16px;padding:10px;">
+				<?php $rs = $database->query("SELECT ip FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND uptime > 1 ORDER BY RAND(NOW()) LIMIT 1",DB::GET_ROW); ?>
+				  This server is currently offline, <a href="/server/<?php echo $rs['ip']; ?>">here's another while you're waiting</a>.
 				  <a href="" class="close">&times;</a>
 				</div>
 			<?php

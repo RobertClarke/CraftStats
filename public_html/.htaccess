@@ -21,7 +21,7 @@ RewriteRule ^(.*) http://craftstats.com/server/$1 [r=301,nc,L]
 #RewriteRule ^(.*)$ http://craftstats.com/$1 [R=301,L]
 
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-RewriteRule ^(.*)$ http://craftstats.com [R=301,L]
+RewriteRule ^(.*)$ http://craftstats.com/$1 [R=301,L]
 
 RewriteRule ^p/([^/]+)?$ index.php?p=$1 [L]
 RewriteRule ^server/([^/]+)?$ servers.php?ip=$1 [L]
