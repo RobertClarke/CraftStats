@@ -18,6 +18,13 @@ if($_GET['version']){
 $template->show('header');
 $template->show('nav');
 
+$tservers = $database->query("SELECT COUNT(*) AS c FROM servers WHERE blacklisted != 1 $version",db::GET_ROW);
+$tservers = floor($tservers['c']/30)-1;
+$cpage = ($_GET['p'] != 0 ? $_GET['p'] : 0);
+$cpage = max(0,min($cpage,$tservers));
+$pagemin = $cpage*30;
+$pagemax = 30;
+$time = time();
 ?>
 
 <div class="servers">
@@ -55,6 +62,42 @@ FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 AND spons
 	}?> 
 		</div>
 	</div>
+	<?php 
+	if($cpage == 0 && $new == ''){
+	?>
+	<div class="row table">
+          <div class="twelve columns">
+            <table class="twelve">
+              <thead>
+                <tr>
+                  <th>Sponsored Servers</th>
+                  <th>Uptime</th>
+                  <th>Players</th>
+                </tr>
+              </thead>
+              <tbody>
+	<?php
+	$sponsored = $database->query("SELECT 
+  ID as sid, country,sponsorTime AS st, category,
+  name, ip, advCheck,
+  connPlayers AS cp, maxPlayers AS mp, version, motd, lastUpdate, uptimeavg, ranking, uptime
+FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 AND game = 'minecraft' $version ORDER BY sponsorRank DESC, ranking ASC");
+
+	?>
+	<?php
+			  foreach($sponsored as $server){
+	echo '<tr onclick="document.location=\'/server/'.$server['ip'].'\';" class="slink '.($server['uptime'] <= 0 ? 'down':'').'">
+	<td>'.($server['st'] > time() ? '<div style="float:left;padding-right:3px;"> &#9733; </div>':'').'<h2 style="font-size:14px;margin:0px;margin-top:3px;padding:0px;float:left;">   '.$server['ip'].' '.($server['version'] != '' ? '</h2><div style="float:right;margin-left:7px;"><a href="/version/'.$server['version'].'"><span class="button tiny">'.$server['version'].'</span></a></div>' : '').' 
+	'.($server['category'] != '' ? '<div style="float:right;margin-left:7px;"><a href="/category/'.$server['category'].'"><span class="button tiny">'.$server['category'].'</span></a></div>' : '').'
+	'.($server['advCheck'] == 2 ? '<div style="float:right;"><span class="button tiny">DirtBlock</span></div>' : '').'</td><td><span style="padding:3px 0px;display:block;width:50px !important;text-align:center;" class="button tiny '.($server['uptime'] <= 0 ? 'alert' : ($server['uptimeavg'] > 90 ? 'success' : ($server['uptimeavg'] > 70 ? 'secondary' : ($server['uptimeavg'] > 50 ? 'secondary' : 'alert')))).'">'.($server['uptime'] <= 0 ? 'down' : $server['uptimeavg'].'%').'</span></td><td>'.$server['cp'].' / '.$server['mp'].'</td></tr>';
+}
+			  ?>
+	</tbody>
+            </table>
+			
+          </div>
+        </div>
+		<?php } ?>
         <div class="row table">
           <div class="twelve columns">
             <table class="twelve">
@@ -66,6 +109,8 @@ FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 AND spons
                 </tr>
               </thead>
               <tbody>
+			  
+			   
                 <?php
 function FosMerge($arr1, $arr2) {
     $res=array();
@@ -85,7 +130,7 @@ function FosMerge($arr1, $arr2) {
     return array_merge($res, $arr2);
 }
 
-$cpage = ($_GET['p'] != 0 ? $_GET['p'] : 0);
+
 
 if($_GET['version']){
 	$version = 'AND version = \''.mysql_real_escape_string($_GET['version']).'\'';
@@ -106,13 +151,9 @@ if(strtolower($_GET['cat']) == 'active'){
 	$new = 'connPlayers DESC,';
 }
 
-$tservers = $database->query("SELECT COUNT(*) AS c FROM servers WHERE blacklisted != 1 $version",db::GET_ROW);
-$tservers = floor($tservers['c']/30)-1;
 
-$cpage = max(0,min($cpage,$tservers));
-$pagemin = $cpage*30;
-$pagemax = 30;
-$time = time();
+
+
 
 
 $servers = $database->query("SELECT 
@@ -120,14 +161,7 @@ $servers = $database->query("SELECT
   name, ip,advCheck,
   connPlayers AS cp,sponsorTime AS st, category, maxPlayers AS mp, version, motd, lastUpdate, uptimeavg, ranking, uptime
 FROM servers WHERE sponsorTime < UNIX_TIMESTAMP() AND blacklisted != 1 AND game = 'minecraft' $version ORDER BY $new ranking ASC LIMIT $pagemin, $pagemax");
-if($cpage == 0 && $new == ''){
-	$sponsored = $database->query("SELECT 
-  ID as sid, country,sponsorTime AS st, category,
-  name, ip, advCheck,
-  connPlayers AS cp, maxPlayers AS mp, version, motd, lastUpdate, uptimeavg, ranking, uptime
-FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 AND game = 'minecraft' $version ORDER BY sponsorRank DESC, ranking ASC");
-$servers = FosMerge($servers,$sponsored);
-}
+
 $time = time();
 foreach($servers as $server){
 	echo '<tr onclick="document.location=\'/server/'.$server['ip'].'\';" class="slink '.($server['uptime'] <= 0 ? 'down':'').'">
@@ -151,7 +185,7 @@ foreach($servers as $server){
         4                   => 'four',
 		 5                   => 'five'
     );
-	for($i = $cpage-2;$i<$cpage+3;$i++){
+	for($i = $cpage-1;$i<$cpage+2;$i++){
 					if($i >= 0 && $i <= $tservers-1){
 						$listout .= '<li><a href="'.$sprefix.'/p/'.$i.'#slist" class="button radius '.($i == $cpage ? 'active':'').'">'.($i+1).'</a></li>';
 						$lcount++;

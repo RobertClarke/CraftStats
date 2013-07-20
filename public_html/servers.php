@@ -27,10 +27,12 @@ if($owner['owner'] == 1){
 }}
 $scat = $server['category'];
 $sname = $server['name'];
+$bannerurl = $server['bannerurl'];
 if($isowner && $_POST['scat']){
-	$database->query("UPDATE servers SET category = '$_POST[scat]', name = '$_POST[sname]' WHERE ID = $server[ID]");
+	$database->query("UPDATE servers SET category = '$_POST[scat]', name = '$_POST[sname]', bannerurl='$_POST[bannerurl]' WHERE ID = $server[ID]");
 	$scat = $_POST['scat'];
 	$sname = $_POST['sname'];
+	$bannerurl = $_POST['bannerurl'];
 }
 
 if($isowner && $_POST['votip'] != ''){
@@ -210,6 +212,7 @@ $template->show('nav');
 				</div>
 			</div>
 		</div>
+		
 		<div class="twelve columns box"style="padding:10px;text-align:center;">
 			<?php if($sname != ''){echo '<h4>'.$sname.'</h4>'; } ?>
 			<?php if(time() < $server['sponsorTime']){ echo ' <div style="text-align:center;color:#aaa;font-size:11px;'.($sname != '' ? 'margin-top:-8px;' :'').'">SPONSORED SERVER</div>';} ?>
@@ -251,13 +254,21 @@ $template->show('nav');
 			
 			
 		</div>
-		<?php if(time() > $server['sponsorTime']){ ?><div class="twelve columns" style="margin-top:10px;">
-			<div class="six columns offset-by-three">
-				<a href="/promote?ip=<?php echo $server['ip']; ?>" class="button expand">Sponsor this server</a>
+		<?php if($bannerurl || time() > $server['sponsorTime']){ ?>
+		<div class="twelve columns box">
+		<?php 
+		if($bannerurl){
+			echo '<img class="banner" src="'.$bannerurl.'" style="margin:10px auto;display:block;"/>';
+		}
+		?>
+		
+		<?php if(time() > $server['sponsorTime']){ ?>
+			<div class="six columns centered">
+				<a href="/promote?ip=<?php echo $server['ip']; ?>" class="button expand secondary" style="margin:10px 0px;">Sponsor this server</a>
 			</div>
+		<?php } ?>
 		</div>
 		<?php } ?>
-		
 		<div class="twelve columns box">
 			<div id="chart_div" style="margin:20px 0px;height:<?php echo(count($dpoints)<2?50:300);?>px;width:640px;text-align:center;">
 				<?php if(count($dpoints < 2)){ ?>
@@ -358,7 +369,13 @@ $template->show('nav');
 				</div>
 				</div>
 				<div class="row">
-				<span style="font-size:12px;"><b>Server Name</b> </span><br/><br/>
+					<span style="font-size:12px;"><b>Banner URL (max 600px width)</b> </span><br/>
+				<div class="four columns">
+				<input name="bannerurl" type="text" value="<?php echo $bannerurl; ?>"/>
+				</div>
+				</div>
+				<div class="row">
+				<span style="font-size:12px;"><b>Server Name</b> </span><br/>
 				<div class="four columns">
 				<input name="sname" type="text" value="<?php echo $sname; ?>"/>
 				</div>
