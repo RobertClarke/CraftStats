@@ -94,7 +94,7 @@ FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 AND game 
 			  ?>
 	</tbody>
             </table>
-			
+			<div style="float:right;font-size:12px;margin-top:-8px;margin-bottom:5px;"><a href="/promote" style="color:#999;">want your server here?</a></div>
           </div>
         </div>
 		<?php } ?>

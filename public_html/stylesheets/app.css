@@ -302,8 +302,13 @@ img.mcuser{
 	margin-top:13px;
 }
 
-.slink.down td{
+.slink.down td,.slink.down h2{
 	color:#aaa;
+}
+
+.slink.down .button{
+	background:#aaa;
+	border:1px solid #666;
 }
 
 div.legend td{
