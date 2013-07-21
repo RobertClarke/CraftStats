@@ -21,7 +21,7 @@
 		</a>
 		<hr/>
 		<a href="http://mcpestats.com">
-		<img src="http://mcpe.redream.co.nz/images/logo.png"/>
+		<img src="http://mcpestats.com/images/logo.png"/>
 		</a>
 		<a class="togglelogos"></a>
       </div>

