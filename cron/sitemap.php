@@ -36,6 +36,10 @@ foreach($servers as $s){
       <loc>http://www.craftstats.com/server/'.$s['ip'].'</loc>
 	  <lastmod>'.date(DATE_ATOM,($s['lastUpdate'] == 0 ? time() : $s['lastUpdate'])).'</lastmod>
    </url>';
+   $xml .= '<url>
+      <loc>http://www.craftstats.com/server/'.$s['ip'].'/vote</loc>
+	  <lastmod>'.date(DATE_ATOM,($s['lastUpdate'] == 0 ? time() : $s['lastUpdate'])).'</lastmod>
+   </url>';
 }
 
 $host = $database->query("SELECT slug FROM hosts");

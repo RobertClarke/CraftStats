@@ -9,7 +9,7 @@ $data = array();
 
 $server = $database->query("SELECT * FROM servers WHERE (resolved = '$_GET[ip]' AND resolved != '') OR ip = '$_GET[ip]' LIMIT 0,1",db::GET_ROW);
 
-$template->setDesc($server['ip'].', '.($sname != '' ? $sname.'. ':'').''.($server['motd'] != '' ? $server['motd'].'. ':'').$server['connPlayers'].' players online. '.($scat != '' ? 'Minecraft '.$scat.' server.':'').' Vote for this minecraft server now!');
+$template->setDesc(($sname != '' ? $sname.'. ':$server['ip'].'. ').''.($server['motd'] != '' ? $server['motd'].'. ':'').$server['connPlayers'].' players online. '.($scat != '' ? 'Minecraft '.$scat.' server.':'').' Vote for '.($sname != '' ? $sname.'. ':$server['ip'].'. ').' now!');
 
 if($server[blacklisted] == 1)
 {
@@ -57,7 +57,12 @@ if($_POST['blcklst'] && $isowner){
 }
 
 $server = $database->query("SELECT * FROM servers WHERE (resolved = '$_GET[ip]' AND resolved != '') OR ip = '$_GET[ip]' LIMIT 0,1",db::GET_ROW);
-$template->setTitle($server['ip']);
+
+if($_GET['tab'] == 'vote'){
+	$template->setTitle('Vote for '.($server['name'] ? $server['name'] : $server['ip']));
+}else{
+	$template->setTitle($server['ip']);
+}
 if($server['ID'] == ''){
 	header("Location: /?sf=1");exit;
 }
@@ -127,6 +132,8 @@ grid:{
 </script>');
 $template->show('header');
 $template->show('nav');
+$database->query("SELECT * FROM uservotes WHERE serverID = '$server[ID]'");
+$votes = $database->num_rows;
 ?>
 <div class="row">
 	<div class="twelve columns">
@@ -175,8 +182,60 @@ $template->show('nav');
 			<div class="seven columns">
 				<h1 style="font-size:14px;margin-bottom:-17px;<?php if($server['motd'] == ''){echo 'margin-top:20px;';} ?>">  <?php echo $server['ip']; ?></h1> <h5><small><?php if($server['motd']!=''){ echo $server['motd'];} ?></small></h5>
 			</div>
+			<?php if($_GET['tab'] != 'vote'){ ?>
 			<div class="row">
 				<div class="five columns" style="padding-top:12px;">
+					<div class="row collapse">
+					<a class="button expand postfix" href="/server/<?php echo $server['ip']; ?>/vote">Vote for this server</a>
+					</div>
+				</div>
+			</div>
+			<?php }else{
+?>
+<div class="row">
+				<div class="five columns" style="padding-top:12px;">
+					<div class="row collapse">
+					<a class="button expand postfix" href="/server/<?php echo $server['ip']; ?>">Back to server page</a>
+					</div>
+				</div>
+			</div>
+<?php
+				}			?>
+		</div>
+		
+		<?php 
+		if($_GET['tab'] == 'vote'){
+			echo '<div class="twelve columns box"><img class="banner" src="'.($bannerurl ? $bannerurl : '/banner/'.$server['ip']).'" style="margin:10px auto;display:block;"/></div>';
+		}
+		?>
+		
+		<div class="twelve columns box"style="padding:10px;text-align:center;">
+			<?php 
+			echo '<h4>'.($_GET['tab'] == 'vote' ? 'Vote for ':'').''.($sname ? $sname : $server['ip']).'</h4>'; ?>
+			<?php if($_GET['tab'] != 'vote'){ if(time() < $server['sponsorTime']){ echo ' <div style="text-align:center;color:#aaa;font-size:11px;'.($sname != '' ? 'margin-top:-8px;' :'').'">SPONSORED SERVER</div>';} ?>
+		<div class="row">
+			<div class="four columns">
+			<h5><small>
+			<?php echo ($scat != '' ? 'minecraft '.strtolower($scat).' server':'minecraft survival server'); ?>
+			</small></h5>
+			</div>
+			<div class="four columns">
+			<h5><small>
+			<?php if($server['version']!=''){ echo 'currently running version '.$server['version']; }else{ echo 'currently running custom version'; }?>
+			</small></h5>
+			</div>
+			<div class="four columns">
+			<h5><small>
+			<?php echo $server['connPlayers']; ?> players online <?php if($time - $server['lastUpdate'] < 1300442333 ){ ?> as of <?php echo ($time - $server['lastUpdate'] > 60 ? round(($time - $server['lastUpdate'])/60).'m' : $time - $server['lastUpdate'].'s'); ?> ago<?php } ?>
+			</small></h5>
+			</div>
+			</div>
+			<?php }else{ ?>
+	
+		
+		
+			<div class="row">
+				<div class="six columns centered" style="padding-top:13px;">
 					<div class="row collapse">
 					<?php
 						$time = time();
@@ -188,8 +247,7 @@ $template->show('nav');
 							$disabled = 'disabled';
 						}
 						
-						$database->query("SELECT * FROM uservotes WHERE serverID = '$server[ID]'");
-						$votes = $database->num_rows;
+						
 						if($disabled == ''){
 					?>	<form action="/api" method="get">
 							<input type="hidden" name="req" value="m12"/>
@@ -210,29 +268,9 @@ $template->show('nav');
 					?>
 					</div>
 				</div>
-			</div>
+			</div><?php } ?>
 		</div>
-		
-		<div class="twelve columns box"style="padding:10px;text-align:center;">
-			<?php if($sname != ''){echo '<h4>'.$sname.'</h4>'; } ?>
-			<?php if(time() < $server['sponsorTime']){ echo ' <div style="text-align:center;color:#aaa;font-size:11px;'.($sname != '' ? 'margin-top:-8px;' :'').'">SPONSORED SERVER</div>';} ?>
-		
-			<div class="four columns">
-			<h5><small>
-			<?php echo ($scat != '' ? 'minecraft '.strtolower($scat).' server':'minecraft survival server'); ?>
-			</small></h5>
-			</div>
-			<div class="four columns">
-			<h5><small>
-			<?php if($server['version']!=''){ echo 'currently running version '.$server['version']; }else{ echo 'currently running custom version'; }?>
-			</small></h5>
-			</div>
-			<div class="four columns">
-			<h5><small>
-			<?php echo $server['connPlayers']; ?> players online <?php if($time - $server['lastUpdate'] < 1300442333 ){ ?> as of <?php echo ($time - $server['lastUpdate'] > 60 ? round(($time - $server['lastUpdate'])/60).'m' : $time - $server['lastUpdate'].'s'); ?> ago<?php } ?>
-			</small></h5>
-			</div>
-		</div>
+		<?php if($_GET['tab'] != 'vote'){ ?>
 		<div class="twelve columns box">
 			<div class="three columns serverstat">
 			<div>#<?php echo $server['ranking']; ?></div><br/>
@@ -312,7 +350,7 @@ $template->show('nav');
 		<div class="twelve columns box" ><h4>Votifier Settings</h4>
 		
 		<span style="font-size:12px;"><b>Currently:</b> <?php echo ($server['votifierIP'] == '' ? 'Not set :(' : $server['votifierIP'].':'.$server['votifierPort'])?> </span><br/><br/>
-		<?php if($isowner){ ?><br/><form action="/server/<?php echo $server['ip']; ?>/vote" method="post">
+		<?php if($isowner){ ?><br/><form action="/server/<?php echo $server['ip']; ?>" method="post">
 		<div class="row">
 			<div class="four columns">
 				<input name="votip" type="text" placeholder="votifier IP address"/>
@@ -389,8 +427,14 @@ $template->show('nav');
 		<span style="font-size:12px;">Claim this server or login to update votifier settings.</span><br/><br/>
 		<?php } ?>
 		</div>
+		<?php }else{
+		
+		?>
+		
+		<?php } ?>
 	</div>
 </div>
 <?php
+
 $template->show('footer');
 ?>
