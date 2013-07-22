@@ -278,7 +278,7 @@ $votes = $database->num_rows;
 			</div>
 			<div class="three columns serverstat">
 			<div><?php echo $votes; ?></div><br/>
-			total votes
+			votes this month
 			</div>
 			
 			<div class="three columns serverstat">

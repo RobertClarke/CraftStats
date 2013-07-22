@@ -73,7 +73,7 @@ foreach($d as $vn => $d1){
 	$data = '';
 	$first = '';
 	for($i=0;$i<$mi;$i++){
-		$data .= $first.'['.((1354142403+(600*$i))*1000).','.($d1[$i]*100).']';
+		$data .= $first.'['.((1354142403+(600*($mi-$i)))*1000).','.($d1[$i]*100).']';
 		$first = ',';
 	}
 	$series .= $first2.'{data:['.$data.'],label:"'.$vn.'"}';
@@ -272,7 +272,7 @@ $cip = mysql_real_escape_string($_POST['claimip']);
 
 <div class="row">
 	<h5 style="text-align:center;">Version Adoption</h5>
-	<div id="chart_div2"  style="width:1200px;height:400px;margin:20px 30px;float:left;"></div>
+	<div id="chart_div2"  style="width:2500px;height:500px;margin:20px 30px;float:left;"></div>
 </div>
 <div class="row">
 	<h5 style="text-align:center;">Server OS Usage</h5>
