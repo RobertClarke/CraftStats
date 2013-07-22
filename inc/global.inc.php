@@ -22,6 +22,10 @@ function displayTree($array) {
      }
      return $output;
 }
+
+function hashPass($password){
+	return sha1(md5('311g9RasdxrpbPjjardxwqww'.$password));
+}
 //$memcache_disable = true;
 if(!$memcache_disable){
 	$memcache = new Memcache;
@@ -34,12 +38,12 @@ $log->log('class','load','','db');
 $api = new csAPI($database,$log);
 
 if(!isset($_SESSION['id'])){
-	$usr = $database->query("SELECT id FROM users WHERE ip = '$_SERVER[REMOTE_ADDR]'",db::GET_ROW);
+	$usr = $database->query("SELECT id FROM users WHERE ip = '$_SERVER[REMOTE_ADDR]' AND twitter_username = '' AND username = ''",db::GET_ROW);
 	if($database->num_rows > 0){
 		$_SESSION['id'] = $usr['id'];	
 	}else{
 		$time = time();
-		$database->query("INSERT INTO users VALUES ('','$_SERVER[REMOTE_ADDR]','','','','','','','','$time')");
+		$database->query("INSERT INTO users VALUES ('','$_SERVER[REMOTE_ADDR]','','','','','','','','',0,'$time','','',0)");
 	}
 }
 

@@ -145,7 +145,7 @@
               <!-- Right Nav Section -->
               <ul class="right">
                 <li>
-                  <a href="<?php echo ($_SESSION['username'] != '' ? '/account.php' : '/oauth.php?login=twitter')?>"><?php echo ($_SESSION['username'] != '' ? 'logged in as @'.$_SESSION['username'] : 'login')?></a>
+                  <a href="<?php echo ($_SESSION['username'] != '' ? '/account.php' : '/login')?>"><?php echo ($_SESSION['username'] != '' ? 'logged in as '.$_SESSION['username'] : 'login')?></a>
                 </li>
 				
 				<?php echo ($_SESSION['username'] != '' ? '<li><a href="/oauth.php?logout=true">logout</a></li>' : '')?>

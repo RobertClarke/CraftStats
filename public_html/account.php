@@ -38,7 +38,7 @@ $template->show('nav');
 	}
 ?>
 		<div class="twelve columns box">
-<h3>@<?php echo $_SESSION['username']; ?></h3>
+<h3><?php echo $_SESSION['username']; ?></h3>
 
 
 <?php if($_SESSION['mcuser'] == ''){ ?>

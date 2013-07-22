@@ -101,14 +101,14 @@ if (isset($_REQUEST['oauth_verifier'])){
 
 	$access_token = access_token($tmhOAuth);
 	// Let's find the user by its ID  
-	$database->query("SELECT * FROM users WHERE oauth_provider = 'twitter' AND oauth_uid = ". $access_token['user_id']);  
+	$user = $database->query("SELECT * FROM users WHERE oauth_provider = 'twitter' AND oauth_uid = ". $access_token['user_id']);  
 
 
 	// If not, let's add it to the database  
 	if($database->num_rows == 0){  
 	//echo '3';
 		$time= time();
-		$database->query("INSERT INTO users (ip, oauth_provider, oauth_uid, username, oauth_token, oauth_secret, created) VALUES ('{$_SERVER[REMOTE_ADDR]}','twitter', {$access_token['user_id']}, '{$access_token['screen_name']}', '{$access_token['oauth_token']}', '{$access_token['oauth_token_secret']}','$time')");  
+		$database->query("INSERT INTO users (ip, oauth_provider, oauth_uid, twitter_username, oauth_token, oauth_secret, created) VALUES ('{$_SERVER[REMOTE_ADDR]}','twitter', {$access_token['user_id']}, '{$access_token['screen_name']}', '{$access_token['oauth_token']}', '{$access_token['oauth_token_secret']}','$time')");  
 		$userinfo = $database->query("SELECT * FROM users WHERE id = " . mysql_insert_id(),db::GET_ROW);  	
 		$insert = true;
 	} else {  
@@ -122,14 +122,15 @@ if (isset($_REQUEST['oauth_verifier'])){
 		}
 	}  
 	$_SESSION['id'] = $userinfo['id']; 
+	$_SESSION['twitter_username'] = $userinfo['twitter_username']; 
 	$_SESSION['username'] = $userinfo['username']; 
 	$_SESSION['oauth_uid'] = $userinfo['oauth_uid']; 
 	$_SESSION['oauth_provider'] = $userinfo['oauth_provider']; 
 	$_SESSION['oauth_token'] = $userinfo['oauth_token']; 
-	$_SESSION['oauth_secret'] = $userinfo['oauth_secret']; 
-	if($insert || $_SERVER['HTTP_REFERER'] == ''){
+	$_SESSION['oauth_secret'] = $userinfo['oauth_secret'];
+	if($insert || $_SERVER['HTTP_REFERER'] == '' || $userinfo['requiresupgrade'] == 1){
 	//echo '5';exit;
-		header('Location: /account.php');  
+		header('Location: /login?u=1');  
 	}else{
 	//echo '4';exit;
 		header('Location: '.$_SERVER['HTTP_REFERER']);
