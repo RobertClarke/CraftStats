@@ -47,7 +47,7 @@ foreach($vp as $vn => $p){
 }
 
 $database->query("INSERT INTO sitegrowth VALUES ($time,$players,$servers,$plugins,$events)");
-
+/*
 foreach($database->query("SELECT * FROM badges") as $badge){
 	if($badge['ID'] >= 6 && $badge['ID'] <= 9){
 		$eligible = $database->query("SELECT COUNT(sp.serverID) AS sc, u.ID AS uid FROM users u JOIN players p ON u.mcuser = p.username JOIN serverplayers sp ON sp.playerID = p.ID WHERE u.mcuser != '' AND sp.found > 0 GROUP BY u.mcuser");
@@ -103,7 +103,7 @@ foreach($database->query("SELECT * FROM badges") as $badge){
 		}
 	}
 }
-
+*/
 $tocheck = $database->query("SELECT * FROM players WHERE paid = 0 LIMIT 800");
 foreach($tocheck as $p){
 	$paid = (file_get_contents('http://minecraft.net/haspaid.jsp?user='.$p['username']) == 'true' ? 2 : 1);

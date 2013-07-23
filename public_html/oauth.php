@@ -128,9 +128,11 @@ if (isset($_REQUEST['oauth_verifier'])){
 	$_SESSION['oauth_provider'] = $userinfo['oauth_provider']; 
 	$_SESSION['oauth_token'] = $userinfo['oauth_token']; 
 	$_SESSION['oauth_secret'] = $userinfo['oauth_secret'];
-	if($insert || $_SERVER['HTTP_REFERER'] == '' || $userinfo['requiresupgrade'] == 1){
+	if($insert || $userinfo['requiresupgrade'] == 1){
 	//echo '5';exit;
 		header('Location: /login?u=1');  
+	}elseif($_SERVER['HTTP_REFERER'] == ''){
+		header('Location: /account');
 	}else{
 	//echo '4';exit;
 		header('Location: '.$_SERVER['HTTP_REFERER']);

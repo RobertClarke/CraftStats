@@ -1,6 +1,7 @@
 <?php
 include '../inc/global.inc.php';
 $svvalid = false;
+
 if($_POST['buyi'] > 0){
 	$sv = $database->query("SELECT * FROM servers WHERE ((resolved = '$_POST[promoip]' AND resolved != '') OR ip = '$_POST[promoip]') AND game = 'minecraft'",db::GET_ROW);
 	if($database->num_rows == 1){
@@ -54,7 +55,7 @@ if($_GET['paypal'] == 'paid'){
 				'user_secret'     => 'J9TiF64znmZaR3I4zxFAyB0HeNJbvlU8mQCuXbNnd78',
 			));
 
-			$code = $tmhOAuth->request('POST', $tmhOAuth->url('1/statuses/update'), array(
+			$code = $tmhOAuth->request('POST', $tmhOAuth->url('1.1/statuses/update'), array(
 				'status' => $responses[array_rand($responses)],
 			));
 

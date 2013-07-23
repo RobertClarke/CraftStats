@@ -64,7 +64,19 @@ FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 AND spons
 	</div>
 	<?php 
 	if($cpage == 0 && $new == ''){
+	$ann =$memcache->get(md5('announce'));
+	if($ann != ''){
+		?>
+		<div class="row ">
+		<div class="twelve columns">
+		<div class="alert-box radius" style="padding:10px;text-align:center;background:#62a7c4;font-weight:normal;">
+					<?php echo $ann; ?>
+				</div></div>
+		</div>
+		<?php
+	}
 	?>
+
 	<div class="row table">
           <div class="twelve columns">
             <table class="twelve">

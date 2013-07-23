@@ -9,7 +9,7 @@ $data = array();
 
 $server = $database->query("SELECT * FROM servers WHERE (resolved = '$_GET[ip]' AND resolved != '') OR ip = '$_GET[ip]' LIMIT 0,1",db::GET_ROW);
 
-$template->setDesc(($sname != '' ? $sname.'. ':$server['ip'].'. ').''.($server['motd'] != '' ? $server['motd'].'. ':'').$server['connPlayers'].' players online. '.($scat != '' ? 'Minecraft '.$scat.' server.':'').' Vote for '.($sname != '' ? $sname.'. ':$server['ip'].'. ').' now!');
+$template->setDesc(($sname != '' ? $sname.'. ':$server['ip'].'. ').''.$server['connPlayers'].' players online. '.($scat != '' ? 'Minecraft '.$scat.' server. ':'').'Vote for '.($sname != '' ? $sname.'. ':$server['ip']).' now!');
 
 if($server[blacklisted] == 1)
 {
@@ -182,7 +182,7 @@ $votes = $database->num_rows;
 			<div class="seven columns">
 				<h1 style="font-size:14px;margin-bottom:-17px;<?php if($server['motd'] == ''){echo 'margin-top:20px;';} ?>">  <?php echo $server['ip']; ?></h1> <h5><small><?php if($server['motd']!=''){ echo $server['motd'];} ?></small></h5>
 			</div>
-			<?php if($_GET['tab'] != 'vote'){ ?>
+			<?php if($_GET['tab'] == ''){ ?>
 			<div class="row">
 				<div class="five columns" style="padding-top:12px;">
 					<div class="row collapse">
@@ -190,7 +190,17 @@ $votes = $database->num_rows;
 					</div>
 				</div>
 			</div>
-			<?php }else{
+			<?php }elseif($_GET['tab'] == 'edit'){
+?>
+<div class="row">
+				<div class="five columns" style="padding-top:12px;">
+					<div class="row collapse">
+					<a class="button expand postfix" href="/myservers">Back to my servers</a>
+					</div>
+				</div>
+			</div>
+<?php
+				}else{
 ?>
 <div class="row">
 				<div class="five columns" style="padding-top:12px;">
@@ -208,7 +218,7 @@ $votes = $database->num_rows;
 			echo '<div class="twelve columns box"><img class="banner" src="'.($bannerurl ? $bannerurl : '/banner/'.$server['ip']).'" style="margin:10px auto;display:block;"/></div>';
 		}
 		?>
-		
+		<?php if($_GET['tab'] != 'edit'){ ?>
 		<div class="twelve columns box"style="padding:10px;text-align:center;">
 			<?php 
 			echo '<h4>'.($_GET['tab'] == 'vote' ? 'Vote for ':'').''.($sname ? $sname : $server['ip']).'</h4>'; ?>
@@ -270,7 +280,7 @@ $votes = $database->num_rows;
 				</div>
 			</div><?php } ?>
 		</div>
-		<?php if($_GET['tab'] != 'vote'){ ?>
+		<?php } if($_GET['tab'] != 'vote'){ ?>
 		<div class="twelve columns box">
 			<div class="three columns serverstat">
 			<div>#<?php echo $server['ranking']; ?></div><br/>
@@ -292,7 +302,7 @@ $votes = $database->num_rows;
 			
 			
 		</div>
-		<?php if($bannerurl || time() > $server['sponsorTime']){ ?>
+		<?php if($_GET['tab'] != 'edit'){ if($bannerurl || time() > $server['sponsorTime']){ ?>
 		<div class="twelve columns box">
 		<?php 
 		if($bannerurl){
@@ -323,7 +333,9 @@ $votes = $database->num_rows;
 			echo '<img mcuser="'.$player.'" mcsize="32"/>';
 		}?>
 		</div>
-		<?php } ?>
+		<?php } } 
+		
+		?>
 		<div class="twelve columns box">
 			<div style="width:600px;height:120px;margin:20px auto 0px auto;"><img class="banner bannertarget" style="margin-left:0px;" data-bbase="/banner/<?php echo $server['ip'];?>" src="/banner/<?php echo $server['ip'];?>"/>
 			</div>

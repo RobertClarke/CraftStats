@@ -188,7 +188,7 @@ if($database->num_rows == 0){
 $playername = $player['username'];
 $showbadges = false;
 $user = $database->query("SELECT id, username FROM users WHERE mcuser = '$playername'",db::GET_ROW);
-
+/*
 if($database->num_rows != 0){
 	$userid = $user['id'];
 	$twitter = $user['username'];
@@ -197,7 +197,7 @@ if($database->num_rows != 0){
 	if($database->num_rows != 0){
 		 $showbadges = true;
 	}
-}
+}*/
 
 $template->setTitle($playername);
 $template->setDesc($playername.' likes to play minecraft! Check out their stats and achievements on CraftStats.com');
@@ -208,55 +208,7 @@ $template->show('nav');
 <div class="row">
 	<div class="twelve columns">
 	<?php
-if($_POST['claimip'] != '' && $_SESSION['mcuser'] == $playername){
-$cip = mysql_real_escape_string($_POST['claimip']);
-	$server = $database->query("SELECT * FROM servers WHERE ((resolved = '$cip' AND resolved != '') OR ip = '$cip') AND game = 'minecraft'",db::GET_ROW);
-	if($database->num_rows == 0 ){
-		?>
-		<div class="alert-box" style="margin-top:20px;">
-			We're not currently tracking that server! Make sure you entered the IP address correctly and try again.
-		</div>
-		<?php
-	}else{
-	
-		$sp = $database->query("SELECT * FROM serverplayers WHERE playerID = '$player[ID]' AND serverID = '$server[ID]'",db::GET_ROW);
-		if($database->num_rows == 0){
-			$database->query("INSERT INTO serverplayers VALUES ('$player[ID]',$server[ID],'0','0')");
-		}
-		if($sp['owner'] == 1){
-			?>
-			<div class="alert-box" style="margin-top:20px;">
-				You're already an owner of <?php echo $server['ip']; ?>.
-			</div>
-			<?php
-		}else{
-			$vs = 'CS'.$server['ID'].'-'.$player['ID'];
-			$ping = $api->pingServer($server['ip'],1);
-			if(stristr($ping['info']['HostName'],$vs)){
-				?>
-				<div class="alert-box success" style="margin-top:20px;">
-					We have successfully verified your ownership of <?php echo $server['ip']; ?>!
-				</div>
-				<?php
-				
-				$database->query("UPDATE serverplayers SET owner = '1' WHERE playerID = '$player[ID]' AND serverID = '$server[ID]'");
-				
-			}elseif($ping['fail'] == true){
-				?>
-				<div class="alert-box" style="margin-top:20px;">
-					We were unable to contact <?php echo $server['ip']; ?> to verify your ownership.
-				</div>
-				<?php
-			}else{
-				?>
-				<div class="alert-box" style="margin-top:20px;">
-					To verify your ownership of this server, add '<?php echo $vs; ?>' to the MOTD and try to claim the server again.
-				</div>
-				<?php
-			}
-		}
-	}
-}
+
 ?>
 		<div class="twelve columns box">
 
@@ -301,17 +253,7 @@ if($_SESSION['mcuser'] == $playername){
 	?>
 	<div class="row">
 	<div class="four columns" style="padding-top:20px;">
-	
-		<div class="row collapse">
-			<form action="<?php echo $_SERVER['REQUEST_URI'];?>" method="post" >
-				<div class="eight mobile-three columns">
-					<input type="text" name="claimip" placeholder="Server IP"/>
-				</div>
-				<div class="four mobile-one columns">
-					<button class="button expand postfix" style="padding:0px;">Claim IP</button>
-				</div>
-			</form>
-		</div>
+		<a href="/myservers" class="button expand">Manage my servers</a>
 	</div>	
 	</div>
 	<?php
@@ -327,7 +269,7 @@ if($_SESSION['mcuser'] == $playername){
 	<div class="eight columns" style="padding-bottom:30px;">
 	<h1 style="font-size:14px;margin-top:20px;">Seen on:</h1>
 	
-	<ul style="position:relative;list-style:none;top:5px;left:5px;font-size:11px;font-weight:bold;margin-bottom:20px;">
+	<ul style="position:relative;list-style:none;top:5px;left:5px;font-size:11px;margin-bottom:20px;">
 		<?php 
 		$servers = $database->query("SELECT * FROM serverplayers AS sp LEFT JOIN servers AS s ON s.ID = sp.serverID WHERE playerID = '{$player[ID]}' AND s.ID != '' AND found > 0");
 		if(count($servers) == 0){
@@ -344,7 +286,7 @@ if($_SESSION['mcuser'] == $playername){
 	if($database->num_rows > 0){
 	?>
 	<h1 style="font-size:14px;margin-top:20px;">Owner of:</h1>
-	<ul style="position:relative;top:5px;list-style:none;left:5px;font-size:11px;font-weight:bold;">
+	<ul style="position:relative;top:5px;list-style:none;left:5px;font-size:11px;">
 		<?php
 		foreach($so as $server){
 			echo '<li style="width:300px;"><img src="/images/flags/'.strtolower($server['country']).'.png" class="flag" style="margin-right:7px;position:relative;top:2px;"/><a href="/server/'.$server['ip'].'">'.$server['ip'].'</a></li>';
