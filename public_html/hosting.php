@@ -123,7 +123,7 @@ foreach($pr as $p){ ?>
 			}
 			
 			if($database->num_rows == 0){
-				echo '<i>no reviews yet! :(</i>';
+				echo '<i style="margin-left:30px;">no reviews yet! :(</i>';
 			}
 		?>
 		
