@@ -94,8 +94,8 @@ $cip = mysql_real_escape_string($_POST['claimip']);
 				</thead>
 				<tbody>
 					
-					<?php //$so = $database->query("SELECT * FROM serverplayers AS sp LEFT JOIN servers AS s ON s.ID = sp.serverID WHERE sp.playerID = '$player[ID]' AND s.ID != '' AND sp.owner = '1' ORDER BY s.lastUpdate DESC");
-					$so = $database->query("SELECT * FROM servers  LIMIT 10");
+					<?php $so = $database->query("SELECT * FROM serverplayers AS sp LEFT JOIN servers AS s ON s.ID = sp.serverID WHERE sp.playerID = '$player[ID]' AND s.ID != '' AND sp.owner = '1' ORDER BY s.lastUpdate DESC");
+					
 					$time = time();
 					foreach($so as $server){
 						echo '
