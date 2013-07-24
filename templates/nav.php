@@ -12,10 +12,8 @@
 
   <div id="wrap">
     <div class="row" id="main">
-    
     <div class="three columns sidecontainer">
       <div class="row  box logo"> 
-
         <a href="/">
 		<img src="/images/logo.png"/>
 		</a>
@@ -132,7 +130,7 @@
                   <a href="/promote">get more players</a>
                 </li>
                 <li>
-                  <a href="http://servercrate.com/minecraft">start a server</a>
+                  <a href="/refer.php?url=cubedhost.org/craftstats">start a server</a>
                 </li>
                 <li>
                   <a href="/players">stats</a>
