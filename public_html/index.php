@@ -11,7 +11,7 @@ if(strtolower($_GET['cat']) == 'reliable'){
 if(strtolower($_GET['cat']) == 'active'){
 	$_GET['cat'] = 'Active';
 }
-$template->setTitle(($_GET['version'] ? $_GET['version'].' Minecraft Servers' : ($_GET['cat'] ? $_GET['cat'].' Minecraft Servers':'Best Minecraft Servers List')));
+$template->setTitle(($_GET['version'] ? $_GET['version'].' Minecraft Servers' : ($_GET['cat'] ? $_GET['cat'].' Minecraft Servers':'Minecraft Servers')));
 if($_GET['version']){
 	$template->setdesc('A list of the best Minecraft '.$_GET['version'].' servers for you to play on with your friends. These include '.$_GET['version'].' PVP Minecraft servers.');
 }
@@ -31,7 +31,7 @@ $time = time();
 	<div class="twelve columns prepromote">
 		<div class="row">
 			<?php
- echo ($_GET['version'] ? '<h1>'.$_GET['version'].' Minecraft Servers</h2>' : ($_GET['cat'] ? '<h1>'.$_GET['cat'].' Minecraft Servers</h1>':'<h1>Best Minecraft Servers</h1>')); ?>
+ echo ($_GET['version'] ? '<h1>'.$_GET['version'].' Minecraft Servers</h2>' : ($_GET['cat'] ? '<h1>'.$_GET['cat'].' Minecraft Servers</h1>':'<h1>Minecraft Servers</h1>')); ?>
 		</div>
         <div class="row">
 			<?php $sponsoredp = $database->query("SELECT 
