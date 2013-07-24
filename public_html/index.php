@@ -69,7 +69,7 @@ FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 AND spons
 		?>
 		<div class="row ">
 		<div class="twelve columns">
-		<div class="alert-box radius" style="padding:10px;text-align:center;background:#62a7c4;font-weight:normal;">
+		<div class="alert-box radius" style="padding:10px;text-align:left;background:#62a7c4;font-weight:normal;">
 					<?php echo $ann; ?>
 				</div></div>
 		</div>
