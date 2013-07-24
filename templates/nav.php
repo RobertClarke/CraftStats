@@ -15,7 +15,7 @@
     <div class="three columns sidecontainer">
       <div class="row  box logo"> 
         <a href="/">
-		<img src="/images/logo.png"/>
+		<img src="/images/logo.png" alt="Minecraft Servers"/>
 		</a>
 		<hr/>
 		<a href="http://mcpestats.com">
