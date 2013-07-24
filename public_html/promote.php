@@ -144,7 +144,7 @@ if($database->num_rows == 1){
 							<?php echo ($instock?'<form class="form-inline" action="/promote" method="post">':''); ?>
 								<input type="hidden" name="buyi" value="1">
 								<input type="text" name="promoip" class="input-medium" placeholder="Server IP"  value="<?php if($_POST['buym'] == 1)echo $_POST['promoip'];  if($_GET['ip'])echo $_GET['ip']; ?>">
-								<button class="button expand" type="submit"><?php echo ($instock?'Buy now':'Sold out!'); ?></a>
+								<button class="button expand <?php echo ($instock?'':'secondary'); ?>" type="submit"><?php echo ($instock?'Buy now':'Sold out!'); ?></a>
 							<?php echo ($instock?'</form>':''); ?>
 						</div>
 						<div class="row">
@@ -154,7 +154,7 @@ if($database->num_rows == 1){
 							
 								<input type="hidden" name="buyi" value="2">
 								<input type="text" name="promoip" class="input-medium" placeholder="Server IP"  value="<?php if($_POST['buym'] == 2)echo $_POST['promoip']; if($_GET['ip'])echo $_GET['ip']; ?>">
-								<button class="button expand"  type="submit"><?php echo ($instock?'Buy now':'Sold out!'); ?></a>
+								<button class="button expand <?php echo ($instock?'':'secondary'); ?>"  type="submit"><?php echo ($instock?'Buy now':'Sold out!'); ?></a>
 							<?php echo ($instock?'</form>':''); ?>
 						</div>
 					</div>
@@ -182,7 +182,7 @@ if($database->num_rows == 1){
 							<?php echo ($instock2?'<form class="form-inline" action="/promote" method="post">':''); ?>
 								<input type="hidden" name="buyi" value="3">
 								<input type="text" name="promoip" class="input-medium" placeholder="Server IP"  value="<?php if($_POST['buym'] == 3)echo $_POST['promoip']; if($_GET['ip'])echo $_GET['ip']; ?>">
-								<button class="button expand" type="submit"><?php echo ($instock2?'Buy now':'Sold out!'); ?></a>
+								<button class="button expand <?php echo ($instock2?'':'secondary'); ?>" type="submit"><?php echo ($instock2?'Buy now':'Sold out!'); ?></a>
 							<?php echo ($instock2?'</form>':''); ?>
 						</div>
 						<div class="row">
@@ -192,7 +192,7 @@ if($database->num_rows == 1){
 							
 								<input type="hidden" name="buyi" value="4">
 								<input type="text" name="promoip" class="input-medium" placeholder="Server IP"  value="<?php if($_POST['buym'] == 4)echo $_POST['promoip'];  if($_GET['ip'])echo $_GET['ip']; ?>">
-								<button class="button expand"  type="submit"><?php echo ($instock2?'Buy now':'Sold out!'); ?></a>
+								<button class="button expand <?php echo ($instock2?'':'secondary'); ?>"  type="submit"><?php echo ($instock2?'Buy now':'Sold out!'); ?></a>
 							<?php echo ($instock2?'</form>':''); ?>
 						</div>
 					</div>

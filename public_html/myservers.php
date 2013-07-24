@@ -1,6 +1,8 @@
 <?php
 include '../inc/global.inc.php';
-
+if($_SESSION['username'] == ''){
+	header("Location: /login");
+}
 $template->setTitle('Manage Servers');
 $template->show('header');
 $template->show('nav');
@@ -19,11 +21,8 @@ $cip = mysql_real_escape_string($_POST['claimip']);
 		<?php
 	}else{
 	
-		$sp = $database->query("SELECT * FROM serverplayers WHERE playerID = '$_SESSION[id]' AND serverID = '$server[ID]'",db::GET_ROW);
-		if($database->num_rows == 0){
-			$database->query("INSERT INTO serverplayers VALUES ('$_SESSION[id]',$server[ID],'0','0')");
-		}
-		if($sp['owner'] == 1){
+		$sp = $database->query("SELECT * FROM serverowners WHERE userID = '$_SESSION[id]' AND serverID = '$server[ID]'",db::GET_ROW);
+		if($database->num_rows >= 1){
 			?>
 			<div class="alert-box" style="margin-top:20px;">
 				You're already an owner of <?php echo $server['ip']; ?>.
@@ -39,7 +38,7 @@ $cip = mysql_real_escape_string($_POST['claimip']);
 				</div>
 				<?php
 				
-				$database->query("UPDATE serverplayers SET owner = '1' WHERE playerID = '$player[ID]' AND serverID = '$server[ID]'");
+				$database->query("INSERT INTO serverowners VALUES('$server[ID]','$_SESSION[id]')");
 				
 			}elseif($ping['fail'] == true){
 				?>
@@ -94,7 +93,7 @@ $cip = mysql_real_escape_string($_POST['claimip']);
 				</thead>
 				<tbody>
 					
-					<?php $so = $database->query("SELECT * FROM serverplayers AS sp LEFT JOIN servers AS s ON s.ID = sp.serverID WHERE sp.playerID = '$player[ID]' AND s.ID != '' AND sp.owner = '1' ORDER BY s.lastUpdate DESC");
+					<?php $so = $database->query("SELECT * FROM serverowners AS so LEFT JOIN servers AS s ON s.ID = so.serverID WHERE so.userID = '$_SESSION[id]' AND s.ID != '' ORDER BY s.lastUpdate DESC");
 					
 					$time = time();
 					foreach($so as $server){

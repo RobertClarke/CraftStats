@@ -19,10 +19,9 @@ if($server[blacklisted] == 1)
 
 if($_SESSION['mcuser'] == 'RobertJFClarke' || $_SESSION['mcuser'] == 'MillerMan' || $_SESSION['mcuser'] == 'TheCreeperLawyer' || $_SESSION['mcuser'] == 'Chris1056' || $_SESSION['mcuser'] == 'Royal_Soda'){
 $isowner = true;
-}elseif($_SESSION['mcuser'] != ''){$playerid = $database->query("SELECT ID FROM players WHERE username = '$_SESSION[mcuser]'",db::GET_ROW);
-$playerid = $playerid['ID'];
-$owner = $database->query("SELECT * FROM serverplayers WHERE playerID = '$playerid' AND serverID = '$server[ID]'",db::GET_ROW);
-if($owner['owner'] == 1){
+}elseif($_SESSION['mcuser'] != ''){
+$owner = $database->query("SELECT * FROM serverowners WHERE userID = '$_SESSION[id]' AND serverID = '$server[ID]'",db::GET_ROW);
+if($database->num_rows >= 1){
 	$isowner = true;
 }}
 $scat = $server['category'];

@@ -1,4 +1,5 @@
-<?php session_start();
+<?php
+session_start();
 include '../classes/db.class.php';
 include '../classes/template.class.php';
 include '../classes/log.class.php';

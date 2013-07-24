@@ -1,8 +1,9 @@
 <?php
 include '../inc/global.inc.php';
 if($_SESSION['username'] == ''){
-	header("Location: /");
+	header("Location: /login");
 }
+header("Location: /myservers");exit;
 if($_SESSION['mcuser'] != ''){
 	header('Location: /player/'.$_SESSION['mcuser']);
 }

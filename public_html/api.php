@@ -147,5 +147,15 @@ if($_GET[req] == 'm12'){
 	exit;
 }
 
+if($_GET[req] == 'm122312893'){
+	$pl = $database->query("SELECT * FROM serverplayers AS sp LEFT JOIN players AS p ON sp.playerID = p.ID WHERE sp.owner = 1");
+	foreach($pl as $p){
+		$on = $database->query("SELECT * FROM users WHERE mcuser = '$p[username]'",db::GET_ROW);
+		if($on['mcuser'] != ''){
+			$database->query("INSERT INTO serverowners VALUES ('$p[serverID]',$on[id])");
+		}
+	}
+}
+
 
 ?>
