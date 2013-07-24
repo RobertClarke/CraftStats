@@ -31,7 +31,7 @@
               <div class="row collapse ad">
                <a href="/refer.php?url=cubedhost.org/craftstats"><img alt="CubedHost.org" src="/images/ads/cubedhost.png"/></a> 
               </div> 
-            </div> -->
+            </div>
           <h6 class="subheader">Find a server</h6>
 		  <?php if($_GET['sf']){ ?>
 			<div class="alert-box alert">
