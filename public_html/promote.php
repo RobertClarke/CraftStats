@@ -108,7 +108,7 @@ if($database->num_rows < 18){
 }
 
 $a = $database->query("SELECT * FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 AND sponsorType = 1 AND game = 'minecraft'"); 
-if($database->num_rows == 3){
+if($database->num_rows == 1){
 	$instock2 = false;
 }else{
 	$instock2 = true;
