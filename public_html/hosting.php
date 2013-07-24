@@ -1,4 +1,5 @@
 <?php
+
 /*if(isset($_POST['review']))*/$memcache_disable = true;
 include '../inc/global.inc.php';
 
@@ -118,7 +119,7 @@ foreach($pr as $p){ ?>
 			foreach($reviews as $r){
 				echo '<blockquote style="width:80%;margin:0 auto;border-left: 5px solid '.($r['positive'] == 0 ? '#b13c33':'#4fa54a').';">
 			<p>'.stripslashes($r['text']).'</p>
-			<small>'.($r['username'] == '' ? 'Anonymous' : '<a href="http://twitter.com/'.$r['username'].'" target="_new" style="font-weight:normal;font-size:16px;color:#3A87AD;">@'.$r['username'].'</a>').' '.($r['username'] == $_SESSION['username'] && $r['username'] != '' ? ' <br/> <br/><form action="/host/'.$_GET['slug'].'" method="POST"><input type="hidden" name="remove" value="'.$r['ID'].'"><button class="btn btn-small btn-inverse" type="submit">Remove</button></form>' : '').'</small>
+			<small style="font-weight:normal;font-size:12px;">'.($r['username'] == '' ? 'Anonymous' : ''.$r['username'].'').' '.($r['username'] == $_SESSION['username'] && $r['username'] != '' ? ' <br/> <br/><form action="/host/'.$_GET['slug'].'" method="POST"><input type="hidden" name="remove" value="'.$r['ID'].'"><button class="btn btn-small btn-inverse" type="submit">Remove</button></form>' : '').'</small>
 		</blockquote>';
 			}
 			
@@ -133,7 +134,7 @@ foreach($pr as $p){ ?>
 	<h3 style="margin-bottom:10px;margin-top:30px;">Write a Review</h3>
 	<?php if(!isset($_SESSION['username'])){
 	?>
-	<a href="/oauth.php?login=twitter"><img style="width:151px;height:24px;margin-top:10px;" src="/images/signintwitter.png"></a>
+	<a href="/login">Login to post a review</a>
 	<?php
 	}else{ 
 	if(isset($_POST['review'])){
@@ -179,10 +180,38 @@ foreach($pr as $p){ ?>
 <div class="row">
 <h3 style="float:left;padding-left:20px;margin-bottom:20px;">Minecraft Server Hosts</h3>
 </div>
-<div class="row" style="margin-bottom:30px;">
-	<?php $hosts = $database->query("SELECT * FROM hosts");
+</div>
+
+
+	<?php $hosts = $database->query("SELECT * FROM hosts WHERE sponsorTime > UNIX_TIMESTAMP()");
+	if($database->num_rows>0){
+	?>
+	<div class="twelve columns box" style="padding:20px 0px;">
+	<div class="row" style="margin-bottom:25px;color:#aaa;text-align:center;">Sponsored Hosts</div>
+	<?php
+	foreach($hosts as $h){
+	$h['shortdesc'] = mb_convert_encoding($h['shortdesc'], "ISO-8859-1", "UTF-8");
+	?>
 	
-	foreach($hosts as $h){?>
+	<div class="box inset" style="float:left;margin-left:<?php echo ($database->num_rows==1?'180':'20'); ?>px;width:280px;margin-bottom:20px;height:80px;">
+		<img style="float:left;margin:3px;border-radius:8px;width:75px;" src="/images/hosts/<?php echo $h['ID']; ?>.png"/>
+		<div style="float:right;margin-left:5px;width:190px;line-height:1.2;">
+			<h3 style="font-size:16px;"><a href="/host/<?php echo $h['slug'];?>"><?php echo $h['name'];?></a></h3>
+
+			<span style="color:#555;font-size:11px;font-weight:bold;"><?php echo $h['shortdesc']; ?></span>
+		</div>
+	</div>
+	<?php } ?>
+	</div>
+	
+	<?php } ?>
+	<div class="twelve columns box" style="padding-top:20px;">
+	<div class="row" style="margin-bottom:30px;">
+	<?php $sponsored = $database->query("SELECT * FROM hosts WHERE sponsorTime < UNIX_TIMESTAMP() ");
+	
+	foreach($sponsored as $h){
+$h['shortdesc'] = mb_convert_encoding($h['shortdesc'], "ISO-8859-1", "UTF-8");	?>
+	
 	<div class="box inset" style="float:left;margin-left:20px;width:280px;margin-bottom:20px;height:80px;">
 		<img style="float:left;margin:3px;border-radius:8px;width:75px;" src="/images/hosts/<?php echo $h['ID']; ?>.png"/>
 		<div style="float:right;margin-left:5px;width:190px;line-height:1.2;">
