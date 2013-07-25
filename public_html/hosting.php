@@ -38,22 +38,15 @@ $template->show('nav');
 		<div class="twelve columns box">
 <?php if($_GET['slug']){ 
 ?>
+<?php
+		$database->query("SELECT * FROM hostreview WHERE hostID = '$h[ID]' AND positive = 1",db::GET_ROW);
+		$rpos = $database->num_rows;
+		$database->query("SELECT * FROM hostreview WHERE hostID = '$h[ID]' AND positive = 0",db::GET_ROW);
+		$rneg = $database->num_rows;
+		?>
+<h3 style="margin-left:20px;margin-top:35px;text-align:left;"><a href="/hosting" style="color:#069;">&laquo;</a><a href="http://<?php echo $h['url']; ?>" style="margin-left:10px;"><?php echo $h['name']; ?></a> <span style="font-size:14px;"><?php echo $rpos; ?> positive and <?php echo $rneg; ?> negative reviews</span></h3>
 
-<h3 style="margin-left:20px;margin-top:30px;text-align:left;"><a href="/hosting" style="color:#069;">&laquo;</a><a href="http://<?php echo $h['url']; ?>" style="margin-left:30px;"><?php echo $h['name']; ?></a></h3>
-
-
-	<div style="position:absolute;left:50px;top:71px;font-size:12px;color:#444;padding-right:90px;">
-	<a href="https://twitter.com/share" class="twitter-share-button" data-text="I just found an awesome minecraft host!" data-via="craftstats_" data-url="http://craftstats.com/host/<?php echo $h['slug']; ?>" data-count="none" data-lang="en">Tweet</a>
-
-	<div class="fb-like" style="float:right;position:absolute;right:-8px;top:0px;margin-right:15px;" data-href="http://craftstats.com/host/<?php echo $h['slug']; ?>" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="arial"></div>
-	<div id="fb-root"></div>
-
-
-
-
-	</div>
-
-	<div class="clearfix" style="position:relative;top:30px;">
+	<div class="clearfix" style="position:relative;top:10px;">
 	<style type="text/css">
 	
 .hostdesc ul{
@@ -70,19 +63,14 @@ $template->show('nav');
 	margin-bottom:20px;
 }
 	</style>
-		<div style="margin: 0px 30px;font-size:14px;width:530px;" class="hostdesc"><?php echo $h['longdesc']; ?>
-		<?php
-		$database->query("SELECT * FROM hostreview WHERE hostID = '$h[ID]' AND positive = 1",db::GET_ROW);
-		$rpos = $database->num_rows;
-		$database->query("SELECT * FROM hostreview WHERE hostID = '$h[ID]' AND positive = 0",db::GET_ROW);
-		$rneg = $database->num_rows;
-		?>
-			<b><?php echo $h['name']; ?> has received <?php echo $rpos; ?> positive and <?php echo $rneg; ?> negative reviews</b></div>
+	<div class="twelve columns centered">
+		<div style="margin-left:10px;font-size:14px;width:100%;line-height:1.4;color:#444;" class="hostdesc"><?php echo $h['longdesc']; ?>
+		</div>
 		<!--<img style="float:right;border:2px solid #ccc; margin:0px 40px;width:280px;height:180px;" src="<?php echo 'http://api.webthumbnail.org?width=280&height=200&format=png&screen=1024&url='.$h['domain']?>"/>
 		-->
 	</div>
 
-	
+	</div>
 
 <div class="box clearfix" style="padding:30px;margin:20px 0px;">
 <h3 style="text-align:center;" >Hosting Plans</h3>
@@ -117,7 +105,7 @@ foreach($pr as $p){ ?>
 		<?php
 			$reviews = $database->query("SELECT * FROM hostreview hr LEFT JOIN users u ON u.ID = hr.userID WHERE hr.hostID = '$h[ID]' ORDER BY hr.time ASC");
 			foreach($reviews as $r){
-				echo '<blockquote style="width:80%;margin:0 auto;border-left: 5px solid '.($r['positive'] == 0 ? '#b13c33':'#4fa54a').';">
+				echo '<blockquote style="width:80%;margin:5px auto;border-left: 5px solid '.($r['positive'] == 0 ? '#b13c33':'#4fa54a').';">
 			<p>'.stripslashes($r['text']).'</p>
 			<small style="font-weight:normal;font-size:12px;">'.($r['username'] == '' ? 'Anonymous' : ''.$r['username'].'').' '.($r['username'] == $_SESSION['username'] && $r['username'] != '' ? ' <br/> <br/><form action="/host/'.$_GET['slug'].'" method="POST"><input type="hidden" name="remove" value="'.$r['ID'].'"><button class="btn btn-small btn-inverse" type="submit">Remove</button></form>' : '').'</small>
 		</blockquote>';
@@ -183,13 +171,13 @@ foreach($pr as $p){ ?>
 </div>
 
 
-	<?php $hosts = $database->query("SELECT * FROM hosts WHERE sponsorTime > UNIX_TIMESTAMP()");
+	<?php $sponsored = $database->query("SELECT * FROM hosts WHERE sponsorTime > UNIX_TIMESTAMP()");
 	if($database->num_rows>0){
 	?>
 	<div class="twelve columns box" style="padding:20px 0px;">
 	<div class="row" style="margin-bottom:25px;color:#aaa;text-align:center;">Sponsored Hosts</div>
 	<?php
-	foreach($hosts as $h){
+	foreach($sponsored as $h){
 	$h['shortdesc'] = mb_convert_encoding($h['shortdesc'], "ISO-8859-1", "UTF-8");
 	?>
 	
@@ -203,29 +191,64 @@ foreach($pr as $p){ ?>
 	</div>
 	<?php } ?>
 	</div>
+	<div style="float:right;font-size:12px;margin-top:5px;margin-bottom:5px;"><a href="/promote" style="color:#999;">want your host here?</a></div>
+	<?php } ?>
+<div class="servers">
+	<div class="row table">
+		<div class="twelve columns">
+			<table class="twelve">
+				<thead>
+					<tr>
+						<th>Server Host</th>
+						<th>Positive Reviews</th>
+						<th>Negative Reviews</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+	<?php
+
+	$hosts = $database->query("SELECT * FROM hosts WHERE sponsorTime < UNIX_TIMESTAMP() ");
+	$hosts2 = array();
+	foreach($hosts as $i => $h){
+		$database->query("SELECT * FROM hostreview WHERE hostID = '$h[ID]' AND positive = 1",db::GET_ROW);
+		$rpos = $database->num_rows;
+		$database->query("SELECT * FROM hostreview WHERE hostID = '$h[ID]' AND positive = 0",db::GET_ROW);
+		$rneg = $database->num_rows;
+		$h['score'] = $rpos-$rneg;
+		$h['pos'] = $rpos;
+		$h['neg'] = $rneg;
+		$hosts2[$i]=$h;
+	}
+	
+usort($hosts2, function($a, $b) {
+    return $b['score'] - $a['score'];
+});
+
+	foreach($hosts2 as $h){
+	$h['shortdesc'] = mb_convert_encoding($h['shortdesc'], "ISO-8859-1", "UTF-8");	
+?>
+					<tr style="cursor:default;">
+					<td><a href="/host/<?php echo $h['slug'];?>"><?php echo $h['name'];?></a></td>
+					<td><?php echo $h['pos']; ?></td>
+					<td><?php echo $h['neg']; ?></td>
+					<td><span style="color:#555;font-size:11px;font-weight:bold;"><?php echo $h['shortdesc']; ?></span></td>
+					</tr>
 	
 	<?php } ?>
-	<div class="twelve columns box" style="padding-top:20px;">
-	<div class="row" style="margin-bottom:30px;">
-	<?php $sponsored = $database->query("SELECT * FROM hosts WHERE sponsorTime < UNIX_TIMESTAMP() ");
 	
-	foreach($sponsored as $h){
-$h['shortdesc'] = mb_convert_encoding($h['shortdesc'], "ISO-8859-1", "UTF-8");	?>
 	
-	<div class="box inset" style="float:left;margin-left:20px;width:280px;margin-bottom:20px;height:80px;">
-		<img style="float:left;margin:3px;border-radius:8px;width:75px;" src="/images/hosts/<?php echo $h['ID']; ?>.png"/>
-		<div style="float:right;margin-left:5px;width:190px;line-height:1.2;">
-			<h3 style="font-size:16px;"><a href="/host/<?php echo $h['slug'];?>"><?php echo $h['name'];?></a></h3>
-			<span style="color:#555;font-size:11px;font-weight:bold;"><?php echo $h['shortdesc']; ?></span>
-		</div>
-	</div>
-	<?php } ?>
-	
-	<div style="text-align:center;color:#777;font-size:12px;float:left;position:absolute;bottom:15px;left:25px;">If you're a minecraft host, you can <a href="https://docs.google.com/spreadsheet/viewform?formkey=dC1kQ3FhX1lsUkFqN0R6TFd0c0gtb0E6MQ#gid=0">apply here</a></div>
 </div> 
+</tbody>
+</table>
+<div style="text-align:center;color:#777;font-size:12px;float:left;position:absolute;bottom:0px;left:25px;">If you're a minecraft host, you can <a href="https://docs.google.com/spreadsheet/viewform?formkey=dC1kQ3FhX1lsUkFqN0R6TFd0c0gtb0E6MQ#gid=0">apply here</a></div>
 <?php
 }
 ?>
+
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
