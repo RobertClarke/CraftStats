@@ -34,9 +34,9 @@ $template->show('nav');
 					</form>
 				</div>
 				<div class="six columns">
-					<p>Adding your server to our site means we'll track uptime, player activity and other stats depending on your setup.</p><p>If you want to increase exposure to your server on the site, get players to vote for it! Send them to your server page, and when they vote you'll be pushed closer to the front page of craftstats.</p>
+					<p>Adding your server to our site means we'll track uptime, player activity and other stats depending on your setup.</p>
 					
-				<p>Be sure to link your players to your vote page. The more votes your server gets, the more it'll be seen by new players, which will get you more players on your server!</p>
+					<p>If you want to increase exposure to your server on the site, get players to vote for it! Send them to your server vote page, and when they vote you'll be pushed closer to the front page of craftstats.</p>
 				</div>
 			</div>
 		</div>
