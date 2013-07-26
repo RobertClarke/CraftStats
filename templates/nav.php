@@ -133,6 +133,9 @@
                   <a href="/refer.php?url=cubedhost.org/craftstats">start a server</a>
                 </li>
                 <li>
+                  <a href="/refer.php?url=enjin.com/minecraft-websites">create a site</a>
+                </li>
+                <li>
                   <a href="/players">stats</a>
                 </li>
                 <li>
