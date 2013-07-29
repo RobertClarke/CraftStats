@@ -120,14 +120,14 @@ if ($final['ACK'] == 'Success') {
 	<?php
 }
 $database->query("SELECT * FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() && sponsorType = 0"); 
-//standard promotion
-if($database->num_rows < 18){
+//Standard promotion stock
+if($database->num_rows < 10){
 	$instock = true;
 }else{
 	$instock = false;
 }
 
-//Premium promotion
+//Premium promotion stock
 $a = $database->query("SELECT * FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 AND sponsorType = 1 AND game = 'minecraft'"); 
 if($database->num_rows >= 1){
 	$instock2 = false;
