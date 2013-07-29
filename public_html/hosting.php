@@ -100,7 +100,7 @@ foreach($pr as $p){ ?>
 <div class="box clearfix" style="padding:30px 0px;margin:20px 0px;">
 
 	<div class="row">
-		<h3 style="margin-bottom:10px;margin-left:30px;">Recent Reviews</h3>
+		<h3 style="margin-bottom:10px;margin-left:30px;"><?php echo $h['name']; ?> Reviews</h3>
 		
 		<?php
 			$reviews = $database->query("SELECT * FROM hostreview hr LEFT JOIN users u ON u.ID = hr.userID WHERE hr.hostID = '$h[ID]' ORDER BY hr.time ASC");
