@@ -121,7 +121,7 @@ if ($final['ACK'] == 'Success') {
 }
 $database->query("SELECT * FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() && sponsorType = 0"); 
 //Standard promotion stock
-if($database->num_rows < 5){
+if($database->num_rows < 12){
 	$instock = true;
 }else{
 	$instock = false;
