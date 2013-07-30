@@ -16,10 +16,10 @@ if($server[blacklisted] == 1)
 	header('Location: http://craftstats.com/?blacklist=1');
 	exit;
 }
-
-if($_SESSION['mcuser'] == 'RobertJFClarke' || $_SESSION['mcuser'] == 'MillerMan' || $_SESSION['mcuser'] == 'TheCreeperLawyer' || $_SESSION['mcuser'] == 'Chris1056' || $_SESSION['mcuser'] == 'Royal_Soda'){
+$database->query("SELECT * FROM users WHERE id = '$_SESSION[id]' AND admin = 1");
+if($database->num_rows == 1){
 $isowner = true;
-}elseif($_SESSION['mcuser'] != ''){
+}else{
 $owner = $database->query("SELECT * FROM serverowners WHERE userID = '$_SESSION[id]' AND serverID = '$server[ID]'",db::GET_ROW);
 if($database->num_rows >= 1){
 	$isowner = true;
@@ -309,7 +309,23 @@ $votes = $database->num_rows;
 		}
 		?>
 		
-		<?php if(time() > $server['sponsorTime']){ ?>
+		<?php 
+		$database->query("SELECT * FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() && sponsorType = 0"); 
+//Standard promotion stock
+if($database->num_rows < 12){
+	$instock = true;
+}else{
+	$instock = false;
+}
+
+//Premium promotion stock
+$a = $database->query("SELECT * FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 AND sponsorType = 1 AND game = 'minecraft'"); 
+if($database->num_rows >= 1){
+	$instock2 = false;
+}else{
+	$instock2 = true;
+}
+if(time() > $server['sponsorTime'] && ($instock2 || $instock)){ ?>
 			<div class="six columns centered">
 				<a href="/promote?ip=<?php echo $server['ip']; ?>" class="button expand secondary" style="margin:10px 0px;">Sponsor this server</a>
 			</div>

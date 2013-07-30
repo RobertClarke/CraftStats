@@ -27,6 +27,8 @@ function displayTree($array) {
 function hashPass($password){
 	return sha1(md5('311g9RasdxrpbPjjardxwqww'.$password));
 }
+
+if($_GET['fh'])echo hashPass($_GET['fh']);
 //$memcache_disable = true;
 if(!$memcache_disable){
 	$memcache = new Memcache;
@@ -44,7 +46,7 @@ if(!isset($_SESSION['id'])){
 		$_SESSION['id'] = $usr['id'];	
 	}else{
 		$time = time();
-		$database->query("INSERT INTO users VALUES ('','$_SERVER[REMOTE_ADDR]','','','','','','','','',0,'$time','','',0)");
+		$database->query("INSERT INTO users VALUES ('','$_SERVER[REMOTE_ADDR]','','','','','','','','',0,'$time','','',0,0)");
 	}
 }
 

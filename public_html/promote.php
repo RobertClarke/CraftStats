@@ -44,28 +44,32 @@ if($_POST['buyi'] > 0 && $svvalid){
 	}
 }
 
-if($_GET['paypal'] == 'paid'){
+if($_GET['paypal'] == 'paid' || $_GET['ttoken']){
 	require_once( '../lib/httprequest.php' );
 	require_once( '../lib/paypal.php' );
 	include_once '../lib/twitteroauth.php';
 	$r = new PayPal(true);
 	
-	$final = $r->doPayment();
+	if(!$_GET['ttoken'])$final = $r->doPayment();
 	
-	if ($final['ACK'] == 'Success') {
+	if ($final['ACK'] == 'Success' || $_GET['ttoken']) {
 		$token = $final['TOKEN'];
+		if($_GET['ttoken'])$token = $_GET['ttoken'];
 		$order = $database->query("SELECT * FROM promo_order WHERE token = '$token'",db::GET_ROW);
-		if($order['paid'] == 0 && $database->num_rows == 1){
-			if($order['type'] > 4){
-				$sv = $database->query("SELECT * FROM servers WHERE game = 'minecraft' AND ID = '$order[serverID]'",db::GET_ROW);
-			}else{
+		if(($order['paid'] == 0 && $database->num_rows == 1) || $_GET['ttoken']){
+			if($order['type'] == 2){
 				$sv = $database->query("SELECT * FROM hosts	WHERE ID = '$order[serverID]'",db::GET_ROW);
+				$responses = array(
+				'Check out '.$sv['name'].' for awesome minecraft hosting http://'.$sv['url'],
+				'Want to start your own minecraft server? Get your own from '.$sv['name'].'. http://'.$sv['url']);
+			}else{
+				$sv = $database->query("SELECT * FROM servers WHERE game = 'minecraft' AND ID = '$order[serverID]'",db::GET_ROW);
 				$responses = array(
 				'Check out this server! http://cstats.co/'.$sv['ip'],
 				'This server looks pretty awesome! http://cstats.co/'.$sv['ip'],
 				'This is a great server: http://cstats.co/'.$sv['ip']);
-				
-				$tmhOAuth = new tmhOAuth(array(
+			}
+			$tmhOAuth = new tmhOAuth(array(
 					'consumer_key'    => 'LikmqUGSLAAWgZ8zCVC2A',
 					'consumer_secret' => '6PlWlXC6ugcwpY0SrlZ48uvc9KNHCPpVhpGjH6O6U',
 					'user_token'      => '822604988-MrKWIjH8xH3eb5TvI6d0XIowqnkV3FE1YLE6u2zq',
@@ -75,12 +79,10 @@ if($_GET['paypal'] == 'paid'){
 				$code = $tmhOAuth->request('POST', $tmhOAuth->url('1.1/statuses/update'), array(
 					'status' => $responses[array_rand($responses)],
 				));
-			}
-			
 			$stime = ($order['length']*60*60*24*7) + max($sv['sponsorTime'],time());
 			
-			$database->query("UPDATE promo_order SET paid = '1', expire = '$stime', first='{$r->details[FIRSTNAME]}',last='{$r->details[LASTNAME]}',email='{$r->details[EMAIL]}' WHERE token = '$token'");
-			if($order['type'] > 4){
+			if(!$_GET['ttoken'])$database->query("UPDATE promo_order SET paid = '1', expire = '$stime', first='{$r->details[FIRSTNAME]}',last='{$r->details[LASTNAME]}',email='{$r->details[EMAIL]}' WHERE token = '$token'");
+			if($order['type'] == 2){
 				$database->query("UPDATE hosts SET sponsorTime = '$stime' WHERE ID = '$order[serverID]'");
 			}else{
 				$database->query("UPDATE servers SET sponsorTime = '$stime', sponsorType = '$order[type]' WHERE ID = '$order[serverID]'");

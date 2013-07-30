@@ -43,7 +43,7 @@ FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 AND spons
 ?>
 			<div class="four columns">
 				<div class="twelve columns box prempromo">
-					<h5 class="subheader"><a href="/server/<?php echo $sp['ip']; ?>"><?php echo $sp['ip']; ?></a></h5>
+					<h5 class="subheader"><strong><a href="/server/<?php echo $sp['ip']; ?>"><?php echo $sp['ip']; ?></a></strong></h5>
 					<span class="subtitle"><?php echo $sp['cp'].'/'.$sp['mp'].' Players - '.$sp['uptimeavg'].'% Uptime'; ?></span><br/>
 					<?php if($sp['version'] != ''){ ?><a href="/version/<?php echo $sp['version']; ?>" class="button tiny"><?php echo $sp['version']; ?></a><?php } ?>
 					<?php if($sp['category'] != ''){ ?><a href="/category/<?php echo $sp['category']; ?>" class="button tiny"><?php echo $sp['category']; ?></a><?php } ?>
@@ -90,10 +90,10 @@ FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 AND spons
               <tbody>
 	<?php
 	$sponsored = $database->query("SELECT 
-  ID as sid, country,sponsorTime AS st, category,
+  ID as sid, country,sponsorTime AS st, sponsorType as sp, category,
   name, ip, advCheck,
   connPlayers AS cp, maxPlayers AS mp, version, motd, lastUpdate, uptimeavg, ranking, uptime
-FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 AND game = 'minecraft' $version ORDER BY sponsorRank DESC, ranking ASC");
+FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND sponsortype = 0 AND blacklisted != 1 AND game = 'minecraft' $version ORDER BY sponsorRank DESC, ranking ASC");
 
 	?>
 	<?php

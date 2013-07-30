@@ -353,9 +353,6 @@ class csAPI{
 					if($maxdiff >= $dpoints[$i]['maxPlayers']/2){
 						$maxdiff = $mdo;
 					}
-					if($dpoints[$i]['connPlayers'] > $dpoints[$i]['maxPlayers']){
-						$playerpenalty = 0.1;
-					}
 				}
 				$count++;
 			}
