@@ -1,7 +1,7 @@
 <body>
   <?php global $index; 
   if($index){
-?>  <div class="featurebg" style="background:url(/images/bigbg<?php echo rand(1,12); ?>.jpg) no-repeat center;background-size:100%;">
+?>  <div class="featurebg" style="background:url(/images/bigbg<?php echo rand(13,14); ?>.jpg) no-repeat center;background-size:100%;">
     
   </div> <?php } ?>
   <div class="navigation">
