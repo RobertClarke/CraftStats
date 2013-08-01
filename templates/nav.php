@@ -19,7 +19,7 @@
 		</a>
 		<hr/>
 		<a href="http://mcpestats.com">
-		<img src="http://mcpestats.com/images/logo.png"/>
+		<img src="http://mcpestats.com/images/logo.png" alt="Minecraft PE Servers"/>
 		</a>
 		<a class="togglelogos"></a>
       </div>
