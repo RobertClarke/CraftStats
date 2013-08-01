@@ -109,7 +109,7 @@
 		</script>
 	     </div>
             <div class="row collapse ad">
-            <a href="mailto:billing@craftstats.com?Subject=Sidebar%20advertisement"><img src="http://placehold.it/200x125"/></a>
+            <a href="mailto:billing@craftstats.com?Subject=Sidebar%20advertisement"><img src="http://placehold.it/200x125"/ alt="Ad Placeholder"></a>
             </div>
           </div>
         </div>
