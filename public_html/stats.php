@@ -21,6 +21,8 @@ function updateStats(){
 				$(\'.srate\').html(data.extra[1]);
 				$(\'.drate\').html(data.extra[4]);
 				$(\'.ptrate\').html(data.extra[5]);
+				$(\'.updating\').html(data.extra[6]);
+				$(\'.waiting\').html(data.extra[7]);
 				$(data.extra[0]).each(function(){
 					$(\'.batchprog\').eq(this[4]).animate({height: Math.max(Math.min(((this[1]/this[2])*100),100),4)+"%"}, 1200);
 					$(\'.batchprog2\').eq(this[4]).animate({bottom: (Math.max(Math.min(((this[1]/this[2])*100),100),4)-1)+"%"}, 1200);
@@ -112,9 +114,13 @@ $template->show('footer');
 	font-size:14px !important;
 }
 </style>
-<h1 style="position:absolute;top:20px;left:20px;">CraftStats Server Activity</h1> <h3 style="position:absolute;top:30px;left:400px;">currently updating at a rate of <span class="srate">0</span> servers per minute over <span class="ptrate">0</span> threads</h3>
+<h1 style="position:absolute;top:20px;left:20px;">CraftStats Server Activity</h1> 
 
+<h3 style="position:absolute;top:20px;left:250px;">currently averaging <span class="srate">0</span> servers/min (each server updated every <span class="ptrate">0</span> minutes)</h3>
 
+<h3 style="position:absolute;top:50px;left:250px;"><span class="updating">0</span> servers currently being updated</h3>
+
+<h3 style="position:absolute;top:70px;left:250px;"><span class="waiting">0</span> servers have not been updated for 10 minutes</h3>
 <?php 
 
 $slaves = $database->query("SELECT * FROM slaves");

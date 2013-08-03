@@ -3,7 +3,7 @@ class csAPI{
 	public $database;
 	public $ping;
 	public $log;
-	public $threads = 12;
+	public $threads = 16;
 	
 	public $maxvotes;
 	public $mct = array();
@@ -29,10 +29,10 @@ class csAPI{
 		}
 		
 		$time = time();
-		$execinterval = 120000;
+		$execinterval = 120;
 		$prv = $this->database->query("SELECT avgTime FROM serviceinfo ORDER BY time DESC LIMIT 1",db::GET_ROW);
-		$maxupdates = round(($execinterval)/(($prv['avgTime'] == 0 ? 1000 : $prv['avgTime'])*1.2));
-		// (update interval) / (estimated update time per server * 1.2) = # servers that should be processed
+		$maxupdates = round(($execinterval)/(1.3));
+		// (update interval) / (estimated update time per server) = # servers that should be processed
 		$sr = $this->database->query("SELECT  s2.*, 
         (
         SELECT  COUNT(*)
@@ -48,13 +48,13 @@ class csAPI{
 		$totalthreads = $this->database->num_rows*$this->threads;
 		
 		$time = time();
-		$rand = rand(1,666);
+		$rand = rand(1,9998);
 		$this->database->query("
 		UPDATE servers SET updatingBy='$thread-$time-$rand'
 		WHERE ID IN (
 			SELECT ID FROM (
 				SELECT ID FROM servers 
-				WHERE (($time - lastUpdate > 60 AND updatingBy = '0') OR ($time - lastUpdate > 1200 AND updatingBy != '0') ) AND id % $totalthreads = $thread
+				WHERE (($time > lastUpdate AND updatingBy = '0') OR ($time - lastUpdate > 1200 AND updatingBy != '0') ) AND id % $totalthreads = $thread
 				ORDER BY lastUpdate ASC 
 				LIMIT 0,$maxupdates
 			) tmp
@@ -65,18 +65,15 @@ class csAPI{
 	}
 	
 	public function batchProcess(){
-		sleep(rand(1,60));
 		$this->database->query("SELECT * FROM batchqueue WHERE processing = '1'");
 		
-		if($this->database->num_rows >= 5)return false;
+		if($this->database->num_rows >= 16)return false;
 		
 		$results = $this->database->query("SELECT * FROM batchqueue WHERE processing = '0' ORDER BY time ASC LIMIT 0,1",db::GET_ROW);
 		
 		if($this->database->num_rows == 0){
 			return false;
 		}
-		
-		
 		$this->database->query("UPDATE batchqueue SET processing = '1' WHERE pings = '{$results[pings]}'");
 		
 		
@@ -92,6 +89,7 @@ class csAPI{
 			
 			$timer += $this->log->timer('upd1');
 			echo $i.'/'.$updsize.', avgtime: '.($timer/$i);
+			usleep(200000);
 		}
 		$avgtime = ($timer/$i);
 		
@@ -186,7 +184,6 @@ class csAPI{
 			$this->endCall($this->formatResponse('error','data older than 60s not allowed to be sent'));
 			return false;
 		}
-		$execinterval = 120000;
 		
 		$final = array();
 		
@@ -201,13 +198,12 @@ class csAPI{
 		$i = 0;
 		foreach($slaves as $slave){
 			$thread = (($slave['rank']-1)*$this->threads);
-		
-			$prv = $this->database->query("SELECT avgTime FROM serviceinfo WHERE slaveID = '{$slave[id]}' ORDER BY time DESC LIMIT 1",db::GET_ROW);
-			$maxupdates = round(($execinterval)/(($prv['avgTime'] == 0 ? 1000 : $prv['avgTime'])*1.1));
+	
 			$svcount = $this->database->query("SELECT COUNT(*) AS svcount FROM servers WHERE $time - lastUpdate > 60 AND id % $totalthreads >= $thread AND id % $totalthreads <= $thread + {$this->threads} - 1 ",db::GET_ROW);
 			$info = $this->database->query("SELECT COUNT(*) as c FROM servers WHERE game ='minecraft'",db::GET_ROW);
+			$tc = $info['c'];
 			$servers = round($info['c']/count($slaves));
-			array_push($final,array($time,(int)$svcount['svcount'],(int)$servers,$maxupdates,$i));
+			array_push($final,array($time,(int)$svcount['svcount'],(int)$servers,0,$i));
 			
 			$i++;
 		}
@@ -215,12 +211,15 @@ class csAPI{
 		$svcount = $this->database->query("SELECT COUNT(*) AS svcount FROM servers WHERE $time - lastUpdate < 180 AND game='minecraft'",db::GET_ROW);
 		$rate = round($svcount['svcount']/3);
 		
+		$svcount = $this->database->query("SELECT COUNT(*) AS svcount FROM servers WHERE updatingBy != 0",db::GET_ROW);
+		$updating = $svcount['svcount'];
+		
+		$svcount = $this->database->query("SELECT COUNT(*) AS svcount FROM servers WHERE $time - lastUpdate > 600 AND $time - lastUpdate < 60000 ",db::GET_ROW);
+		$waiting = $svcount['svcount'];
+		
 		$updated = $this->database->query("SELECT ip FROM servers WHERE lastUpdate > $since AND game='minecraft' LIMIT 0,50");
-		
-		$svcount = $this->database->query("SELECT COUNT(*) AS svcount FROM batchqueue WHERE processing = 1",db::GET_ROW);
-		$pc = number_format($svcount['svcount']);
-		
-		$this->endCall($this->formatResponse('success','transmitting data',array($final,$rate,$time,$updated,0,$pc)));
+		$every = $tc/$rate;
+		$this->endCall($this->formatResponse('success','transmitting data',array($final,$rate,$time,$updated,0,round($every),$updating,$waiting)));
 	}
 	
 	public function updateRanks(){
@@ -347,29 +346,34 @@ class csAPI{
 			for($i = 0;$i < $this->database->num_rows;$i++){
 				$amt += ($dpoints[$i]['ping'] == 0 ? 0 : 1);
 				$amt2 += (($dpoints[$i]['ping'] == 0 || $dpoints[$i]['maxPlayers'] <= 1) ? 0 : ($dpoints[$i]['connPlayers'] / $dpoints[$i]['maxPlayers']));
-				if($i>2){
+				/*if($i>2){
 					$mdo = $maxdiff;
 					$maxdiff = max($maxdiff,abs($dpoints[$i]['connPlayers'] - $dpoints[$i-1]['connPlayers']));
 					if($maxdiff >= $dpoints[$i]['maxPlayers']/2){
 						$maxdiff = $mdo;
 					}
-				}
+				}*/
 				$count++;
 			}
 			
-			$maxplayers = $dpoints[$this->database->num_rows-1]['maxPlayers'];
+			//$maxplayers = $dpoints[$this->database->num_rows-1]['maxPlayers'];
 			$finaluptime = round(($amt / $count)*100,2);
-			
-			$avgplayers = ($playerpenalty == 0.1 ? 1 : (0.4+(round($amt2 / $count)*0.6)));
+			/*
+			$avgplayers = min(($playerpenalty == 0.1 ? 1 : (0.4+(round($amt2 / $count)*0.6))),1);
 			$datafullness = min(max((($time - $dpoints[0]['time'])/2678400),1),0.2);
+			
 			$votes = $server['votes'];
 			$serverscore = $avgplayers*$finaluptime*$datafullness*1500*(0.2+(($votes/$this->maxvotes)*0.8))*$playerpenalty;
 			if($maxdiff <= 2)$serverscore = 0;
-			$this->log->log('generic','action',"id: $server[ID] amt3: $amt3 md: $maxdiff count: $count pt: $pt p: $avgplayers ping: $avgping df: $datafullness uptime: $finaluptime");
+			$this->log->log('generic','action',"id: $server[ID] amt3: $amt3 md: $maxdiff count: $count pt: $pt p: $avgplayers ping: $avgping df: $datafullness uptime: $finaluptime");*/
 		}else{
-			$serverscore = $server['score'];
+			//$serverscore = $server['score'];
 			$finaluptime = $server['uptimeavg'];
 		}
+		
+		$serverscore = $server['votes'];
+		
+		
 		//no haxx plz
 		
 		$ping['info']['Players'] = mysql_real_escape_string($ping['info']['Players']);
@@ -379,14 +383,16 @@ class csAPI{
 		
 		if($ping['resolvedip'] != ''){
 			$this->log->timer('ccup');
-			$location = $this->getLocationIP($ping['resolvedip']);
-			$lat = $location[2];
-			$long = $location[3];
-			$continent = $location[1];
-			$country = $location[0];
-			$this->log->timer('ccup');
-		
-			$cupd="country = '$country',continent = '$continent',latitude = '$lat',longitude = '$long',";
+			if(rand(1,200) == 4){
+				$location = $this->getLocationIP($ping['resolvedip']);
+				$lat = $location[2];
+				$long = $location[3];
+				$continent = $location[1];
+				$country = $location[0];
+				$this->log->timer('ccup');
+			
+				$cupd="country = '$country',continent = '$continent',latitude = '$lat',longitude = '$long',";
+			}
 			$parts = explode(':',$ping['ip']);	
 			if($parts[1] == '25565'){
 				$ping['ip'] = $parts[0];
@@ -395,9 +401,7 @@ class csAPI{
 		// add new info for latest server ping
 		$this->database->query("INSERT INTO updates VALUES ('$server[ID]','$iping','$time', '$uptime', '{$ping[info][Players]}', '{$ping[info][MaxPlayers]}')");
 		
-		//votes
-		$this->database->query("SELECT * FROM uservotes WHERE serverID = '$server[ID]'");
-		$votes = $this->database->num_rows;
+		
 		$advc = 'advCheck = FALSE,';
 		$finaluptime = max($finaluptime,0);
 		if($finaluptime == '')$finaluptime = 0;
@@ -408,9 +412,9 @@ class csAPI{
 			if($ping['plusinfo'] != ''){$advc= 'advCheck = 2,';}
 			$motd = preg_replace('/\xA7[0-9A-FK-OR]+/i', '', $ping[info][HostName]);
 			if(count($ping['players'])>0)$plcache = mysql_real_escape_string(implode('||',array_slice($ping['players'],0,30)));
-			$this->database->query("UPDATE servers SET votes='$votes',plCache = '$plcache',updatingBy = '0',ip = '$ping[ip]', resolved = '$ping[lookupip]',$cupd motd = '$motd', version = '{$ping[info][Version]}', uptime = $uptime,  uptimeavg = $finaluptime,lastUpdate = '$time', connPlayers = '{$ping[info][Players]}', maxPlayers = '{$ping[info][MaxPlayers]}',$advc score = $serverscore WHERE id = '$server[ID]'");
+			$this->database->query("UPDATE servers SET plCache = '$plcache',updatingBy = '0',ip = '$ping[ip]', resolved = '$ping[lookupip]',$cupd motd = '$motd', version = '{$ping[info][Version]}', uptime = $uptime,  uptimeavg = $finaluptime,lastUpdate = '$time', connPlayers = '{$ping[info][Players]}', maxPlayers = '{$ping[info][MaxPlayers]}',$advc score = $serverscore WHERE id = '$server[ID]'");
 		}else{
-			$this->database->query("UPDATE servers SET votes='$votes',plCache = '',updatingBy = '0',resolved = '$ping[lookupip]',$cupd uptime = '$uptime', lastUpdate = '$time',uptimeavg = $finaluptime, connPlayers = '0',score = $serverscore WHERE id = '$server[ID]'");
+			$this->database->query("UPDATE servers SET plCache = '',updatingBy = '0',resolved = '$ping[lookupip]',$cupd uptime = '$uptime', lastUpdate = '$time',uptimeavg = $finaluptime, connPlayers = '0',score = $serverscore WHERE id = '$server[ID]'");
 			//$this->endCall($this->formatResponse('error','Failed to connect to Minecraft Server'));
 			$this->log->timer('update');
 			return false;
@@ -435,7 +439,7 @@ class csAPI{
 		}
 		
 		$this->log->timer('players');
-		
+		/*
 		if(count($ping['players']) > 0 && is_array($ping['players'])){
 		
 			$qstr = '';
@@ -531,11 +535,11 @@ class csAPI{
 				}
 			}
 			
-			$this->database->query("UPDATE players SET currentServer = '0' WHERE currentServer = '$server[ID]'");
+			//$this->database->query("UPDATE players SET currentServer = '0' WHERE currentServer = '$server[ID]'");
 		
-			if($firstfound == false){ // setting current server of players
-				$this->database->query("UPDATE players SET currentServer = '$server[ID]' WHERE $toAdd");
-			}
+			//if($firstfound == false){ // setting current server of players
+			//	$this->database->query("UPDATE players SET currentServer = '$server[ID]' WHERE $toAdd");
+			//}
 			
 			if($firstfound2 == false){ // adding 1 to # times player has been found on this server
 				$this->database->query("UPDATE serverplayers SET found = found + 1 WHERE serverID = '$server[ID]' AND ($toAdd2)");
@@ -545,7 +549,7 @@ class csAPI{
 				$this->database->query("INSERT INTO serverplayers VALUES $spvalues");
 			}
 		
-		}
+		}*/
 		
 		
 		$this->log->timer('players');
@@ -575,7 +579,7 @@ class csAPI{
 		$this->log->timer('supdate');
 	}
 	
-	private function validateIP($ip){
+	public function validateIP($ip){
 		$parts = explode(':',$ip);
 		if(filter_var($ip, FILTER_VALIDATE_IP)){
 			return $ip;

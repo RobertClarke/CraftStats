@@ -16,7 +16,7 @@ jQuery(document).ready(function($) {
 		var src = $(this).attr('mcuser');
 		var size = $(this).attr('mcsize');
 		$(this).hide();
-		$(this).attr('title',src).addClass('ttip').addClass('mcuser').wrap('<a href="/player/'+src+'"></a>').attr('src','/skins.php?size='+size+'&head&user='+src);
+		$(this).attr('title',src).addClass('ttip').addClass('mcuser').attr('src','/skins.php?size='+size+'&head&user='+src);
 		$(this).on('load', function () {
 			$(this).fadeIn(1200);
 		});

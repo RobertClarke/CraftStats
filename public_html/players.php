@@ -6,7 +6,7 @@ if($_GET['name'] == ''){
 $time = time();
 if($_GET['zoom'] < 1)$_GET['zoom']=1;
 $zoom = 172800 / $_GET['zoom'];
-$dpoints = $database->query("SELECT time, online FROM serviceinfo WHERE time > $time - $zoom AND slaveThread = 0 AND slaveID = 3 ORDER BY time ASC");
+$dpoints = $database->query("SELECT time, online FROM serviceinfo WHERE time > $time - $zoom AND slaveThread % 2 = 0 AND slaveID = 3 ORDER BY time ASC");
 
 $data = array();
 foreach($dpoints as $update){

@@ -3,7 +3,7 @@ set_include_path('/var/www/cstats/');
 $memcache_disable = true;
 include 'inc/global.inc.php';
 
-$scutoff = -(60*60*24*31);
+$scutoff = -(60*60*24*14);
 $updcutoff = time() - 60*60*24*8;
 $bcutoff = time() - 60*45;
 $database->query("DELETE FROM updates WHERE time < $updcutoff");

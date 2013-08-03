@@ -49,26 +49,8 @@
 				</div>
 			</form>
           </div>
-		  
-          <h6 class="subheader" style="margin-top:0px;">Find a player</h6>
-		   <?php if($_GET['pf']){ ?>
-			<div class="alert-box alert">
-				  Player not found
-				  <a href="" class="close">&times;</a>
-				</div>
-		  <?php } ?>
-          <div class="row collapse">
-			<form action="/api" method="get">
-				<input type="hidden" name="v1" value="player"/>
-				  <input type="hidden" name="req" value="m10"/>
-				<div class="eight mobile-three columns">
-				  <input type="text" name="v2" placeholder="Username"/>
-				</div>
-				<div class="four mobile-one columns">
-				  <button class="button expand postfix" style="padding:0px;">Search</button>
-				</div>
-			</form>
-          </div>
+		 
+          
 		  <a class="button expand" href="/submit">Add a server</a>
           <h6 class="subheader">Minecraft Server Categories</h6>
           <div class="row collapse tags">

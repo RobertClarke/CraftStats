@@ -143,7 +143,7 @@ if($_POST[req] == 'm12'){
 
 if($_GET[req] == 'm12'){
 	$r = $api->addvote($_GET[id],$_GET[usr]);	
-	if($r['extra']!='')header('Location: /server/'.$r['extra']);
+	if($r['extra']!='')header('Location: /server/'.$r['extra'].'/voted');
 	exit;
 }
 
@@ -156,6 +156,49 @@ if($_GET[req] == 'm122312893'){
 		}
 	}
 }
+
+if($_GET[req] == 'scrape2'){
+	echo json_encode(array(
+	
+	'min'=>$memcache->get('strip_min'),
+	'page'=>$memcache->get('strip_page'),
+	'last'=>$memcache->get('strip_last')
+	));	
+}
+
+if($_GET[req] == 'scrape'){
+$template->setHeadScripts('
+<script type="text/javascript">
+window.setInterval(updateStats, 500);
+var last = '.(time()).';
+function updateStats(){
+	
+	$.ajax({					
+			type: "GET",
+			url: "/api.php",
+			data: "req=scrape2",
+			async: true,
+			cache: false,
+			dataType: "json",
+			
+			success: function(data){
+				$(\'.min\').html(data.min);
+				$(\'.last\').html(data.last);
+				$(\'.page\').html(data.page);
+			}
+			
+		});
+}
+
+</script>
+');
+	$template->show('header');
+	?>
+	<h3 style="text-align:center;">Scraped <span class="min">0</span> servers (on page <span class="page">1</span>)</h3>
+	<h4 style="text-align:center;">Last scraped: <span class="last"></span></h3>
+	<?php
+}
+
 
 
 ?>

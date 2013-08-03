@@ -176,6 +176,15 @@ $votes = $database->num_rows;
 		<?php
 		
 		}
+		
+		if($_GET['tab'] == 'voted'){
+		?>
+		<div class="alert-box success" style="margin-top:20px;">
+					You've voted for <?php echo $server['ip']; ?>!
+				</div>
+		<?php
+		
+		}
 	?>
 		<div class="twelve columns box">
 			<div class="seven columns">
