@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ERROR | E_PARSE);
 $logrequest = false;
-$memcache_disable = true;
+if($_GET[req] != 'scrape2')$memcache_disable = true;
 include '../inc/global.inc.php';
 include_once '../lib/twitteroauth.php';
 

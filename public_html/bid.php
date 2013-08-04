@@ -1,15 +1,17 @@
 <?php
+$memcache_disable = true;
+
 include '../inc/global.inc.php';
 if($_SESSION['username'] == ''){
-	header("Location: /login");
+	header("Location: /login?post=/promote/bid");
 }
 $template->setTitle('Banner Auction');
 $template->show('header');
 $template->show('nav');
 
 
-$auctionend = mktime(0,0,0,date("n"),5);
-$auctionid=date('N').'-'.date('Y');
+$auctionend = mktime(0,0,0,date("n"),24);
+$auctionid=date('n').'-'.date('Y');
 
 if(time() > $auctionend){
 	$running = false;
@@ -17,6 +19,68 @@ if(time() > $auctionend){
 	$running = true;
 }
 
+if($_POST['ip']){
+	$sv = $database->query("SELECT * FROM servers WHERE ((resolved = '$_POST[ip]' AND resolved != '') OR ip = '$_POST[ip]') AND game = 'minecraft'",db::GET_ROW);
+	if($database->num_rows == 1){
+		$svvalid = true;
+		$svid = $sv['ID'];
+	}
+}
+$bids = $database->query("SELECT * FROM promo_bids WHERE auctionID = '$auctionid' ORDER BY amount DESC LIMIT 3");
+
+$startbid = 100;
+foreach($bids as $b){
+	$startbid = max($startbid,$b['amount']+10);
+}
+
+
+if($_POST['bid']){
+	if(!is_numeric($_POST['bid'])){
+		$badbid=true;
+	}elseif($_POST['bid'] < $startbid){
+		$invalidbid = true;
+	}elseif($_POST['ip'] && $svvalid){
+		$time = time();
+		$database->query("INSERT INTO promo_bids VALUES ('','$auctionid','$time','$_SESSION[id]','$_POST[ip]','$_POST[bid]','')");
+		$bids = $database->query("SELECT * FROM promo_bids WHERE auctionID = '$auctionid' ORDER BY amount DESC LIMIT 3");
+		foreach($bids as $b){
+			$startbid = max($startbid,$b['amount']+10);
+		}
+	}
+}
+
+if($_GET['pay']){
+	$bid = $database->query("SELECT * FROM promo_bids WHERE won = 1 AND id = '$_GET[pay]'",db::GET_ROW);
+	if($database->num_rows == 0)header('Location: /promote/bid');exit;
+	
+	$server = $database->query("SELECT * FROM servers WHERE ID = '$bid[serverID]'",db::GET_ROW);
+	require_once( '../lib/httprequest.php' );
+	require_once( '../lib/paypal.php' );
+	$r = new PayPal(true);
+	$r->pp_return = 'http://craftstats.com/bid?pp=paid';
+	$r->pp_cancel = 'http://craftstats.com/promote/bid';
+	$ret = $r->doExpressCheckout($bid['amount'], '30 day banner promotion for '.$server['ip']);
+	if ($ret['ACK'] == 'Success') {
+		$token = $ret['TOKEN'];
+		$database->query("UPDATE promo_bids SET token = '$token' WHERE id = '$bid[id]'");
+		exit;
+	}
+}
+
+if($_GET['pp'] == 'paid'){
+	require_once( '../lib/httprequest.php' );
+	require_once( '../lib/paypal.php' );
+	$r = new PayPal(true);
+	$final = $r->doPayment();
+	if ($final['ACK'] == 'Success') {
+		$token = $final['TOKEN'];
+		$bid = $database->query("SELECT * FROM promo_bids WHERE token = '$token'",db::GET_ROW);
+		$server = $database->query("SELECT * FROM servers WHERE ID = '$bid[serverID]'",db::GET_ROW);
+		$stime = (60*60*24*30) + time();
+		$database->query("UPDATE servers SET bannerpromo = $stime WHERE ID = '$server[ID]'");
+		$haspaid=true;
+	}
+}
 ?>
 <div class="row">
 	<div class="twelve columns">
@@ -35,12 +99,29 @@ if(time() > $auctionend){
 		</div>
 	</div>
 </div>
+<?php 
+if($haspaid){
+?>
+<div class="alert-box success"  style="margin-top:20px;">
+	You've successfully paid for your bid. Your server promotion will start shortly.
+	</div>
+<?php
+}
+?>
+<div class="row">
+	<div class="twelve columns">
+		<div class="twelve columns box" style="padding:10px;margin-top:0px;margin-bottom:15px;line-height:1.4;color:#333;">
+			This auction will end on <?php echo date('F jS, g:ia T',$auctionend);?>. The top three bids will have exactly 72 hours to pay their bids. In the event that a bid is not paid, the bidder will be restricted from bidding in any other auctions.
+		</div>
+	</div>
+</div>
 <div class="row">
 	<div class="twelve columns">
 		<div class="servers">
 			<div class="row table">
 				<div class="six columns">
 					<b>Top Bids</b>
+					
 					<table class="twelve">
 						<thead>
 							<tr>
@@ -51,7 +132,6 @@ if(time() > $auctionend){
 						</thead>
 						<tbody>
 							<?php
-								$bids = $database->query("SELECT * FROM promo_bids WHERE auctionID = '$auctionid'");
 								if($database->num_rows == 0){
 								?>
 								<tr>
@@ -60,19 +140,54 @@ if(time() > $auctionend){
 									<td></td>
 								</tr>
 								<?php
+								}else{
+								
+									$i=1;
+									foreach($bids as $b){
+										echo '<tr>
+									<td>'.$i.'</td>
+									<td>'.$b['serverIP'].'</td>
+									<td>$'.$b['amount'].'</td>
+								</tr>';
+								$i++;
+									}
 								}
+								
 							?>
 						</tbody>
 					</table>
 				</div>
 				<div class="six columns">
-					<b>Place a bid</b>
-
+					<b>Place a bid (Minimum $<?php echo $startbid; ?>)</b>
+<?php if($_POST['ip'] && !$svvalid){ ?>
+						<div class="alert-box"  style="margin-top:20px;">
+						We're not currently tracking that server! Make sure you entered the IP address correctly and try again.
+						</div>
+					<?php } ?>
+					
+					<?php 
+					if($invalidbid){
+					?>
+					<div class="alert-box"  style="margin-top:20px;">
+						That bid was lower than the minimum bid of $<?php echo $startbid; ?>.
+						</div>
+					<?php
+					}
+					?>
+					<?php 
+					if($badbid){
+					?>
+					<div class="alert-box"  style="margin-top:20px;">
+						Invalid bid.
+						</div>
+					<?php
+					}
+					?>
 					<div class="twelve columns box" style="padding-left:0px;padding-right:15px;padding-top:10px;padding-bottom:10px;">
 							<?php if($running){ ?>
 							<form action="/promote/bid" method="post">
 								<div class="six columns">
-									<input type="text" name="bid" placeholder="60.12" />
+									<input type="text" name="bid" placeholder="<?php echo $startbid; ?>" value="<?php echo $_POST['bid']; ?>" />
 								</div>
 								<div class="six columns">
 									<input type="text" name="ip" placeholder="Server IP" />

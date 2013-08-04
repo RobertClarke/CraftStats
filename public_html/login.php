@@ -1,7 +1,9 @@
 <?php
 include '../inc/global.inc.php';
 
-
+if($_GET['post']){
+	$_SESSION['loginredirect'] = $_GET['post'];
+}
 
 if($_GET['u']){
 	$upgrade=1;
@@ -50,7 +52,7 @@ if($_POST['action'] == 'login'){
 
 if($_POST['action'] == 'reset'){
 	$user = $database->query("SELECT * FROM users WHERE username = '$_POST[user]'");
-	if($database->num_rows==1)array_push($errors,'User \''.$_POST['user'].'\' does not exist');
+	if($database->num_rows==0)array_push($errors,'User \''.$_POST['user'].'\' does not exist');
 }
 
 if($_POST['action'] == 'resetconfirm' && $_GET['code']){
@@ -68,11 +70,12 @@ if($_POST['action'] == 'resetconfirm' && $_POST['code']){
 	if($database->num_rows == 0 || $user['resetexpire'] < time())array_push($errors,'That password reset link has expired.');
 	$resetconfirm = 0;
 	$_POST['action'] = '';
+	$doreset = true;
 }
 
-if($_POST['action'] == 'resetconfirm' && $_POST['code'] && count($errors) == 0){
+if($doreset && $_POST['code'] && count($errors) == 0){
 	$pass = hashPass($_POST['pass']);
-	$database->query("UPDATE users SET pass_hash = '$pass' WHERE id = $user[id]");
+	$database->query("UPDATE users SET pass_hash = '$pass',resetexpire = 0,resetcode='' WHERE id = $user[id]");
 	array_push($errors,'Password successfully reset');
 	$resetconfirm = 0;
 	$_POST['action'] = '';
@@ -81,14 +84,16 @@ if($_POST['action'] == 'resetconfirm' && $_POST['code'] && count($errors) == 0){
 if($_POST['action'] == 'reset' && count($errors) == 0){
 	$code = md5(time().$_POST['user']);
 	$expire = time() + 60*60*24;
-	$database->query("UPDATE users SET resetcode = '$code',resetexpire = $expire");
+	$database->query("UPDATE users SET resetcode = '$code',resetexpire = $expire WHERE username = '$_POST[user]'");
+	$user = $database->query("SELECT * FROM users WHERE username = '$_POST[user]'",db::GET_ROW);
 	$to      = $user['email'];
 	$subject = 'CraftStats Password Reset';
-	$message = 'Click this link to reset your password, link will work for the next 24 hours: <a href="/login?fpc=1&code='.$code.'">Reset Password</a>';
+	$message = 'Click this link to reset your password, link will work for the next 24 hours: <a href="http://craftstats.com/login?fpc=1&code='.$code.'">Reset Password</a>';
 	$headers = 'From: noreply@craftstats.com'."\r\n";
 	$headers  .= 'MIME-Version: 1.0' . "\r\n";
 	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-	array_push($errors,'Email sent. Reset link will expire in 24 hours.');
+	mail($to,$subject,$message,$headers);
+	array_push($errors,'Email sent to '.substr($to, 0,3).'*****'.substr($to, -3).'. Reset link will expire in 24 hours.');
 }
 
 if($_POST['action'] && $_POST['action'] != 'reset' && count($errors) == 0){
@@ -102,13 +107,14 @@ if($_POST['action'] && $_POST['action'] != 'reset' && count($errors) == 0){
 		$_SESSION['username'] = $user['username'];
 		$_SESSION['mcuser'] = $user['mcuser'];
 	}
-	header('Location: /account');
+	header('Location: '.($_SESSION['loginredirect'] ? $_SESSION['loginredirect'] : '/account'));
 }
+
+
 
 $template->setTitle(($_GET['r'] ? 'Register':($_GET['u'] ? 'Upgrade Account' : 'Login')));
 $template->show('header');
 $template->show('nav');
-
 ?>
 <div class="row">
 	<div class="twelve columns">

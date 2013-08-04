@@ -47,8 +47,9 @@ class PayPal {
 	const API_USERNAME = "billing_api2.craftstats.com";
 	const API_PASSWORD = "65UYNKZDK5U6693H";
 	const API_SIGNATURE = "AFcWxV21C7fd0v3bYYYRCpSSRl31ACQ1eMMOp7T4yG61isoUhiHOu8SG";
-	const PP_RETURN = "http://www.craftstats.com/promote.php?paypal=paid";
-	const PP_CANCEL = "http://www.craftstats.com/promote.php?paypal=cancel";
+	
+	public pp_return = "http://www.craftstats.com/promote.php?paypal=paid";
+	public pp_cancel = "http://www.craftstats.com/promote.php?paypal=cancel";
 
 	private $endpoint;
 	private $host;
@@ -104,8 +105,8 @@ class PayPal {
 		$data = array(
 		'PAYMENTACTION' =>'Sale',
 		'AMT' =>$amount,
-		'RETURNURL' => self::PP_RETURN,
-		'CANCELURL'  => self::PP_CANCEL,
+		'RETURNURL' => $this->pp_return,
+		'CANCELURL'  => $this->pp_cancel,
 		'DESC'=>$desc,
 		'NOSHIPPING'=>"1",
 		'ALLOWNOTE'=>"1",
