@@ -434,12 +434,12 @@ if(time() > $server['sponsorTime'] && ($instock2 || $instock)){ ?>
 					'Factions',
 					'Roleplaying',
 					'Feed The Beast',
-          				'Prison'
-                			'Parkour'
-          				'Mindcrack'
-          				'Drug'
-          				'PVE'
-          				'Spoutcraft'
+          				'Prison',
+                			'Parkour',
+          				'Mindcrack',
+          				'Drug',
+          				'PVE',
+          				'Spoutcraft',
 					);
 					foreach($options as $o){
 						echo '<option '.($scat == $o ? 'selected="selected"' : '').'>'.$o.'</option>';
