@@ -421,25 +421,25 @@ if(time() > $server['sponsorTime'] && ($instock2 || $instock)){ ?>
 				<div class="four columns"><select name="scat" style="margin:10px;">
 					<?php
 					$options = array(
-					'PVP',
-					'Hardcore',
-					'Hunger Games',
-					'Survival',
 					'Creative',
-					'Vanilla',
-					'Tekkit',
-					'Skyblock',
 					'CTF',
+          				'Drug',
 					'Economy',
 					'Factions',
-					'Roleplaying',
 					'Feed The Beast',
-          				'Prison',
-                			'Parkour',
+					'Hardcore',
+					'Hunger Games',
           				'Mindcrack',
-          				'Drug',
+                			'Parkour',
+          				'Prison',
           				'PVE',
+					'PVP',
+					'Roleplaying',
+					'Skyblock',
           				'Spoutcraft',
+					'Survival',
+					'Tekkit',
+					'Vanilla',
 					);
 					foreach($options as $o){
 						echo '<option '.($scat == $o ? 'selected="selected"' : '').'>'.$o.'</option>';
