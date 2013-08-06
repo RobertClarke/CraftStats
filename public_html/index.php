@@ -1,5 +1,4 @@
-<?php 
-
+<?php
 include '../inc/global.inc.php';
 $index = true;
 $stats = $database->query("SELECT * FROM sitegrowth ORDER BY time DESC LIMIT 10");
@@ -79,6 +78,52 @@ FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 AND spons
 	}
 	?>
 
+	<?php $sponsoredp = $database->query("SELECT 
+  ID as sid, country, category,
+  name, ip, advCheck,
+  connPlayers AS cp, maxPlayers AS mp, version, motd, lastUpdate, uptimeavg, ranking, bannerurl
+FROM servers WHERE bannerpromo > UNIX_TIMESTAMP() AND blacklisted != 1 AND game = 'minecraft' ORDER BY ranking ASC LIMIT 3");
+			foreach($sponsoredp as $sp){
+?>
+	<div class="row">
+			<div class="twelve columns centered">
+				<div class="twelve columns box">
+					
+					<div style="float:left;margin:10px 0px;">
+					<h5 style="margin:0px;">
+					<?php echo ($sp['name'] ? $sp['name'] : $sp['ip'])?>
+					</h5>
+					
+					<span class="subtitle"><?php echo $sp['cp'].'/'.$sp['mp'].' Players - '.$sp['uptimeavg'].'% Uptime'; ?></span><br/>
+					<a href="/server/<?php echo $sp['ip']; ?>" class="button tiny" style="margin-top:5px;">Join Now!</a>
+			</div>
+			<a href="/server/<?php echo $sp['ip']; ?>">
+					<img src="<?php echo $sp['bannerurl']; ?>" style="margin:10px auto;display:block;float:right;border-radius:4px;"/>
+					</a>
+				
+				</div>
+			</div>
+			
+			</div>
+<?php }
+
+if(count($sponsoredp) < 3){
+?>
+
+<div class="row">
+			<div class="twelve columns centered">
+				<div class="twelve columns box">
+					
+					<a href="/promote"><h5 style="text-align:center;margin:20px auto;font-size:14px;">your server here!</h5></a>
+				
+				</div>
+			</div>
+			
+			</div>
+
+<?php
+}
+?>
 	<div class="row table">
           <div class="twelve columns">
             <table class="twelve">

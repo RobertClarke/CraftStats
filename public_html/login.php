@@ -51,8 +51,8 @@ if($_POST['action'] == 'login'){
 }
 
 if($_POST['action'] == 'reset'){
-	$user = $database->query("SELECT * FROM users WHERE username = '$_POST[user]'");
-	if($database->num_rows==0)array_push($errors,'User \''.$_POST['user'].'\' does not exist');
+	$user = $database->query("SELECT * FROM users WHERE username = '$_POST[user]' OR email = '$_POST[user]'");
+	if($database->num_rows==0)array_push($errors,'User does not exist');
 }
 
 if($_POST['action'] == 'resetconfirm' && $_GET['code']){
@@ -160,7 +160,7 @@ $template->show('nav');
 						<?php if($upgrade || $register || $reset){ ?>
 						<div class="row collapse">
 								<div class="eight columns">
-								  <input type="text" name="user" placeholder="Username" />
+								  <input type="text" name="user" placeholder="<?php echo($reset ? 'Username or Email':'Username')?>" />
 								</div>
 								<?php
 									if($reset){

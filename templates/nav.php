@@ -1,4 +1,12 @@
 <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=1397828010439963";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
   <?php global $index; 
   if($index){
 ?>  <div class="featurebg" style="background:url(/images/bigbg<?php echo rand(1,14); ?>.jpg) no-repeat center;background-size:100%;">
@@ -51,7 +59,24 @@
           </div>
 		 
           
-		  <a class="button expand" href="/submit">Add a server</a>
+		  <a class="button expand" href="/submit" >Add a server</a>
+		  <div style="margin-top:13px;margin-left:14px;">
+			<div class="fb-like" data-href="https://www.facebook.com/craftstats" data-width="70" data-layout="button_count" data-show-faces="true" data-send="false"></div>
+
+			<a href="https://twitter.com/craftstats" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @craftstats</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<!-- Place this tag where you want the +1 button to render. -->
+<div class="g-plusone" data-size="medium" data-annotation="none"></div>
+
+<!-- Place this tag after the last +1 button tag. -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+</div>
           <h6 class="subheader">Minecraft Server Categories</h6>
           <div class="row collapse tags">
 		   <a href="/" class="button tiny" >Top Ranked</a>
@@ -93,7 +118,8 @@
             <div class="row collapse ad">
             <a href="mailto:billing@craftstats.com?Subject=Sidebar%20advertisement"><img src="http://placehold.it/200x125"/ alt="Ad Placeholder"></a>
             </div>
-          </div>
+			
+		 </div>
         </div>
       </div>
     </div>

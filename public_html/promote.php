@@ -191,7 +191,23 @@ if($database->num_rows >= 2){
 					</div>
 				</div>
 			</div> 
+		<div class="row" style="padding:20px;">
+			<h3>Banner Auction Promotion</h3>
+			<div style="width:100%;margin-top:15px;color:#777;font-size:14px;padding:15px;border-radius:10px;background:#eee;">
+				Looking to really give your server a boost? Grab one of our highlighted spots. These'll sit right along the top of the page, sure to catch the attention of viewers.
+			</div>
 
+			<div class="row">
+				<div class="seven columns">
+				<img src="/images/bannerprev.png" style="margin-top:10px;border-radius:5px;"/>
+				</div>
+				<div class="five columns" style="padding:10px 40px;">
+					<div class="row">
+						<a href="/promote/bid" class="button expand" >Go to Auction</a>
+					</div>
+				</div>
+			</div>
+		</div> 
 		
 		<div class="row" style="padding:20px;">
 			<h3>Premium Promotion</h3>
