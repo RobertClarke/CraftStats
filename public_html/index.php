@@ -114,7 +114,7 @@ if(count($sponsoredp) < 3){
 			<div class="twelve columns centered">
 				<div class="twelve columns box">
 					
-					<a href="/promote"><h5 style="text-align:center;margin:20px auto;font-size:14px;">your server here!</h5></a>
+					<a href="/promote/bid"><h5 style="text-align:center;margin:20px auto;font-size:14px;">your server here!</h5></a>
 				
 				</div>
 			</div>
