@@ -2,10 +2,9 @@
 set_include_path('/var/www/cstats/');
 $memcache_disable = true;
 include 'inc/global.inc.php';
-
+$auctionid=date('n').'-'.date('Y');
 
 $bids = $database->query("SELECT * FROM promo_bids WHERE auctionID = '$auctionid' ORDER BY amount DESC LIMIT 3");
-$auctionid=date('n').'-'.date('Y');
 
 foreach($bids as $b){
 $user = $database->query("SELECT * FROM users WHERE id = '$b[userID]'",db::GET_ROW);
@@ -20,6 +19,7 @@ $headers = 'From: noreply@craftstats.com'."\r\n";
 $headers  .= 'MIME-Version: 1.0' . "\r\n";
 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 mail($to,$subject,$message,$headers);
+echo $to;
 }
 
 ?>

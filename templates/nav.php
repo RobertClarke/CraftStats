@@ -33,12 +33,12 @@
       </div>
       <div class="row sidebar"> 
          <div class="twelve columns box">
-            <div class="adsection hide-for-small">
+            <div class="adsection hide-for-small" style="margin-bottom:0px;padding-bottom:0px;">
               <div class="row collapse ad">
                <a href="/refer.php?url=cubedhost.org/craftstats"><img alt="CubedHost.org" src="/images/ads/cubedhost.png"/></a> 
               </div> 
             </div>
-          <h6 class="subheader">Find a server</h6>
+          <h6 class="subheader" style="margin-top:0px;">Find a server</h6>
 		  <?php if($_GET['sf']){ ?>
 			<div class="alert-box alert">
 				  Server not found

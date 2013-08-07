@@ -5,9 +5,7 @@ include '../inc/global.inc.php';
 if($_SESSION['username'] == ''){
 	header("Location: /login?post=/promote/bid");
 }
-$template->setTitle('Banner Auction');
-$template->show('header');
-$template->show('nav');
+
 
 
 $auctionend = mktime(0,0,0,date("n"),24);
@@ -18,6 +16,7 @@ if(time() > $auctionend){
 }else{
 	$running = true;
 }
+
 
 if($_POST['ip']){
 	$sv = $database->query("SELECT * FROM servers WHERE ((resolved = '$_POST[ip]' AND resolved != '') OR ip = '$_POST[ip]') AND game = 'minecraft'",db::GET_ROW);
@@ -37,50 +36,64 @@ foreach($bids as $b){
 if($_POST['bid']){
 	if(!is_numeric($_POST['bid'])){
 		$badbid=true;
-	}elseif($_POST['bid'] < $startbid){
+	}
+	
+	if($_POST['bid'] < $startbid){
 		$invalidbid = true;
-	}elseif($_POST['ip'] && $svvalid){
+	}
+	
+	if($_POST['ip'] && $svvalid){
 		$time = time();
-		$database->query("INSERT INTO promo_bids VALUES ('','$auctionid','$time','$_SESSION[id]','$_POST[ip]','$_POST[bid]','')");
+		$database->query("INSERT INTO promo_bids VALUES ('','$auctionid','$time','$_SESSION[id]','$_POST[ip]','$_POST[bid]','','','','')");
 		$bids = $database->query("SELECT * FROM promo_bids WHERE auctionID = '$auctionid' ORDER BY amount DESC LIMIT 3");
 		foreach($bids as $b){
-			$startbid = max($startbid,$b['amount']+10);
+			$startbid = max($startbid,($b['amount']+10));
 		}
 	}
 }
 
+
 if($_GET['pay']){
-	$bid = $database->query("SELECT * FROM promo_bids WHERE won = 1 AND id = '$_GET[pay]'",db::GET_ROW);
-	if($database->num_rows == 0)header('Location: /promote/bid');exit;
+	$bid = $database->query("SELECT * FROM promo_bids WHERE won = '1' AND id = '$_GET[pay]' AND auctionID = '$auctionid'",db::GET_ROW);
+	if($database->num_rows == 0){
+		header('Location: /promote/bid');
+	}
+	include '../lib/httprequest.php';
+	include '../lib/paypal.php';
 	
-	$server = $database->query("SELECT * FROM servers WHERE ID = '$bid[serverID]'",db::GET_ROW);
-	require_once( '../lib/httprequest.php' );
-	require_once( '../lib/paypal.php' );
+
 	$r = new PayPal(true);
 	$r->pp_return = 'http://craftstats.com/bid?pp=paid';
 	$r->pp_cancel = 'http://craftstats.com/promote/bid';
-	$ret = $r->doExpressCheckout($bid['amount'], '30 day banner promotion for '.$server['ip']);
-	if ($ret['ACK'] == 'Success') {
+	$ret = $r->doExpressCheckout($bid['amount'], '30 day banner promotion for '.$bid['serverIP']);
+
+	if($ret['ACK'] == 'Success'){
 		$token = $ret['TOKEN'];
 		$database->query("UPDATE promo_bids SET token = '$token' WHERE id = '$bid[id]'");
-		exit;
 	}
 }
 
-if($_GET['pp'] == 'paid'){
+if($_GET['pp'] == 'paid' && $_GET['ttoken']){
 	require_once( '../lib/httprequest.php' );
 	require_once( '../lib/paypal.php' );
 	$r = new PayPal(true);
-	$final = $r->doPayment();
-	if ($final['ACK'] == 'Success') {
+	if(!$_GET['ttoken'])$final = $r->doPayment();
+	if ($final['ACK'] == 'Success' || $_GET['ttoken']) {
 		$token = $final['TOKEN'];
-		$bid = $database->query("SELECT * FROM promo_bids WHERE token = '$token'",db::GET_ROW);
-		$server = $database->query("SELECT * FROM servers WHERE ID = '$bid[serverID]'",db::GET_ROW);
+		if($_GET['ttoken'])$token = $_GET['ttoken'];
+		$database->query("UPDATE promo_bids SET paid = 1 WHERE token = '$token'",db::GET_ROW);
 		$stime = (60*60*24*30) + time();
-		$database->query("UPDATE servers SET bannerpromo = $stime WHERE ID = '$server[ID]'");
 		$haspaid=true;
 	}
 }
+$template->setHeadScripts('<script> 
+		if (window != top) { 
+	          top.location.replace(document.location); 
+		} 
+	   </script> ');
+$template->setTitle('Banner Auction');
+$template->show('header');
+$template->show('nav');
 ?>
 <div class="row">
 	<div class="twelve columns">
@@ -103,7 +116,7 @@ if($_GET['pp'] == 'paid'){
 if($haspaid){
 ?>
 <div class="alert-box success"  style="margin-top:20px;">
-	You've successfully paid for your bid. Your server promotion will start shortly.
+	You've successfully paid for your bid. Your server promotion will start at the beginning of next month.
 	</div>
 <?php
 }

@@ -48,8 +48,8 @@ class PayPal {
 	const API_PASSWORD = "65UYNKZDK5U6693H";
 	const API_SIGNATURE = "AFcWxV21C7fd0v3bYYYRCpSSRl31ACQ1eMMOp7T4yG61isoUhiHOu8SG";
 	
-	public pp_return = "http://www.craftstats.com/promote.php?paypal=paid";
-	public pp_cancel = "http://www.craftstats.com/promote.php?paypal=cancel";
+	public $pp_return = "http://www.craftstats.com/promote.php?paypal=paid";
+	public $pp_cancel = "http://www.craftstats.com/promote.php?paypal=cancel";
 
 	private $endpoint;
 	private $host;
