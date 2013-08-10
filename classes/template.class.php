@@ -15,6 +15,7 @@
     public $onloadscript;
     public $headscripts;
     public $content;
+	public $keys;
     private $assets;
   
     public function __construct($db,$logger){
@@ -45,6 +46,14 @@
 			$this->desc = 'Find the best Minecraft servers with our minecraft server multiplayer list. Browse detailed information on each server and vote for your favourite server.';  
 		}else{
 			$this->desc = $desc;  
+		}
+    }
+	
+	public function setKeys($keys){
+		if(strlen($keys) < 1){ 
+			$this->keys = 'minecraft servers, mcservers, mc servers, mc server list, minecraft server list, best minecraft servers, minecraft servers list';  
+		}else{
+			$this->keys = $keys.', '.'minecraft servers, mcservers, mc servers, mc server list, minecraft server list, best minecraft servers, minecraft servers list';  
 		}
     }
   

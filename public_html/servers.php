@@ -8,9 +8,11 @@ if($_POST['advc'] == true){
 $data = array();
 
 $server = $database->query("SELECT * FROM servers WHERE (resolved = '$_GET[ip]' AND resolved != '') OR ip = '$_GET[ip]' LIMIT 0,1",db::GET_ROW);
+$sname = $server['name'];
+$scat = $server['category'];
+$template->setDesc(($sname != '' ? $sname.'. ':$server['ip'].'. ').''.$server['connPlayers'].' players online. '.($scat != '' ? 'Minecraft '.($server['version'] != '' ? $server['version'].' ' : '').''.$scat.' server. ':'').'Come join one of the minecraft servers on CraftStats today!');
 
-$template->setDesc(($sname != '' ? $sname.'. ':$server['ip'].'. ').''.$server['connPlayers'].' players online. '.($scat != '' ? 'Minecraft '.$scat.' server. ':'').'Vote for '.($sname != '' ? $sname.'. ':$server['ip']).' now!');
-
+$template->setKeys(($scat != '' ? 'minecraft '.$scat.' server, ':'').($scat != '' ? 'mc '.$scat.' server, ':'').' minecraft '.($server['version'] != '' ? $server['version'].' ' : '').'servers, '.($scat != '' ? 'minecraft '.$server['version'].' '.$scat.' servers, ':'').' '.($scat != '' ? 'minecraft '.$server['version'].' '.$scat.' server ':''));
 if($server[blacklisted] == 1)
 {
 	header('Location: http://craftstats.com/?blacklist=1');
@@ -24,8 +26,8 @@ $owner = $database->query("SELECT * FROM serverowners WHERE userID = '$_SESSION[
 if($database->num_rows >= 1){
 	$isowner = true;
 }}
-$scat = $server['category'];
-$sname = $server['name'];
+
+
 $bannerurl = $server['bannerurl'];
 if($isowner && $_POST['scat']){
 	$database->query("UPDATE servers SET category = '$_POST[scat]', name = '$_POST[sname]', bannerurl='$_POST[bannerurl]' WHERE ID = $server[ID]");

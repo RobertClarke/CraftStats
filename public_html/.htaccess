@@ -41,6 +41,7 @@ RewriteRule ^version/([^/]+)?$ index.php?version=$1 [L]
 RewriteRule ^category/([^/]+)/p/([^/]+)?$ index.php?cat=$1&p=$2 [L]
 RewriteRule ^category/([^/]+)?$ index.php?cat=$1 [L]
 RewriteRule ^promote/bid?$ bid.php [L]
+RewriteRule ^login/reset?$ login.php?fp=1 [L]
 
 # Externally redirect direct client requests for .php files to non-.php URLs
 rewriteCond %{THE_REQUEST} ^GET\ /([^/]+/)*[^.]+\.php(\?[^\ ]*)?\ HTTP/

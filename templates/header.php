@@ -13,7 +13,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="Lang" content="en">
   <meta name="description" content="<?php echo $this->desc; ?>">
-  <meta name="keywords" content="minecraft servers, mcservers, mc servers, mc server list, minecraft server list, best minecraft servers, minecraft servers list">
+  <meta name="keywords" content="<?php echo $this->keys; ?>">
   <title><?php echo $this->title; ?></title>
 
   

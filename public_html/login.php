@@ -188,7 +188,7 @@ $template->show('nav');
 								</div>
 								<?php if(!$upgrade && !$register && !$resetconfirm){ ?>
 								<div class="twelve columns">
-									<a href="/login?fp=1" style="font-size:12px;">Forgot your password?</a>
+									<a href="/login/reset" style="font-size:12px;">Forgot your password?</a>
 								</div>
 								<?php } }?>
 						</div>
