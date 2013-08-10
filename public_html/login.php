@@ -51,8 +51,12 @@ if($_POST['action'] == 'login'){
 }
 
 if($_POST['action'] == 'reset'){
-	$user = $database->query("SELECT * FROM users WHERE username = '$_POST[user]' OR email = '$_POST[user]'");
-	if($database->num_rows==0)array_push($errors,'User does not exist');
+	if($user == ''){
+		$user = $database->query("SELECT * FROM users WHERE username = '$_POST[user]' OR email = '$_POST[user]'");
+		if($database->num_rows==0)array_push($errors,'User does not exist');
+	}else{
+		array_push($errors,'User does not exist');
+	}
 }
 
 if($_POST['action'] == 'resetconfirm' && $_GET['code']){
@@ -112,7 +116,7 @@ if($_POST['action'] && $_POST['action'] != 'reset' && count($errors) == 0){
 
 
 
-$template->setTitle(($_GET['r'] ? 'Register':($_GET['u'] ? 'Upgrade Account' : 'Login')));
+$template->setTitle(($reset? 'Reset Password' : ($_GET['r'] ? 'Register':($_GET['u'] ? 'Upgrade Account' : 'Login'))));
 $template->show('header');
 $template->show('nav');
 ?>
