@@ -192,7 +192,7 @@ if($database->num_rows >= 2){
 				</div>
 			</div> 
 		<div class="row" style="padding:20px;">
-			<h3>Banner Auction Promotion</h3>
+			<h3>*NEW!* Banner Auction Promotion</h3>
 			<div style="width:100%;margin-top:15px;color:#777;font-size:14px;padding:15px;border-radius:10px;background:#eee;">
 				Looking to really give your server a boost? Grab one of our highlighted spots. These'll sit right along the top of the page, sure to catch the attention of viewers.
 			</div>
