@@ -430,6 +430,7 @@ if(time() > $server['sponsorTime'] && ($instock2 || $instock)){ ?>
 					'Factions',
 					'Feed The Beast',
 					'Hardcore',
+					'Hub',
 					'Hunger Games',
           				'Mindcrack',
                 			'Parkour',
