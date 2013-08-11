@@ -170,7 +170,7 @@ if($database->num_rows >= 2){
 					<div class="five columns" style="padding:10px 40px;">
 						<div class="row">
 							<h5 style="text-align:center;margin-bottom:-10px;" >One Week</h5>
-							<h5 style="text-align:center;color:#3A87AD;font-size:42px;font-weight:bold;">$20</h5>
+							<h5 style="text-align:center;color:#3A87AD;font-size:42px;font-weight:bold;">$40</h5>
 							<?php echo ($instock?'<form class="form-inline" action="/promote" method="post">':''); ?>
 								<input type="hidden" name="buyi" value="1">
 								<input type="text" name="promoip" class="input-medium" placeholder="Server IP"  value="<?php if($_POST['buym'] == 1)echo $_POST['promoip'];  if($_GET['ip'])echo $_GET['ip']; ?>">
@@ -179,7 +179,7 @@ if($database->num_rows >= 2){
 						</div>
 						<div class="row">
 							<h5 style="text-align:center;margin-bottom:-10px;">Two Weeks</h5>
-							<h5 style="text-align:center;color:#3A87AD;font-size:42px;font-weight:bold;">$35</h5>
+							<h5 style="text-align:center;color:#3A87AD;font-size:42px;font-weight:bold;">$70</h5>
 							<?php echo ($instock?'<form class="form-inline" action="/promote" method="post">':''); ?>
 							
 								<input type="hidden" name="buyi" value="2">
@@ -224,7 +224,7 @@ if($database->num_rows >= 2){
 				<div class="five columns" style="padding:10px 40px;">
 					<div class="row">
 						<h5 style="text-align:center;margin-bottom:-10px;" >One Week</h5>
-						<h5 style="text-align:center;color:#3A87AD;font-size:42px;font-weight:bold;">$50</h5>
+						<h5 style="text-align:center;color:#3A87AD;font-size:42px;font-weight:bold;">$100</h5>
 						<?php echo ($instock2?'<form class="form-inline" action="/promote" method="post">':''); ?>
 							<input type="hidden" name="buyi" value="3">
 							<input type="text" name="promoip" class="input-medium" placeholder="Server IP"  value="<?php if($_POST['buym'] == 3)echo $_POST['promoip']; if($_GET['ip'])echo $_GET['ip']; ?>">
@@ -233,7 +233,7 @@ if($database->num_rows >= 2){
 					</div>
 					<div class="row">
 						<h5 style="text-align:center;margin-bottom:-10px;">Two Weeks</h5>
-						<h5 style="text-align:center;color:#3A87AD;font-size:42px;font-weight:bold;">$90</h5>
+						<h5 style="text-align:center;color:#3A87AD;font-size:42px;font-weight:bold;">$180</h5>
 						<?php echo ($instock2?'<form class="form-inline" action="/promote" method="post">':''); ?>
 						
 							<input type="hidden" name="buyi" value="4">
