@@ -23,8 +23,7 @@ if($_POST['buyi'] > 0 && $svvalid){
 	require_once( '../lib/httprequest.php' );
 	require_once( '../lib/paypal.php' );
 	$r = new PayPal(true);
-	
-	$prices = array(1=>20,2=>35,3=>50,4=>90,5=>20,6=>35);
+	$prices = array(1=>40,2=>70,3=>100,4=>180,5=>20,6=>35);
 	$week = array(1=>1,2=>2,3=>1,4=>2,5=>1,6=>2);
 	$type = ($_POST['buyi'] > 4 ? 2 :($_POST['buyi']>2 ? 1:0));
 	
