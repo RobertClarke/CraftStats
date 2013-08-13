@@ -95,7 +95,7 @@ $template->setHeadScripts('<script>
 	          top.location.replace(document.location); 
 		} 
 	   </script> ');
-
+$template->setKeys('minecraft advertising, more minecraft players ');
 $template->setTitle('Promote a Minecraft Server');
 $template->show('header');
 $template->show('nav');

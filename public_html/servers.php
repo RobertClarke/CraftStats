@@ -10,7 +10,7 @@ $data = array();
 $server = $database->query("SELECT * FROM servers WHERE (resolved = '$_GET[ip]' AND resolved != '') OR ip = '$_GET[ip]' LIMIT 0,1",db::GET_ROW);
 $sname = $server['name'];
 $scat = $server['category'];
-$template->setDesc(($sname != '' ? $sname.'. ':$server['ip'].'. ').''.$server['connPlayers'].' players online. '.($scat != '' ? 'Minecraft '.($server['version'] != '' ? $server['version'].' ' : '').''.$scat.' server. ':'').'Come join one of the minecraft servers on Minecraft Servers today!');
+$template->setDesc($server['ip'].' | '.($sname != '' ? $sname.' | ':'').''.$server['connPlayers'].' players online | '.($scat != '' ? 'Minecraft '.($server['version'] != '' ? $server['version'].' ' : '').''.$scat.' server | ':'').'Come join one of the minecraft servers on Minecraft Servers today!');
 
 $template->setKeys(($scat != '' ? 'minecraft '.$scat.' server, ':'').($scat != '' ? 'mc '.$scat.' server, ':'').' minecraft '.($server['version'] != '' ? $server['version'].' ' : '').'servers, '.($scat != '' ? 'minecraft '.$server['version'].' '.$scat.' servers, ':'').' '.($scat != '' ? 'minecraft '.$server['version'].' '.$scat.' server ':''));
 if($server[blacklisted] == 1)
@@ -385,10 +385,12 @@ if(time() > $server['sponsorTime'] && ($instock2 || $instock)){ ?>
 			
 			
 		</div>
-		<div class="twelve columns box" ><h4>Votifier Settings</h4>
+		<div class="twelve columns box" ><h4>Server Settings</h4>
 		
-		<span style="font-size:12px;"><b>Currently:</b> <?php echo ($server['votifierIP'] == '' ? 'Not set :(' : $server['votifierIP'].':'.$server['votifierPort'])?> </span><br/><br/>
-		<?php if($isowner){ ?><br/><form action="/server/<?php echo $server['ip']; ?>" method="post">
+		<span style="font-size:12px;">
+		<?php if($isowner){ ?>.
+		<b>Votifier Settings:</b> <?php echo ($server['votifierIP'] == '' ? 'Not set :(' : $server['votifierIP'].':'.$server['votifierPort'])?> </span><br/><br/>
+		<br/><form action="/server/<?php echo $server['ip']; ?>" method="post">
 		<div class="row">
 			<div class="four columns">
 				<input name="votip" type="text" placeholder="votifier IP address"/>
@@ -469,7 +471,7 @@ if(time() > $server['sponsorTime'] && ($instock2 || $instock)){ ?>
 			</form>
 			
 			<?php }else{ ?>
-		<span style="font-size:12px;">Claim this server or login to update votifier settings.</span><br/><br/>
+		<span style="font-size:12px;">Claim this server or login to update settings.</span><br/><br/>
 		<?php } ?>
 		</div>
 		<?php }else{

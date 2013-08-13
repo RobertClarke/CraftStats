@@ -29,7 +29,7 @@ $bids = $database->query("SELECT * FROM promo_bids WHERE auctionID = '$auctionid
 
 $startbid = 100;
 foreach($bids as $b){
-	$startbid = max($startbid,$b['amount']+10);
+	$startbid = max($startbid,($b['amount']+max(10,(floor($b['amount']/10)))));
 }
 
 
@@ -40,14 +40,17 @@ if($_POST['bid']){
 	
 	if($_POST['bid'] < $startbid){
 		$invalidbid = true;
-	}
+	}else{
 	
-	if($_POST['ip'] && $svvalid){
-		$time = time();
-		$database->query("INSERT INTO promo_bids VALUES ('','$auctionid','$time','$_SESSION[id]','$_POST[ip]','$_POST[bid]','','','','')");
-		$bids = $database->query("SELECT * FROM promo_bids WHERE auctionID = '$auctionid' ORDER BY amount DESC LIMIT 3");
-		foreach($bids as $b){
-			$startbid = max($startbid,($b['amount']+10));
+		if($_POST['ip'] && $svvalid){
+			$time = time();
+			$database->query("DELETE FROM promo_bids WHERE auctionID = '$auctionid' AND serverIP = '$_POST[ip]'");
+			$database->query("INSERT INTO promo_bids VALUES ('','$auctionid','$time','$_SESSION[id]','$_POST[ip]','$_POST[bid]','','','','')");
+			$bids = $database->query("SELECT * FROM promo_bids WHERE auctionID = '$auctionid' ORDER BY amount DESC LIMIT 3");
+
+			foreach($bids as $b){
+				$startbid = max($startbid,($b['amount']+max(10,(floor($b['amount']/10)))));
+			}
 		}
 	}
 }

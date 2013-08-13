@@ -47,6 +47,13 @@ foreach($vp as $vn => $p){
 }
 
 $database->query("INSERT INTO sitegrowth VALUES ($time,$players,$servers,$plugins,$events)");
+
+$fails = $database->query("SELECT ip FROM servers GROUP BY ip HAVING count(*) > 1");
+foreach($fails as $f){
+	$database->query("DELETE FROM servers WHERE updatingBy != '' AND lastUpdate = 0 AND ip = '$f[ip]'");
+	//this is a temp fix to remove server dupes. Real fix would be to change slaves to update based on ID, not IP or prevent dupes from occuring in the first place
+}
+
 /*
 foreach($database->query("SELECT * FROM badges") as $badge){
 	if($badge['ID'] >= 6 && $badge['ID'] <= 9){
