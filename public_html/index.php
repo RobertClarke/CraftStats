@@ -12,7 +12,7 @@ if(strtolower($_GET['cat']) == 'reliable'){
 if(strtolower($_GET['cat']) == 'active'){
 	$_GET['cat'] = 'Active';
 }
-$template->setTitle(($_GET['version'] ? $_GET['version'].' Minecraft Servers' : ($_GET['cat'] ? $_GET['cat'].' Minecraft Servers':'Minecraft Servers')));
+$template->setTitle(($_GET['version'] ? $_GET['version'].' Minecraft Servers' : ($_GET['cat'] ? $_GET['cat'].' Minecraft Servers':'Best Minecraft Servers List')));
 if($_GET['version']){
 	$template->setdesc('A list of the best Minecraft '.$_GET['version'].' servers for you to play on with your friends. These include '.$_GET['version'].' PVP Minecraft servers.');
 }
