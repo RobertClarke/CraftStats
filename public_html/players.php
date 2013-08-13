@@ -200,7 +200,7 @@ if($database->num_rows != 0){
 }*/
 
 $template->setTitle($playername);
-$template->setDesc($playername.' likes to play minecraft! Check out their stats and achievements on CraftStats.com');
+$template->setDesc($playername.' likes to play minecraft! Check out their stats and achievements on MinecraftServers.com');
 }
 $template->show('header');
 $template->show('nav');
