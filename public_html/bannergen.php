@@ -169,7 +169,7 @@ if(!$cache){
 		$uptime = 'SERVER  OFFLINE';
 	}
 
-	$craftstats = 'TRACKED BY CRAFTSTATS.COM';
+	$craftstats = 'TRACKED BY MINECRAFTSERVERS.COM';
 
 	imagettftext($image, 22, 0 , 4, 32, $titlecol, $bigtext, $servername);
 	imagettftext($image, 15, 0 , 4, 68, $playerscol, $bigtext, $players);

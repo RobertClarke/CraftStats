@@ -33,9 +33,9 @@
     
     public function setTitle($title){
 		if(strlen($title) < 1){ 
-			$this->title = 'CraftStats.com';  
+			$this->title = 'Minecraft Servers';  
 		}else{
-			$this->title = $title.' | CraftStats.com';  
+			$this->title = $title.' | Minecraft Servers';  
 		}
 		$this->logger->log('template', 'title', $this->title, 'template');
       

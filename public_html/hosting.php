@@ -8,7 +8,7 @@ $h = $database->query("SELECT * FROM hosts WHERE slug = '$_GET[slug]'",db::GET_R
 	if($database->num_rows == 0){
 		header("Location: /hosting");
 	}else{
-		$template->setDesc($h['name'].' is a Minecraft server hosting provider featured on CraftStats, you can use this hosting provider to create your own minecraft server');
+		$template->setDesc($h['name'].' is a Minecraft server hosting provider featured on Minecraft Servers, you can use this hosting provider to create your own minecraft server');
 	}
 }
 

@@ -10,12 +10,12 @@ $data = array();
 $server = $database->query("SELECT * FROM servers WHERE (resolved = '$_GET[ip]' AND resolved != '') OR ip = '$_GET[ip]' LIMIT 0,1",db::GET_ROW);
 $sname = $server['name'];
 $scat = $server['category'];
-$template->setDesc(($sname != '' ? $sname.'. ':$server['ip'].'. ').''.$server['connPlayers'].' players online. '.($scat != '' ? 'Minecraft '.($server['version'] != '' ? $server['version'].' ' : '').''.$scat.' server. ':'').'Come join one of the minecraft servers on CraftStats today!');
+$template->setDesc(($sname != '' ? $sname.'. ':$server['ip'].'. ').''.$server['connPlayers'].' players online. '.($scat != '' ? 'Minecraft '.($server['version'] != '' ? $server['version'].' ' : '').''.$scat.' server. ':'').'Come join one of the minecraft servers on Minecraft Servers today!');
 
 $template->setKeys(($scat != '' ? 'minecraft '.$scat.' server, ':'').($scat != '' ? 'mc '.$scat.' server, ':'').' minecraft '.($server['version'] != '' ? $server['version'].' ' : '').'servers, '.($scat != '' ? 'minecraft '.$server['version'].' '.$scat.' servers, ':'').' '.($scat != '' ? 'minecraft '.$server['version'].' '.$scat.' server ':''));
 if($server[blacklisted] == 1)
 {
-	header('Location: http://craftstats.com/?blacklist=1');
+	header('Location: http://minecraftservers.com/?blacklist=1');
 	exit;
 }
 $database->query("SELECT * FROM users WHERE id = '$_SESSION[id]' AND admin = 1");

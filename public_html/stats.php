@@ -114,7 +114,7 @@ $template->show('footer');
 	font-size:14px !important;
 }
 </style>
-<h1 style="position:absolute;top:20px;left:20px;">CraftStats Server Activity</h1> 
+<h1 style="position:absolute;top:20px;left:20px;">Minecraft Server Activity</h1> 
 
 <h3 style="position:absolute;top:20px;left:250px;">currently averaging <span class="srate">0</span> servers/min (each server updated every <span class="ptrate">0</span> minutes)</h3>
 
