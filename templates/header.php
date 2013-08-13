@@ -5,7 +5,6 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
   <meta charset="utf-8" />
-  <meta name="google-site-verification" content="c6waMbcfpptiM7JdeJnTwJrtFl5FZoGO16DVCKTxPVs" />
 
   <!-- Set the viewport width to device width for mobile -->
   <meta name="viewport" content="width=device-width" />
@@ -52,7 +51,7 @@
   <script type="text/javascript">
 
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-17509155-7']);
+  _gaq.push(['_setAccount', 'UA-8521263-24']);
     _gaq.push(['_setSiteSpeedSampleRate', 10]);
   _gaq.push(['_trackPageview']);
 
