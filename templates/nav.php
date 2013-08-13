@@ -146,7 +146,7 @@
                   <a href="/promote">get more players</a>
                 </li>
                 <li>
-                  <a href="/refer.php?url=imc.io#cstatsheader">start a server</a>
+                  <a href="/refer.php?url=imc.io#mcserversheader">start a server</a>
                 </li>
                 <!--<li>
                   <a href="/refer.php?url=enjin.com/minecraft-websites">create a site</a>
