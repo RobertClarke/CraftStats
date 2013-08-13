@@ -53,7 +53,7 @@ if($_POST['changeIP'] && $isowner && $_SESSION['mcuser'] == 'Chris1056'){
 
 if($_POST['blcklst'] && $isowner){
 	$database->query("UPDATE servers SET blacklisted = '1' WHERE ID = $server[ID]");
-	header('Location: http://craftstats.com/?blacklist=2');
+	header('Location: http://minecraftservers.com/?blacklist=2');
 	exit;
 }
 
@@ -379,9 +379,9 @@ if(time() > $server['sponsorTime'] && ($instock2 || $instock)){ ?>
 				</ul>
 			</div>
 
-			<b>Direct:</b> <div class="panel embed"><?php echo 'http://craftstats.com/banner/'.$server['ip'];?><span class="bannerpost"></span></div>
+			<b>Direct:</b> <div class="panel embed"><?php echo 'http://minecraftservers.com.com/banner/'.$server['ip'];?><span class="bannerpost"></span></div>
 			<b>HTML:</b><div class="panel embed">&lt;a href="<?php echo 'http://cstats.co/'.$server['ip'];?>" title="<?php echo $server['ip']; ?>"&gt;&lt;img src="<?php echo 'http://craftstats.com/banner/'.$server['ip'];?><span class="bannerpost"></span>" alt="<?php echo $server['ip']; ?>" /&gt;&lt;/a&gt;</div>
-			<b>BBCode:</b> <div class="panel embed">[url=<?php echo 'http://cstats.co/'.$server['ip'];?>][img]<?php echo 'http://craftstats.com/banner/'.$server['ip'];?><span class="bannerpost"></span>[/img][/url]</div>
+			<b>BBCode:</b> <div class="panel embed">[url=<?php echo 'http://cstats.co/'.$server['ip'];?>][img]<?php echo 'http://minecraftservers.com/banner/'.$server['ip'];?><span class="bannerpost"></span>[/img][/url]</div>
 			
 			
 		</div>
