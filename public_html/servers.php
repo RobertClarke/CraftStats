@@ -380,7 +380,7 @@ if(time() > $server['sponsorTime'] && ($instock2 || $instock)){ ?>
 			</div>
 
 			<b>Direct:</b> <div class="panel embed"><?php echo 'http://minecraftservers.com/banner/'.$server['ip'];?><span class="bannerpost"></span></div>
-			<b>HTML:</b><div class="panel embed">&lt;a href="<?php echo 'http://cstats.co/'.$server['ip'];?>" title="<?php echo $server['ip']; ?>"&gt;&lt;img src="<?php echo 'http://craftstats.com/banner/'.$server['ip'];?><span class="bannerpost"></span>" alt="<?php echo $server['ip']; ?>" /&gt;&lt;/a&gt;</div>
+			<b>HTML:</b><div class="panel embed">&lt;a href="<?php echo 'http://cstats.co/'.$server['ip'];?>" title="<?php echo $server['ip']; ?>"&gt;&lt;img src="<?php echo 'http://minecraftservers.com/banner/'.$server['ip'];?><span class="bannerpost"></span>" alt="<?php echo $server['ip']; ?>" /&gt;&lt;/a&gt;</div>
 			<b>BBCode:</b> <div class="panel embed">[url=<?php echo 'http://cstats.co/'.$server['ip'];?>][img]<?php echo 'http://minecraftservers.com/banner/'.$server['ip'];?><span class="bannerpost"></span>[/img][/url]</div>
 			
 			
