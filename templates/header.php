@@ -34,7 +34,7 @@
   <script src="/javascripts/modernizr.foundation.js"></script>
   <script type="text/javascript">
   var GoSquared = {};
-  GoSquared.acct = "GSN-354646-Z";
+  GoSquared.acct = "GSN-036970-B";
   (function(w){
     function gs(){
       w._gstc_lt = +new Date;
