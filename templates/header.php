@@ -71,6 +71,6 @@
 		});
 	});
   </script>
-<link rel="shortcut icon" href="http://craftstats.com/images/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="http://minecraftservers.com/images/favicon.ico" type="image/x-icon" />
   <?php echo $this->headscripts; ?>
 </head>
