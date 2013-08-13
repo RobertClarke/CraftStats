@@ -8,7 +8,7 @@ echo 'currently tracking <div class="spinner0 spinner"></div> players on <div cl
 	<div style="margin:10px auto;display:block;width:300px;height:250px;" />
 		<script type="text/javascript"><!--
 			google_ad_client = "ca-pub-8782622759360356";
-			/* CraftStats Home Large Square */
+			/* Minecraft Servers Home Large Square */
 			google_ad_slot = "9484045437";
 			google_ad_width = 300;
 			google_ad_height = 250;
@@ -24,7 +24,7 @@ echo 'currently tracking <div class="spinner0 spinner"></div> players on <div cl
 <div style="float:right;margin:20px 20px 30px 20px;width:468px;height:60px;">
 	<script type="text/javascript"><!--
 	google_ad_client = "ca-pub-8782622759360356";
-	/* CraftStats */
+	/* Minecraft Servers */
 	google_ad_slot = "0756285012";
 	google_ad_width = 468;
 	google_ad_height = 60;
