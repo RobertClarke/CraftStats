@@ -55,7 +55,7 @@ while(!stristr(($file = file_get_html('https://minestatus.net/?page='.$p)),'No s
 					if($s['ID'] != ''){
 						$worked = file_put_contents('/var/www/cstats/public_html/images/banners/'.$s['ID'].'.png', file_get_contents($banner));
 						if($worked){
-							$database->query("UPDATE servers SET bannerurl='http://craftstats.com/images/banners/$s[ID].png' WHERE ID = '$s[ID]'");
+							$database->query("UPDATE servers SET bannerurl='http://minecraftservers.com/images/banners/$s[ID].png' WHERE ID = '$s[ID]'");
 						}
 					}
 				}
