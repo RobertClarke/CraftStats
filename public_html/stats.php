@@ -80,7 +80,7 @@ $template->setHeadScripts('<script type="text/javascript" src="https://www.googl
         ]);
 
         var options = {
-          title: \'CraftStats Server Activity\',
+          title: \'MinecraftServers.com Server Activity\',
 		  focusTarget: \'category\',
 		  curveType: "function",
 		  interpolateNulls: false,
