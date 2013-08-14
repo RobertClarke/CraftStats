@@ -102,7 +102,6 @@ $template->setHeadScripts('<script>
 	   </script> ');
 $template->setKeys('minecraft advertising, more minecraft players ');
 $template->setTitle('Promote a Minecraft Server');
-<?php echo ($_GET['ip'] ? 'Sponsor '.$_GET['ip'] : 'Promote a Minecraft Server'); ?>
 $template->show('header');
 $template->show('nav');
 ?>
