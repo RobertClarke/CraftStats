@@ -64,13 +64,13 @@ if($_GET['paypal'] == 'paid' || $_GET['ttoken']){
 			}else{
 				$sv = $database->query("SELECT * FROM servers WHERE game = 'minecraft' AND ID = '$order[serverID]'",db::GET_ROW);
 				$responses = array(
-				'Check out this server! http://minecraftservers.com/server/'.$sv['ip'],
-				'Congrats to these guys for becoming sponsored at MinecraftServers.com! http://minecraftservers.com/server/'.$sv['ip'],
+				'Check out this server http://minecraftservers.com/server/'.$sv['ip'],
+				'Congrats to these guys for becoming sponsored at MinecraftServers.com http://minecraftservers.com/server/'.$sv['ip'],
 				'Looking for a new Minecraft server to play on? Look no further http://minecraftservers.com/server/'.$sv['ip'],
-				'Awesome new promoted server, check these guys out! http://minecraftservers.com/server/'.$sv['ip'],
+				'Awesome new promoted server be sure to check these guys out http://minecraftservers.com/server/'.$sv['ip'],
 				'We\'ve got another fantastic Minecraft server for you to try out http://minecraftservers.com/server/'.$sv['ip'],
-				'This minecraft server looks pretty awesome! http://minecraftservers.com/server/'.$sv['ip'],
-				'This server looks pretty awesome! http://minecraftservers.com/server/'.$sv['ip'],
+				'This minecraft server looks pretty awesome http://minecraftservers.com/server/'.$sv['ip'],
+				'This server looks pretty awesome http://minecraftservers.com/server/'.$sv['ip'],
 				'This is a great minecraft server http://minecraftservers.com/server/'.$sv['ip']);
 			}
 			$tmhOAuth = new tmhOAuth(array(
