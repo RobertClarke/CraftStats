@@ -16,6 +16,10 @@ $template->setTitle(($_GET['version'] ? $_GET['version'].' Minecraft Servers' : 
 if($_GET['version']){
 	$template->setdesc('A list of the best Minecraft '.$_GET['version'].' servers for you to play on with your friends. These include '.$_GET['version'].' PVP Minecraft servers.');
 }
+if($_GET['cat']){
+	$template->setdesc('A list of the best Minecraft '.$_GET['cat'].' servers for you to play on with your friends. These include '.$_GET['cat'].' Minecraft servers.');
+}
+
 $template->show('header');
 $template->show('nav');
 
