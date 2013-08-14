@@ -71,7 +71,7 @@ if($_GET['paypal'] == 'paid' || $_GET['ttoken']){
 				'We\'ve got another fantastic Minecraft server for you to try out http://minecraftservers.com/server/'.$sv['ip'],
 				'This minecraft server looks pretty awesome! http://minecraftservers.com/server/'.$sv['ip'],
 				'This server looks pretty awesome! http://minecraftservers.com/server/'.$sv['ip'],
-				'This is a great minecraft server :) http://minecraftservers.com/server/'.$sv['ip']);
+				'This is a great minecraft server http://minecraftservers.com/server/'.$sv['ip']);
 			}
 			$tmhOAuth = new tmhOAuth(array(
 					'consumer_key'    => 'LikmqUGSLAAWgZ8zCVC2A',
