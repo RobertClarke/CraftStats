@@ -51,7 +51,7 @@ if($_POST['changeIP'] && $isowner && $_SESSION['mcuser'] == 'Chris1056'){
 }
 */
 
-if($_POST['del'] && $isowner){
+if($isowner && $_GET['tab'] == 'blacklist'){
 	$database->query("UPDATE servers SET blacklisted = '1' WHERE ID = $server[ID]");
 	header('Location: http://minecraftservers.com/?blacklist=2');
 	exit;
@@ -183,6 +183,16 @@ $votes = $database->num_rows;
 		?>
 		<div class="alert-box success" style="margin-top:20px;">
 					You've voted for <?php echo $server['ip']; ?>!
+				</div>
+		<?php
+		
+		}
+	?>
+	<?php 
+	if($_POST['del']){
+		?>
+		<div class="alert-box alert" style="margin-top:20px;">
+					Are you sure you want to delete and blacklist this server? <a href="/server/<?php echo $server['ip']; ?>/blacklist" style="color:#fff;">Click here to continue.</a>
 				</div>
 		<?php
 		
@@ -480,9 +490,10 @@ if(time() > $server['sponsorTime'] && ($instock2 || $instock)){ ?>
 			</form>
 			<form action="/server/<?php echo $server['ip']; ?>" method="post">
 				<div class="row">
+				<div class="four columns offset-by-eight">
 				<input type="hidden" name="del" value="1">
-				<button class="button alert" style="margin-left:10px;margin-top:130px;">Delete/blacklist this server</button>
-
+				<button class="button alert">Delete/blacklist server</button>
+				</div>
 				</div>
 			</form>
 			<?php }else{ ?>
