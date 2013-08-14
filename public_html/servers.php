@@ -10,7 +10,6 @@ $data = array();
 $server = $database->query("SELECT * FROM servers WHERE (resolved = '$_GET[ip]' AND resolved != '') OR ip = '$_GET[ip]' LIMIT 0,1",db::GET_ROW);
 $sname = $server['name'];
 $scat = $server['category'];
-$template->setDesc($server['ip'].' | '.($sname != '' ? $sname.' | ':'').''.$server['connPlayers'].' players online | '.($scat != '' ? 'Minecraft '.($server['version'] != '' ? $server['version'].' ' : '').''.$scat.' server | ':'').'Come join one of the minecraft servers on Minecraft Servers today!');
 
 $template->setKeys(($scat != '' ? 'minecraft '.$scat.' server, ':'').($scat != '' ? 'mc '.$scat.' server, ':'').' minecraft '.($server['version'] != '' ? $server['version'].' ' : '').'servers, '.($scat != '' ? 'minecraft '.$server['version'].' '.$scat.' servers, ':'').' '.($scat != '' ? 'minecraft '.$server['version'].' '.$scat.' server ':''));
 if($server[blacklisted] == 1)
@@ -64,6 +63,13 @@ if($_GET['tab'] == 'vote'){
 }else{
 	$template->setTitle($server['ip']);
 }
+
+if($_GET['tab'] == 'vote'){
+	$template->setDesc('Vote for'.$server['ip'].' | '.($sname != '' ? $sname.' | ':'').''.$server['connPlayers'].' players online | '.($scat != '' ? 'Minecraft '.($server['version'] != '' ? $server['version'].' ' : '').''.$scat.' server | ':'').'Come join one of the minecraft servers on Minecraft Servers today!');
+}else{
+	$template->setDesc($server['ip'].' | '.($sname != '' ? $sname.' | ':'').''.$server['connPlayers'].' players online | '.($scat != '' ? 'Minecraft '.($server['version'] != '' ? $server['version'].' ' : '').''.$scat.' server | ':'').'Come join one of the minecraft servers on Minecraft Servers today!');
+}
+
 if($server['ID'] == ''){
 	header("Location: /?sf=1");exit;
 }
