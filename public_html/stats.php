@@ -1,7 +1,6 @@
 <?php
 include '../inc/global.inc.php';
 $template->setTitle("Statistics");
-$template->setDesc("Minecraft Servers tracks thousands of minecraft servers, and so we have the best minecraft statistics out there. Look at all the online Minecraft players.");
 $template->setHeadScripts('
 <script type="text/javascript">
 window.setInterval(updateStats, 2000);
