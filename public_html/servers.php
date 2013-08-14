@@ -30,7 +30,7 @@ if($database->num_rows >= 1){
 
 $bannerurl = $server['bannerurl'];
 if($isowner && $_POST['scat']){
-	$database->query("UPDATE servers SET category = '$_POST[scat]', name = '$_POST[sname]', bannerurl='$_POST[bannerurl]' WHERE ID = $server[ID]");
+	$database->query("UPDATE servers SET category = '$_POST[scat]',graphshow = '$_POST[gshow]', name = '$_POST[sname]', bannerurl='$_POST[bannerurl]' WHERE ID = $server[ID]");
 	$scat = $_POST['scat'];
 	$sname = $_POST['sname'];
 	$bannerurl = $_POST['bannerurl'];
@@ -51,7 +51,7 @@ if($_POST['changeIP'] && $isowner && $_SESSION['mcuser'] == 'Chris1056'){
 }
 */
 
-if($_POST['blcklst'] && $isowner){
+if($_POST['del'] && $isowner){
 	$database->query("UPDATE servers SET blacklisted = '1' WHERE ID = $server[ID]");
 	header('Location: http://minecraftservers.com/?blacklist=2');
 	exit;
@@ -173,7 +173,7 @@ $votes = $database->num_rows;
 		if($isowner && $_POST['scat']){
 		?>
 		<div class="alert-box success" style="margin-top:20px;">
-					Successfully updated server info!
+					Successfully updated server info. There may be a delay for changes to take effect.
 				</div>
 		<?php
 		
@@ -343,6 +343,7 @@ if(time() > $server['sponsorTime'] && ($instock2 || $instock)){ ?>
 		<?php } ?>
 		</div>
 		<?php } ?>
+		<?php if($server['graphshow']){ ?>
 		<div class="twelve columns box">
 			<div id="chart_div" style="margin:20px 0px;height:<?php echo(count($dpoints)<2?50:300);?>px;width:640px;text-align:center;">
 				<?php if(count($dpoints < 2)){ ?>
@@ -350,7 +351,7 @@ if(time() > $server['sponsorTime'] && ($instock2 || $instock)){ ?>
 				<?php } ?>
 			</div>
 		</div>
-		
+		<?php } ?>
 		<?php if($server['plCache'] != ''){ ?>
 		<div class="twelve columns box" style="padding-bottom:20px;">
 			<h5>Recently Active Players</h5>
@@ -454,6 +455,14 @@ if(time() > $server['sponsorTime'] && ($instock2 || $instock)){ ?>
 				</div>
 				</div>
 				<div class="row">
+				<span style="font-size:12px;"><b>Show graphs</b> </span><br/>
+				<div class="four columns"><select name="gshow" style="margin:10px;">
+				<option <?php echo ($server['graphshow'] == 1 ? 'selected' : '');?> value="1">Yes</option>
+				<option <?php echo ($server['graphshow'] == 0 ? 'selected' : '');?> value="0">No</option>
+				</select>
+				</div>
+				</div>
+				<div class="row">
 					<span style="font-size:12px;"><b>Banner URL (max 600px width)</b> </span><br/>
 				<div class="four columns">
 				<input name="bannerurl" type="text" value="<?php echo $bannerurl; ?>"/>
@@ -469,7 +478,13 @@ if(time() > $server['sponsorTime'] && ($instock2 || $instock)){ ?>
 				</div>
 				</div>
 			</form>
-			
+			<form action="/server/<?php echo $server['ip']; ?>" method="post">
+				<div class="row">
+				<input type="hidden" name="del" value="1">
+				<button class="button alert" style="margin-left:10px;margin-top:130px;">Delete/blacklist this server</button>
+
+				</div>
+			</form>
 			<?php }else{ ?>
 		<span style="font-size:12px;">Claim this server or login to update settings.</span><br/><br/>
 		<?php } ?>

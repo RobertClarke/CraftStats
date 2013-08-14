@@ -1,4 +1,5 @@
 <?php
+$memcache_disable = true;
 include 'inc/global.inc.php';
 $database->query("SELECT * FROM users WHERE id = '$_SESSION[id]' AND admin = 1");
 if($database->num_rows == 0){

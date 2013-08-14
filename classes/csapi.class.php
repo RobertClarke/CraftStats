@@ -602,13 +602,13 @@ class csAPI{
 	
 	private function getAddrByHost($host, $timeout = 1) {
 		if($this->isDomain($host)){
-			$query = `nslookup -timeout=$timeout -retry=1 $host`;
-			if(preg_match('/\nAddress: (.*)\n/', $query, $matches))
-				return trim($matches[1]);
-				
 			$query = `nslookup -type=SRV -timeout=$timeout -retry=1 _minecraft._tcp.$host`;
 			if(preg_match('/service = (\d+) (\d+) (\d+) (.*)./', $query, $matches))
 				return trim($matches[4].':'.$matches[3]);
+				
+			$query = `nslookup -timeout=$timeout -retry=1 $host`;
+			if(preg_match('/\nAddress: (.*)\n/', $query, $matches))
+				return trim($matches[1]);
 		}
 		return false;
 	}
