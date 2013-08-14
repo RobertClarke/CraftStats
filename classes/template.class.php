@@ -43,7 +43,7 @@
 	
 	public function setDesc($desc){
 		if(strlen($desc) < 1){ 
-			$this->desc = 'Find the best Minecraft servers with our minecraft server multiplayer list. Browse detailed information on each server and vote for your favourite server.';  
+			$this->desc = 'Minecraft Servers has a list of the very best Minecraft servers on the internet, including the best pvp, survival, hungers games, and other minecraft servers for you to play and vote on.';  
 		}else{
 			$this->desc = $desc;  
 		}
