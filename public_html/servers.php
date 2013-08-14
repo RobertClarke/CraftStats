@@ -65,7 +65,7 @@ if($_GET['tab'] == 'vote'){
 }
 
 if($_GET['tab'] == 'vote'){
-	$template->setDesc('Vote for '.$server['ip'].' | '.($sname != '' ? $sname.' | ':'').'Come join one of the minecraft servers on Minecraft Servers today!');
+	$template->setDesc('Vote for '.$server['ip'].' | '.($sname != '' ? $sname.' | ':'').'Vote for your favorite minecraft server on Minecraft Servers today!');
 }else{
 	$template->setDesc($server['ip'].' | '.($sname != '' ? $sname.' | ':'').''.$server['connPlayers'].' players online | '.($scat != '' ? 'Minecraft '.($server['version'] != '' ? $server['version'].' ' : '').''.$scat.' server | ':'').'Come join one of the minecraft servers on Minecraft Servers today!');
 }
