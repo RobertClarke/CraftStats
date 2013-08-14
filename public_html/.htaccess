@@ -57,3 +57,4 @@ rewriteCond %{REQUEST_URI} !(\.�/$)
 rewriteCond %{REQUEST_FILENAME}.php -f
 rewriteRule (.+) /$1.php [L]
 
+Redirect permanent /hosting/ /hosting
