@@ -1,6 +1,8 @@
 <?php
 include '../inc/global.inc.php';
 
+$template->setTitle('Minecraft Server Statistics');
+$template->setDesc("Minecraft Servers tracks thousands of minecraft servers, and so we have the best minecraft statistics out there. Look at all the online Minecraft players.");
 
 if($_GET['name'] == ''){
 $time = time();
@@ -176,7 +178,7 @@ $.plot($("#pie2"), ['.$series5.'],
 	});
 </script>
 ');
-	$template->setTitle('Minecraft Server Statistics');
+
 }else{
 $pn2 = mysql_real_escape_string($_GET['name']);
 
