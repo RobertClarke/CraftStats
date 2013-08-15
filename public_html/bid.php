@@ -66,8 +66,8 @@ if($_GET['pay']){
 	
 
 	$r = new PayPal(true);
-	$r->pp_return = 'http://craftstats.com/bid?pp=paid';
-	$r->pp_cancel = 'http://craftstats.com/promote/bid';
+	$r->pp_return = 'http://minecraftservers.com/bid?pp=paid';
+	$r->pp_cancel = 'http://minecraftservers.com/promote/bid';
 	$ret = $r->doExpressCheckout($bid['amount'], '30 day banner promotion for '.$bid['serverIP']);
 
 	if($ret['ACK'] == 'Success'){
