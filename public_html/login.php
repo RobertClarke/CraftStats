@@ -91,9 +91,9 @@ if($_POST['action'] == 'reset' && count($errors) == 0){
 	$database->query("UPDATE users SET resetcode = '$code',resetexpire = $expire WHERE username = '$_POST[user]'");
 	$user = $database->query("SELECT * FROM users WHERE username = '$_POST[user]'",db::GET_ROW);
 	$to      = $user['email'];
-	$subject = 'CraftStats Password Reset';
-	$message = 'Click this link to reset your password, link will work for the next 24 hours: <a href="http://craftstats.com/login?fpc=1&code='.$code.'">Reset Password</a>';
-	$headers = 'From: noreply@craftstats.com'."\r\n";
+	$subject = 'MinecraftServers.com Password Reset';
+	$message = 'Click this link to reset your password, link will work for the next 24 hours: <a href="http://minecraftservers.com/login?fpc=1&code='.$code.'">Reset Password</a>';
+	$headers = 'From: noreply@minecraftservers.com'."\r\n";
 	$headers  .= 'MIME-Version: 1.0' . "\r\n";
 	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 	mail($to,$subject,$message,$headers);
@@ -138,7 +138,7 @@ $template->show('nav');
 		<div class="twelve columns box">
 			<div class="row">
 				<div class="twelve columns">
-					<h5><?php echo (($resetconfirm || $reset) ? 'Reset Password' : ($register ? 'Sign Up':($upgrade?'Upgrade Account':'Login to CraftStats'))); ?></h5>
+					<h5><?php echo (($resetconfirm || $reset) ? 'Reset Password' : ($register ? 'Sign Up':($upgrade?'Upgrade Account':'Login to MinecraftServers.com'))); ?></h5>
 				</div>
 			</div>
 			<div class="row">
