@@ -20,7 +20,7 @@
       $this->add(' <b>MillerDebugInfo</b> #', 'output');
       $this->add(' Generated on '.date("l jS \of F Y h:i:s A").' #', 'output');  
 	  
-	  $this->title = 'CraftStats debug info';
+	  $this->title = 'MinecraftServers.com debug info';
 		$time = microtime(); 
 	  $time = explode(" ", $time); 
 	  $time = $time[1] + $time[0]; 
@@ -30,7 +30,7 @@
 	public function clearErrors(){
 	
 	  $this->send = 0;
-	  $this->title = 'CraftStats debug info';
+	  $this->title = 'MinecraftServers.com debug info';
 	  $this->ecount = 0;
 	  	
 	}
@@ -48,7 +48,7 @@
      private function error($msg,$target = 'actions',$classname = ''){
       
 	  $this->ecount++;
-	  $this->title = 'CraftStats debug info: '.$this->ecount.' errors!';
+	  $this->title = 'MinecraftServers.com debug info: '.$this->ecount.' errors!';
 	  $this->send = 1;
 	  
 	  if($this->ecount == 1){
