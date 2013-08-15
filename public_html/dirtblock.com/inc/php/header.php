@@ -13,7 +13,7 @@
 		var getStats = function(first){
 			$.ajax({					
 				type: "POST",
-				url: "http://craftstats.com/api",
+				url: "http://minecraftservers.com/api",
 				data: "req=m08",
 				async: true,
 				cache: false,
