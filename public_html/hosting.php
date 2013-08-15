@@ -10,6 +10,8 @@ $h = $database->query("SELECT * FROM hosts WHERE slug = '$_GET[slug]'",db::GET_R
 	}else{
 		$template->setDesc($h['name'].' is a Minecraft server hosting provider featured on Minecraft Servers. This includes reviews and plans.');
 	}
+}else{
+	$template->setDesc('Find the best Minecraft host on our minecraft server host list. Look at reviews for the best hosting companies out there.');
 }
 
 $template->setTitle(($h['name'] != '' ? $h['name']: 'Minecraft Server Hosting Suggestions'));

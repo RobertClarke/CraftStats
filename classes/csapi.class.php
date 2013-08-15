@@ -270,7 +270,7 @@ class csAPI{
 					return $this->formatResponse('error','Failed to connect to Minecraft Server');
 				}
 		
-				$this->database->query("INSERT INTO servers VALUES ('','minecraft','$ip','$lookupip','',0,0,0,'US','NA',0,0,'','','','','','',0,0,'',0,0,0,0,100,'',0,0,FALSE,0,'0','0')");
+				$this->database->query("INSERT INTO servers VALUES ('','minecraft','$ip','$lookupip','',0,0,0,'US','NA',0,0,'','','','','',1,'',0,0,'',0,0,0,0,100,'',0,0,FALSE,0,'0','0')");
 				
 				$this->updateServerFromPing($result);
 				

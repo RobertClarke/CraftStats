@@ -10,6 +10,7 @@ $data = array();
 $server = $database->query("SELECT * FROM servers WHERE (resolved = '$_GET[ip]' AND resolved != '') OR ip = '$_GET[ip]' LIMIT 0,1",db::GET_ROW);
 $sname = $server['name'];
 $scat = $server['category'];
+$template->setDesc($server['ip'].' | '.($sname != '' ? $sname.' | ':'').''.$server['connPlayers'].' players online | '.($scat != '' ? 'Minecraft '.($server['version'] != '' ? $server['version'].' ' : '').''.$scat.' server | ':'').'Come join one of the minecraft servers on Minecraft Servers today!');
 
 $template->setKeys(($scat != '' ? 'minecraft '.$scat.' server, ':'').($scat != '' ? 'mc '.$scat.' server, ':'').' minecraft '.($server['version'] != '' ? $server['version'].' ' : '').'servers, '.($scat != '' ? 'minecraft '.$server['version'].' '.$scat.' servers, ':'').' '.($scat != '' ? 'minecraft '.$server['version'].' '.$scat.' server ':''));
 if($server[blacklisted] == 1)
@@ -63,13 +64,6 @@ if($_GET['tab'] == 'vote'){
 }else{
 	$template->setTitle($server['ip']);
 }
-
-if($_GET['tab'] == 'vote'){
-	$template->setDesc('Vote for '.$server['ip'].' | '.($sname != '' ? $sname.' | ':'').'Vote for your favorite minecraft server on Minecraft Servers today!');
-}else{
-	$template->setDesc($server['ip'].' | '.($sname != '' ? $sname.' | ':'').''.$server['connPlayers'].' players online | '.($scat != '' ? 'Minecraft '.($server['version'] != '' ? $server['version'].' ' : '').''.$scat.' server | ':'').'Come join one of the minecraft servers on Minecraft Servers today!');
-}
-
 if($server['ID'] == ''){
 	header("Location: /?sf=1");exit;
 }
@@ -247,7 +241,7 @@ $votes = $database->num_rows;
 		<?php if($_GET['tab'] != 'edit'){ ?>
 		<div class="twelve columns box"style="padding:10px;text-align:center;">
 			<?php 
-			echo '<h4>'.($_GET['tab'] == 'vote' ? 'Vote for ':'').''.($sname ? $sname : $server['ip']).'</h4>'; ?>
+			echo '<h1 style="font-size:16px;">'.($_GET['tab'] == 'vote' ? 'Vote for ':'').''.($sname ? $sname : $server['ip']).'</h1>'; ?>
 			<?php if($_GET['tab'] != 'vote'){ if(time() < $server['sponsorTime']){ echo ' <div style="text-align:center;color:#aaa;font-size:11px;'.($sname != '' ? 'margin-top:-8px;' :'').'">SPONSORED SERVER</div>';} ?>
 		<div class="row">
 			<div class="four columns">

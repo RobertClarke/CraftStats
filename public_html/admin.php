@@ -26,8 +26,19 @@ foreach($month as $r){
 	if($r['c'] > 1)$links[$r['link']]['month'] = $r['c'];
 }
 
-if($_POST){
+if($_POST['setann']){
 $memcache->set(md5('announce'),stripslashes($_POST['ann']),MEMCACHE_COMPRESSED,60*60*36);
+}
+if($_POST['addowner']){
+	$u = $database->query("SELECT * FROM users WHERE username = '$_POST[user]'",db::GET_ROW);
+	if($database->num_rows == 0)$addownerfail=true;
+	$s= $database->query("SELECT * FROM servers WHERE ip = '$_POST[server]'",db::GET_ROW);
+	if($database->num_rows == 0)$addownerfail=true;
+	
+	if(!$addownerfail){
+		$database->query("INSERT INTO serverowners VALUES ('$s[ID]','$u[id]')");
+		
+	}
 }
 ?>
 <div class="row">
@@ -36,9 +47,25 @@ $memcache->set(md5('announce'),stripslashes($_POST['ann']),MEMCACHE_COMPRESSED,6
 	<div class="twelve columns box">
 		<h4>Set announcement</h4>
 		<form action="/admin" method="post">
-		
+			<input type="hidden" name="setann" value="1"/>
 			<textarea name="ann" placeholder="Announcement message"></textarea>
 			<button type="submit" class="button">Set</button>
+		</form>
+	</div>
+	<div class="twelve columns box">
+		<h4>Add owner</h4>
+		<form action="/admin" method="post">
+			<input type="hidden" name="addowner" value="1"/>
+			<?php if($addownerfail){ ?><div class="alert-box alert" style="margin-top:20px;">
+					User or server does not exist
+			</div><?php }elseif($_PSOT['addowner']){ ?>
+<div class="alert-box success" style="margin-top:20px;">
+					User '<?php echo $u['username']; ?>' is now an owner of '<?php echo $s['ID']; ?>'
+			</div>
+			<?php } ?>
+			<div class="four columns"><input name="user" placeholder="Username" type="text"/></div>
+			<div class="four columns"><input name="server" placeholder="Server IP" type="text"/></div>
+			<button type="submit" class="button">Add as Owner</button>
 		</form>
 	</div>
 <style type="text/css">
