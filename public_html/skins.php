@@ -16,7 +16,7 @@ if(strlen(@file_get_contents($cachepath)) != 0){
 	$usecache=true;
 	$filename = $cachepath;
 }else if(strlen(@file_get_contents($filename)) == 0){
-	$filename = "http://www.craftstats.com/images/defaultskin.png";
+	$filename = "http://minecraftservers.com/images/defaultskin.png";
 }else{
 	$img = @file_get_contents($filename);
 	@file_put_contents($cachepath,$img);
