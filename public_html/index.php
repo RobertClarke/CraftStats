@@ -16,8 +16,6 @@ $template->setTitle(($_GET['version'] ? $_GET['version'].' Minecraft Servers' : 
 if($_GET['version']){
 	$template->setdesc('A list of the best Minecraft '.$_GET['version'].' servers for you to play on with your friends. These include '.$_GET['version'].' PVP Minecraft servers.');
 	$template->setKeys(($scat != '' ? 'minecraft '.$scat.' server, ':'').($scat != '' ? 'mc '.$scat.' server, ':'').' minecraft '.($server['version'] != '' ? $server['version'].' ' : '').'servers, '.($scat != '' ? 'minecraft '.$server['version'].' '.$scat.' servers, ':'').' '.($scat != '' ? 'minecraft '.$server['version'].' '.$scat.' server ':''));
-}else{
-	$template->setKeys('minecraft servers, mcservers, mc servers, mc server list, minecraft server list, best minecraft servers, minecraft servers list')
 }
 if($_GET['cat']){
 	$template->setdesc('A list of the best Minecraft '.$_GET['cat'].' servers for you to play on with your friends. These include 1.6.2 '.$_GET['cat'].' Minecraft servers.');
