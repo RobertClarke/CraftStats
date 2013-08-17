@@ -53,7 +53,7 @@
 		if(strlen($keys) < 1){ 
 			$this->keys = 'minecraft servers, mcservers, mc servers, mc server list, minecraft server list, best minecraft servers, minecraft servers list';  
 		}else{
-			$this->keys = $keys;  
+			$this->keys = $keys.', '.'minecraft servers, mcservers, mc servers, mc server list, minecraft server list, best minecraft servers, minecraft servers list';  
 		}
     }
   
