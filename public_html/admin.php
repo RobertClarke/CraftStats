@@ -1,12 +1,12 @@
 <?php
 include 'inc/global.inc.php';
 $database->query("SELECT * FROM users WHERE id = '$_SESSION[id]' AND admin = 1");
+$template->setTitle('CraftStats Admin');
+$template->show('header');
+$template->show('nav');
 if($database->num_rows == 0){
 	echo 'You\'re not an admin. Go away please.';exit;
 }
-$template->setTitle('Admin');
-$template->show('header');
-$template->show('nav');
 
 $day = time()-60*60*24;
 $week = time()-60*60*24*7;
