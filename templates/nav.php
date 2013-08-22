@@ -142,7 +142,7 @@
                   <a href="/promote">get more players</a>
                 </li>
                 <li>
-                  <a href="/refer.php?url=billing.servercrate.com/aff.php?aff=004&url=servercrate.com/minecraft">start a server</a>
+                  <a href="http://billing.servercrate.com/aff.php?aff=004&url=servercrate.com/minecraft">start a server</a>
                 </li>
                 <!--<li>
                   <a href="/refer.php?url=enjin.com/minecraft-websites">create a site</a>
