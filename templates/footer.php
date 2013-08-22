@@ -7,7 +7,8 @@
         promote your server with <a href="http://minecraftservers.com/promote" target="_new">MinecraftServers.com</a>
       </div>
       <div class="six columns" style="text-align:right;">
-        &lt;3's to <a href="http://mojang.com" target="_new">mojang</a>
+        <!--&lt;3's to <a href="http://mojang.com" target="_new">mojang</a>-->
+        contact RobertJFClarke on Skype with issues.
       </div>
     </div>
   </div>
