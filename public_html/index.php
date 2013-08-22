@@ -24,6 +24,30 @@ if(strtolower($_GET['cat']) == 'factions'){
 if(strtolower($_GET['cat']) == 'creative'){
 	$_GET['cat'] = 'Creative';
 }
+if(strtolower($_GET['cat']) == 'ctf'){
+	$_GET['cat'] = 'CTF';
+}
+if(strtolower($_GET['cat']) == 'drug'){
+	$_GET['cat'] = 'Drug';
+}
+if(strtolower($_GET['cat']) == 'economy'){
+	$_GET['cat'] = 'Economy';
+}
+if(strtolower($_GET['cat']) == 'hardcore'){
+	$_GET['cat'] = 'Hardcore';
+}
+if(strtolower($_GET['cat']) == 'mindcrack'){
+	$_GET['cat'] = 'Mindcrack';
+}
+if(strtolower($_GET['cat']) == 'parkour'){
+	$_GET['cat'] = 'Parkour';
+}
+if(strtolower($_GET['cat']) == 'tekkit'){
+	$_GET['cat'] = 'Tekkit';
+}
+if(strtolower($_GET['cat']) == 'vanilla'){
+	$_GET['cat'] = 'Vanilla';
+}
 if(strtolower($_GET['cat']) == 'hub'){
 	$_GET['cat'] = 'Hub';
 }
