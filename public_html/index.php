@@ -12,6 +12,21 @@ if(strtolower($_GET['cat']) == 'reliable'){
 if(strtolower($_GET['cat']) == 'active'){
 	$_GET['cat'] = 'Active';
 }
+if(strtolower($_GET['cat']) == 'creative'){
+	$_GET['cat'] = 'Creative';
+}
+if(strtolower($_GET['cat']) == 'survival'){
+	$_GET['cat'] = 'Survival';
+}
+if(strtolower($_GET['cat']) == 'factions'){
+	$_GET['cat'] = 'Factions';
+}
+if(strtolower($_GET['cat']) == 'creative'){
+	$_GET['cat'] = 'Creative';
+}
+if(strtolower($_GET['cat']) == 'hub'){
+	$_GET['cat'] = 'Hub';
+}
 $template->setTitle(($_GET['version'] ? $_GET['version'].' Minecraft Servers' : ($_GET['cat'] ? $_GET['cat'].' Minecraft Servers':'Best Minecraft Servers List')));
 
 $template->setKeys(($_GET['version'] ? $_GET['version'].' Minecraft Servers' : ($_GET['cat'] ? $_GET['cat'].' Minecraft Servers':'Best Minecaft Servers List')));
