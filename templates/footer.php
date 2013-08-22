@@ -8,7 +8,7 @@
       </div>
       <div class="six columns" style="text-align:right;">
         <!--&lt;3's to <a href="http://mojang.com" target="_new">mojang</a>-->
-        contact RobertJFClarke on Skype with issues.
+        <a href="skype:robertjfclarke?chat">contact RobertJFClarke on Skype with issues.</a>
       </div>
     </div>
   </div>
