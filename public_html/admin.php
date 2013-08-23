@@ -7,7 +7,7 @@ $template->show('nav');
 
 $database->query("SELECT * FROM users WHERE id = '$_SESSION[id]' AND admin = 1");
 if($database->num_rows == 0){
-	echo 'You\'re not an admin. Go away please.';exit;
+	echo '</br><strong>You\'re not an admin. Go away please.</strong>';exit;
 }
 
 $day = time()-60*60*24;
