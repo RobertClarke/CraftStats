@@ -32,7 +32,7 @@
             <div class="adsection hide-for-small" style="margin-bottom:0px;padding-bottom:0px;">
               <div class="row collapse ad">
 			   <a href="/refer.php?url=enjin.com" style="margin-left:7px;margin-bottom:10px;display:block;"><img src="http://files.enjin.com/1340/minecraft-server-website-enjin.gif"/></a>
-               <!--<a href="/refer.php?url=bit.ly/18r9kzV"><img alt="CubedHost.org" src="/images/ads/cubedhost.png"/></a>--> 
+               <a href="/refer.php?url=bit.ly/18r9kzV"><img alt="CubedHost.org" src="/images/ads/cubedhost.png"/></a> 
 			  
               </div> 
             </div>
@@ -142,7 +142,7 @@
                   <a href="/promote">get more players</a>
                 </li>
                 <li>
-                  <a href="http://billing.servercrate.com/aff.php?aff=004&url=servercrate.com/minecraft">start a server</a>
+                  <a href="/refer.php?url=bit.ly/18r9kzV">start a server</a>
                 </li>
                 <!--<li>
                   <a href="/refer.php?url=enjin.com/minecraft-websites">create a site</a>
