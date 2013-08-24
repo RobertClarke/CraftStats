@@ -102,7 +102,7 @@ FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 AND spons
 	?>
 	<div class="four columns">
 				<div class="twelve columns box" style="text-align:center;color:#999 !important;margin-top:70px;padding-bottom:4px;margin-bottom:-35px;">
-					<h5 class="subheader"><a href="/promote" style="color:#999;">Brand new high-traffic banner auction ending in less than 2 days, bid now!</a></h5>
+					<h5 class="subheader"><p style="color:#999;">Servers coming here soon.</p></h5>
 				</div>
 			</div>
 	<?php	
