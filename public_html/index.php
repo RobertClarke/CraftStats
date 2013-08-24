@@ -160,7 +160,7 @@ if(count($sponsoredp) < 3){
 			<div class="twelve columns centered">
 				<div class="twelve columns box">
 					
-					<a href="/promote/bid"><h5 style="text-align:center;margin:20px auto;font-size:14px;">Brand new high-traffic banner auction ending in less than 2 days, bid now!</h5></a>
+					<h5 style="text-align:center;margin:20px auto;font-size:14px;">Servers coming here soon.</h5>
 				
 				</div>
 			</div>
