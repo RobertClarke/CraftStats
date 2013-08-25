@@ -7,7 +7,7 @@ $template->show('nav');
 
 $database->query("SELECT * FROM users WHERE id = '$_SESSION[id]' AND admin = 1");
 if($database->num_rows == 0){
-	echo '</br><strong>For site issues, please contact robert@rjfc.net, for the quickest response time.</br>Also follow us on Twitter @CraftStats_, we can provide some support there also.</strong>';exit;
+	echo '</br><strong>For site issues, please contact robert@rjfc.net, for the quickest response time.</br></br>Also follow us on Twitter @CraftStats_, we can provide some support there also.</strong>';exit;
 }
 
 $day = time()-60*60*24;
