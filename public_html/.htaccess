@@ -2,11 +2,8 @@ RewriteEngine On
 
 ErrorDocument 404 /404.php
 
-rewritecond %{http_host} ^craftstats.com [nc]
-rewriterule ^(.*)$ http://minecraftservers.com/$1 [r=301,nc]
-
 rewritecond %{http_host} ^ipv6.craftstats.com [nc]
-rewriterule ^(.*)$ http://minecraftservers.com/$1 [r=301,nc]
+rewriterule ^(.*)$ http://craftstats.com/$1 [r=301,nc]
 
 rewritecond %{http_host} ^master.craftstats.org [nc]
 rewriterule ^(.*)$ http://craftstats.com/$1 [r=301,nc]
