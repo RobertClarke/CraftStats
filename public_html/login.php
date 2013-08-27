@@ -138,7 +138,7 @@ $template->show('nav');
 		<div class="twelve columns box">
 			<div class="row">
 				<div class="twelve columns">
-					<h5><?php echo (($resetconfirm || $reset) ? 'Reset Password' : ($register ? 'Sign Up':($upgrade?'Upgrade Account':'Login to MinecraftServers.com'))); ?></h5>
+					<h5><?php echo (($resetconfirm || $reset) ? 'Reset Password' : ($register ? 'Sign Up':($upgrade?'Upgrade Account':'Login'))); ?></h5>
 				</div>
 			</div>
 			<div class="row">
