@@ -155,7 +155,7 @@ if($database->num_rows >= 2){
 			<div class="row" style="padding:20px;">
 				<h3><?php echo ($_GET['ip'] ? 'Sponsor '.$_GET['ip'] : 'Promote a Minecraft Server'); ?></h3>
 				<div style="width:100%;margin-top:15px;color:#777;font-size:14px;padding:15px;border-radius:10px;background:#eee;">
-					<span style="font-weight:bold;font-size:18px;">thousands of minecraft players visit MinecraftServers.com to find servers</span><br/><br/> you can purchase a slice of that traffic for <?php echo ($_GET['ip'] ? $_GET['ip'] : 'your own server'); ?>!
+					<span style="font-weight:bold;font-size:18px;">thousands of minecraft players visit our site to find servers</span><br/><br/> you can purchase a slice of that traffic for <?php echo ($_GET['ip'] ? $_GET['ip'] : 'your own server'); ?>!
 				</div>
 
 				<div class="row">
@@ -164,7 +164,7 @@ if($database->num_rows >= 2){
 						<ul style="list-style:disc inside;margin-left:15px;margin-top:5px;font-size:14px;">
 							<li>Featured listing on the front page</li>
 							<li>Minecraft Server banners around the website</li>
-							<li>Tweet from the MinecraftServers.com twitter account</li>
+							<li>Tweet from our twitter account</li>
 						</ul>
 					</div>
 					<img src="/images/promprev.png" style="margin-top:10px;border-radius:5px;"/>
