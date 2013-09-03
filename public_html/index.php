@@ -127,8 +127,8 @@ FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND blacklisted != 1 AND spons
 	<?php $sponsoredp = $database->query("SELECT 
   ID as sid, country, category,
   name, ip, advCheck,
-  connPlayers AS cp, maxPlayers AS mp, version, motd, lastUpdate, uptimeavg, ranking, bannerurl
-FROM servers WHERE bannerpromo > UNIX_TIMESTAMP() AND blacklisted != 1 AND game = 'minecraft' ORDER BY ranking ASC LIMIT 3");
+  connPlayers AS cp, maxPlayers AS mp, version, motd, lastUpdate, uptimeavg, sponsorRank, bannerurl
+FROM servers WHERE bannerpromo > UNIX_TIMESTAMP() AND blacklisted != 1 AND game = 'minecraft' ORDER BY sponsorRank ASC LIMIT 3");
 			foreach($sponsoredp as $sp){
 ?>
 	<div class="row">
