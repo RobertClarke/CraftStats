@@ -81,6 +81,20 @@
   })();
 </script>
 </div>
+
+<center>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-8782622759360356";
+/* CraftStats Long Sidebar */
+google_ad_slot = "4934785430";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
           <h6 class="subheader">Minecraft Server Categories</h6>
           <div class="row collapse tags">
 		   <a href="/" class="button tiny" >Top Ranked</a>
