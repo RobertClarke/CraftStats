@@ -289,7 +289,7 @@ $votes = $database->num_rows;
 								<button class="button expand postfix small">Vote</button>
 							</div>
 							</br>
-							<script type="text/javascript"><!--
+							<center><script type="text/javascript"><!--
 google_ad_client = "ca-pub-8782622759360356";
 /* CraftStats Vote Rectangle */
 google_ad_slot = "3458052230";
@@ -299,7 +299,7 @@ google_ad_height = 280;
 </script>
 <script type="text/javascript"
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
+</script</center>
 						</form>
 					<?php
 						}else{
