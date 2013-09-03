@@ -291,10 +291,10 @@ $votes = $database->num_rows;
 							</br>
 							<script type="text/javascript"><!--
 google_ad_client = "ca-pub-8782622759360356";
-/* CraftStats Vote */
-google_ad_slot = "5074386236";
-google_ad_width = 728;
-google_ad_height = 90;
+/* CraftStats Vote Rectangle */
+google_ad_slot = "3458052230";
+google_ad_width = 336;
+google_ad_height = 280;
 //-->
 </script>
 <script type="text/javascript"
