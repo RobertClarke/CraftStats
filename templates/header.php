@@ -33,7 +33,7 @@
   <script src="/javascripts/modernizr.foundation.js"></script>
   <script type="text/javascript">
   var GoSquared = {};
-  GoSquared.acct = "GSN-036970-B";
+  GoSquared.acct = "GSN-830142-V";
   (function(w){
     function gs(){
       w._gstc_lt = +new Date;
@@ -48,19 +48,14 @@
       w.attachEvent("onload", gs);
   })(window);
 </script>
-  <script type="text/javascript">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-8521263-24']);
-    _gaq.push(['_setSiteSpeedSampleRate', 10]);
-  _gaq.push(['_trackPageview']);
-
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+  ga('create', 'UA-8521263-30', 'craftstats.com');
+  ga('send', 'pageview');
 
 </script>
 <script type="text/javascript">
