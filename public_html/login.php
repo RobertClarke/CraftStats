@@ -91,7 +91,7 @@ if($_POST['action'] == 'reset' && count($errors) == 0){
 	$database->query("UPDATE users SET resetcode = '$code',resetexpire = $expire WHERE username = '$_POST[user]'");
 	$user = $database->query("SELECT * FROM users WHERE username = '$_POST[user]'",db::GET_ROW);
 	$to      = $user['email'];
-	$subject = 'MinecraftServers.com Password Reset';
+	$subject = 'Minecraft Servers Password Reset';
 	$message = 'Click this link to reset your password, link will work for the next 24 hours: <a href="http://craftstats.com/login?fpc=1&code='.$code.'">Reset Password</a>';
 	$headers = 'From: noreply@craftstats.com'."\r\n";
 	$headers  .= 'MIME-Version: 1.0' . "\r\n";
