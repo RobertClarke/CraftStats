@@ -174,7 +174,7 @@ if(!$cache){
 	imagettftext($image, 22, 0 , 4, 32, $titlecol, $bigtext, $servername);
 	imagettftext($image, 15, 0 , 4, 68, $playerscol, $bigtext, $players);
 	imagettftext($image, 15, 0 , 4, 93, ($offline == true ? $offlinecol : $playerscol), $bigtext, $uptime);
-	imagettftext($image, 8, 0 , 397, 95, $craftstatscol, $smalltext, $craftstats);
+	imagettftext($image, 8, 0 , 421, 95, $craftstatscol, $smalltext, $craftstats);
 	imagettftext($image, 15, 0, 485, 24, $playerscol, $bigtext, $version);
 
 	//imagefilledrectangle($image,0,0,600,100,$offlinecol);
