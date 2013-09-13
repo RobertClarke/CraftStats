@@ -13,6 +13,7 @@
   <meta http-equiv="Lang" content="en">
   <meta name="description" content="<?php echo $this->desc; ?>">
   <meta name="keywords" content="<?php echo $this->keys; ?>">
+  <meta name="msvalidate.01" content="03A66C58E8ECAB2D852E76F7ECE0B637" />
   <title><?php echo $this->title; ?></title>
 
   <!-- Included CSS Files (Compressed) -->
