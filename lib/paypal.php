@@ -44,9 +44,9 @@ class PayPal {
 	//const API_USERNAME = "alexan_1317104643_biz_api1.gmail.com";
 	//const API_PASSWORD = "1317104670";
 	//const API_SIGNATURE = "AFcWxV21C7fd0v3bYYYRCpSSRl31AElnohMLKq-.-fDzNGRdG9aKyo6h";
-	const API_USERNAME = "billing_api2.craftstats.com";
-	const API_PASSWORD = "65UYNKZDK5U6693H";
-	const API_SIGNATURE = "AFcWxV21C7fd0v3bYYYRCpSSRl31ACQ1eMMOp7T4yG61isoUhiHOu8SG";
+	const API_USERNAME = "billing_api1.cubemotion.com";
+	const API_PASSWORD = "6SDCSS74UWW24WK9";
+	const API_SIGNATURE = "AFcWxV21C7fd0v3bYYYRCpSSRl31A00yqU-3YIuIOmUUTGo49gdsbS2l";
 	
 	public $pp_return = "http://www.craftstats.com/promote.php?paypal=paid";
 	public $pp_cancel = "http://www.craftstats.com/promote.php?paypal=cancel";
