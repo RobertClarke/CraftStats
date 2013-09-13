@@ -7,7 +7,7 @@ $xml .='<?xml version="1.0" encoding="UTF-8"?>
 <url>
       <loc>http://craftstats.com/</loc>
       <priority>1</priority>
-      <changefreq>daily</changefreq>
+      <changefreq>always</changefreq>
    </url>
    <url>
       <loc>http://craftstats.com/hosting</loc>
@@ -23,12 +23,18 @@ $xml .='<?xml version="1.0" encoding="UTF-8"?>
    </url>
     <url>
       <loc>http://craftstats.com/category/new</loc>
+      <changefreq>always</changefreq>
+      <priority>0.8</priority>
    </url>
     <url>
       <loc>http://craftstats.com/category/active</loc>
+      <changefreq>always</changefreq>
+      <priority>0.8</priority>
    </url>
     <url>
       <loc>http://craftstats.com/category/reliable</loc>
+      <changefreq>always</changefreq>
+      <priority>0.8</priority>
    </url>
 ';
 
@@ -55,6 +61,9 @@ foreach($host as $h){
   foreach($vs as $vb){
 	$xml .= '<url>
       <loc>http://craftstats.com/category/'.urlencode($vb['category']).'</loc>
+      <priority>0.8</priority>
+      <changefreq>always</changefreq>
+      
    </url>';
   }
   
@@ -62,6 +71,8 @@ foreach($host as $h){
   foreach($vs as $vb){
 	$xml .= '<url>
       <loc>http://craftstats.com/version/'.urlencode($vb['version']).'</loc>
+      <priority>0.8</priority>
+      <changefreq>always</changefreq>
    </url>';
   }
 
