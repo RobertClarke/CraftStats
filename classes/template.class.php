@@ -43,7 +43,7 @@
 	
 	public function setDesc($desc){
 		if(strlen($desc) < 1){ 
-			$this->desc = 'CraftStats has a list of the very best Minecraft servers on the internet, find your dream MC server today.';  
+			$this->desc = 'CraftStats has a list of the best Minecraft servers on the internet. Use our Minecraft server list to find your dream server!';  
 		}else{
 			$this->desc = $desc;  
 		}
