@@ -43,7 +43,7 @@
 	
 	public function setDesc($desc){
 		if(strlen($desc) < 1){ 
-			$this->desc = 'Minecraft Servers has a list of the very best Minecraft servers on the internet, including the best pvp, survival, hungers games, and other minecraft servers for you to play and vote on.';  
+			$this->desc = 'CraftStats has a list of the very best Minecraft servers on the internet, find your dream MC server today.';  
 		}else{
 			$this->desc = $desc;  
 		}
