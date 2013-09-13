@@ -15,7 +15,6 @@
   <meta name="keywords" content="<?php echo $this->keys; ?>">
   <title><?php echo $this->title; ?></title>
 
-  <meta name="wot-verification" content="22beee5a47b34aec6495"/>
   <!-- Included CSS Files (Compressed) -->
   <link rel="stylesheet" href="/stylesheets/foundation.min.css">
   <link rel="stylesheet" href="/stylesheets/app.css">
@@ -65,6 +64,6 @@
 		});
 	});
   </script>
-<link rel="shortcut icon" href="http://minecraftservers.com/images/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="http://craftstats.com/images/favicon.ico" type="image/x-icon" />
   <?php echo $this->headscripts; ?>
 </head>
