@@ -175,7 +175,7 @@ if(count($sponsoredp) < 3){
             <table class="twelve">
               <thead>
                 <tr>
-                  <th>Sponsored Servers</th>
+                  <th>Sponsored Minecraft Servers</th>
                   <th>Uptime</th>
                   <th>Players</th>
                 </tr>
