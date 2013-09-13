@@ -24,6 +24,17 @@
     #wrap {display:table;height:100%}
   </style>
 <![endif]-->
+
+
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement("script"); po.type = "text/javascript"; po.async = true;
+    po.src = "https://apis.google.com/js/plusone.js?publisherid=109695773171690626361";
+    var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
 	  <!-- Included JS Files (Compressed) -->
   <script src="/javascripts/jquery.js"></script>
   <script src="/javascripts/foundation.min.js"></script>
