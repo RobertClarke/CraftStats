@@ -36,7 +36,7 @@
 			  
               </div> 
             </div>
-          <h6 class="subheader" style="margin-top:0px;">Find a server</h6>
+          <h6 class="subheader" style="margin-top:0px;">Find a Minecraft server</h6>
 		  <?php if($_GET['sf']){ ?>
 			<div class="alert-box alert">
 				  Server not found
