@@ -153,7 +153,10 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
               <!-- Left Nav Section -->
               <ul class="left">
                 <li>
-                  <a href="/promote">get more players</a>
+                  <a href="http://craftstats.com">home</a>
+                </li>
+                <li>
+                  <a href="/promote">promote</a>
                 </li>
                 <li>
                   <a href="/refer.php?url=bit.ly/18r9kzV">start a server</a>
