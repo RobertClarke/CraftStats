@@ -194,9 +194,9 @@ h6.subheader{
 	background:#62a7c4;
 }
 
-.servers table tr:hover{
+/*.servers table tr:hover{
 	cursor:pointer;
-}
+}*/
 .button.active{ background-color: #2284a1; }
 
 .tags a.button{
