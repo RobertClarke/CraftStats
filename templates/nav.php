@@ -95,7 +95,7 @@ google_ad_height = 600;
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 </center>
-          <h6 class="subheader">Minecraft Server Categories</h6>
+          <h6 class="subheader">Sort Minecraft Servers</h6>
           <div class="row collapse tags">
 		   <a href="/" class="button tiny" >Top Ranked</a>
 	<a href="/category/new" class="button tiny secondary" >New</a>
