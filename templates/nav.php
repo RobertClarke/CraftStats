@@ -18,7 +18,7 @@
     <div class="row" id="main">
     <div class="three columns sidecontainer">
       <div class="row  box logo"> 
-        <a href="/">
+        <a href="http://craftstats.com">
 		<img src="/images/logo.png" alt="Minecraft Servers"/>
 		</a>
 		<hr/>
