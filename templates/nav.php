@@ -18,14 +18,18 @@
     <div class="row" id="main">
     <div class="three columns sidecontainer">
       <div class="row  box logo"> 
-        <a href="http://craftstats.com">
-		<img src="/images/logo.png" alt="Minecraft Servers"/>
-		</a>
-		<hr/>
-		<a href="http://mcpestats.com">
-		<img src="http://mcpestats.com/images/logo.png" alt="Minecraft PE Servers"/>
-		</a>
-		<a class="togglelogos"></a>
+      <a href="http://craftstats.com">
+        <img src="/images/logos/craftstats.png" alt="Minecraft Servers"/>
+      </a>
+    <hr/>
+      <a href="http://mcpestats.com">
+        <img src="/images/logos/mcpestats.png" alt="Minecraft PE Servers"/>
+      </a>
+    <hr/>
+      <a href="http://mcpeservers.com">
+        <img src="/images/logos/mcpeservers.png" alt="Minecraft PE Servers"/>
+      </a>
+    <a class="togglelogos"></a>
       </div>
       <div class="row sidebar"> 
          <div class="twelve columns box">
