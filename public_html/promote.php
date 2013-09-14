@@ -30,7 +30,7 @@ if($_POST['buyi'] > 0 && $svvalid){
 	if($_POST['promohost']){
 		$msg = $week[$_POST['buyi']].' Week promotion for host '.$sv['name'];
 	}else{
-		$msg = $week[$_POST['buyi']].' Week '.($type == 1 ? 'Premium' : 'Standard').' Promotion for server '.$_POST['promoip'];
+		$msg = $week[$_POST['buyi']].' Week '.($type == 1 ? 'Premium' : 'Standard').' Promotion for server '.$_POST['promoip']. ' on craftstats.com';
 	}
 	$ret = $r->doExpressCheckout($prices[$_POST['buyi']], $msg);
 
