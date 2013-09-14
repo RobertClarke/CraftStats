@@ -36,7 +36,7 @@ $template->show('nav');
 				<div class="six columns">
 					<p>Adding your server to our site means we'll track uptime, player activity and other stats depending on your setup.</p>
 					
-					<p>If you want to increase exposure to your server on the site, get players to vote for it! Send them to your server vote page, and when they vote you'll be pushed closer to the front page of MinecraftServers.com.</p>
+					<p>If you want to increase exposure to your server on the site, get players to vote for it! Send them to your server vote page, and when they vote you'll be pushed closer to the front page of CraftStats.com.</p>
 				</div>
 			</div>
 		</div>
