@@ -15,7 +15,12 @@ $template->setDesc($server['ip'].' | '.($sname != '' ? $sname.' | ':'').''.$serv
 $template->setKeys(($scat != '' ? 'minecraft '.$scat.' server, ':'').($scat != '' ? 'mc '.$scat.' server, ':'').' minecraft '.($server['version'] != '' ? $server['version'].' ' : '').'servers, '.($scat != '' ? 'minecraft '.$server['version'].' '.$scat.' servers, ':'').' '.($scat != '' ? 'minecraft '.$server['version'].' '.$scat.' server ':''));
 if($server[blacklisted] == 1)
 {
-	header('Location: http://minecraftservers.com/?blacklist=1');
+	header('Location: /?blacklist=1');
+	exit;
+}
+if($server[game] == mcpe)
+{
+	header('Location: /?sf=1');
 	exit;
 }
 $database->query("SELECT * FROM users WHERE id = '$_SESSION[id]' AND admin = 1");
