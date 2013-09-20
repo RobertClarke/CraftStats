@@ -66,8 +66,8 @@ if($_GET['pay']){
 	
 
 	$r = new PayPal(true);
-	$r->pp_return = 'http://minecraftservers.com/bid?pp=paid';
-	$r->pp_cancel = 'http://minecraftservers.com/promote/bid';
+	$r->pp_return = 'http://craftstats.com/bid?pp=paid';
+	$r->pp_cancel = 'http://craftstats.com/promote/bid';
 	$ret = $r->doExpressCheckout($bid['amount'], '30 day banner promotion for '.$bid['serverIP']);
 
 	if($ret['ACK'] == 'Success'){
@@ -127,7 +127,7 @@ if($haspaid){
 <div class="row">
 	<div class="twelve columns">
 		<div class="twelve columns box" style="padding:10px;margin-top:0px;margin-bottom:15px;line-height:1.4;color:#333;">
-			You are bidding for a full month of a front-page, large banner ad on MinecraftServers.com. This auction will end on <?php echo date('F jS, g:ia T',$auctionend);?>. The top three bids will have exactly 72 hours to pay their bids. In the event that a bid is not paid, the bidder will be restricted from bidding in any other auctions. The <strong>top 3 bidders'</strong> ads will be featured on our front page after payment. Obviously, the 3 top bidders will be the only users paying after the auction ends. Good luck!
+			You are bidding for a full month of a front-page, large banner ad on CraftStats.com. This auction will end on <?php echo date('F jS, g:ia T',$auctionend);?>. The top three bids will have exactly 72 hours to pay their bids. In the event that a bid is not paid, the bidder will be restricted from bidding in any other auctions. The <strong>top 3 bidders'</strong> ads will be featured on our front page after payment. Obviously, the 3 top bidders will be the only users paying after the auction ends. Good luck!
 		</div>
 	</div>
 </div>
