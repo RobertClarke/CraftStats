@@ -9,7 +9,7 @@ if($_GET['url'] == ''){
 //Database stuff goes here!
 $time = time();
 $database->prepare("INSERT INTO referrals VALUES (?,?,?,?,?)");
-$database->execute(array($_GET['url'], $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_REFERER'], $SESSION['id'], $time));
+$database->execute(array($_GET['url'], $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_REFERER'], $_SESSION['id'], $time));
 
 header('Location: http://'.$_GET['url']);
 ?>
