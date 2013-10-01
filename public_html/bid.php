@@ -98,7 +98,7 @@ $template->show('nav');
 
 $database->query("SELECT * FROM users WHERE id = '$_SESSION[id]' AND blacklisted = 1");
 if($database->num_rows == 1){
-	echo '</br><strong>You\'re blacklisted from participating in CraftStatats.</strong>';exit;
+	echo '</br><strong>You\'re blacklisted from participating in CraftStats.</strong>';exit;
 }
 ?>
 <div class="row">
