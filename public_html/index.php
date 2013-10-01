@@ -153,7 +153,7 @@ FROM servers WHERE bannerpromo > UNIX_TIMESTAMP() AND blacklisted != 1 AND game 
 			</div>
 <?php }
 
-if(count($sponsoredp) < 3){
+if(count($sponsoredp) < 1){
 ?>
 
 <div class="row">
