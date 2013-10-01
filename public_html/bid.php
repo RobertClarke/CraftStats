@@ -6,11 +6,6 @@ if($_SESSION['username'] == ''){
 	header("Location: /login?post=/promote/bid");
 }
 
-$database->query("SELECT * FROM users WHERE id = '$_SESSION[id]' AND blacklisted = 1");
-if($database->num_rows == 1){
-	echo '</br><strong>You\'re blacklisted from participating in CraftStatats.</strong>';exit;
-}
-
 $auctionend = mktime(0,0,0,date("n"),24);
 $auctionid=date('n').'-'.date('Y');
 
@@ -100,6 +95,11 @@ $template->setHeadScripts('<script>
 $template->setTitle('Banner Auction');
 $template->show('header');
 $template->show('nav');
+
+$database->query("SELECT * FROM users WHERE id = '$_SESSION[id]' AND blacklisted = 1");
+if($database->num_rows == 1){
+	echo '</br><strong>You\'re blacklisted from participating in CraftStatats.</strong>';exit;
+}
 ?>
 <div class="row">
 	<div class="twelve columns">
