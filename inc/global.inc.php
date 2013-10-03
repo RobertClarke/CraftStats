@@ -46,7 +46,7 @@ if(!isset($_SESSION['id'])){
 		$_SESSION['id'] = $usr['id'];	
 	}else{
 		$time = time();
-		$database->query("INSERT INTO users VALUES ('','$_SERVER[REMOTE_ADDR]','','','','','','','','',0,'$time','','',0,0)");
+		$database->query("INSERT INTO users VALUES ('','$_SERVER[REMOTE_ADDR]','','','','','','','','',0,'$time','','',0,0,0)");
 	}
 }
 
