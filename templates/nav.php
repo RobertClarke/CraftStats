@@ -163,7 +163,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
                   <a href="/promote">promote</a>
                 </li>
                 <li>
-                  <a href="/refer.php?url=bit.ly/18r9kzV">start a server</a>
+                  <a href="/refer.php?url=servercrate.com/minecrafthosting">start a server</a>
                 </li>
                 <!--<li>
                   <a href="/refer.php?url=enjin.com/minecraft-websites">create a site</a>
