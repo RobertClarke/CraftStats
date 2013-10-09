@@ -7,7 +7,7 @@
   <meta charset="utf-8" />
 
   <!-- Set the viewport width to device width for mobile -->
-  <meta name="viewport" content="width=device-width" />
+  <!--<meta name="viewport" content="width=device-width" />-->
   
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="Lang" content="en">
