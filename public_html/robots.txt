@@ -1,4 +1,5 @@
 User-agent: *
 Disallow: /banner/
 Disallow: /admin
+Disallow: /refer
 Sitemap: http://craftstats.com/sitemap.xml
