@@ -15,12 +15,12 @@ $template->setDesc($server['ip'].' | '.($sname != '' ? $sname.' | ':'').''.$serv
 $template->setKeys(($scat != '' ? 'minecraft '.$scat.' server, ':'').($scat != '' ? 'mc '.$scat.' server, ':'').' minecraft '.($server['version'] != '' ? $server['version'].' ' : '').'servers, '.($scat != '' ? 'minecraft '.$server['version'].' '.$scat.' servers, ':'').' '.($scat != '' ? 'minecraft '.$server['version'].' '.$scat.' server ':''));
 if($server[blacklisted] == 1)
 {
-	header('Location: /?blacklist=1');
+	header('Location: /410');
 	exit;
 }
 if($server[game] == mcpe)
 {
-	header('Location: /?sf=1');
+	header('Location: /404');
 	exit;
 }
 $database->query("SELECT * FROM users WHERE id = '$_SESSION[id]' AND admin = 1");
@@ -70,7 +70,7 @@ if($_GET['tab'] == 'vote'){
 	$template->setTitle($server['ip']);
 }
 if($server['ID'] == ''){
-	header("Location: /?sf=1");exit;
+	header("Location: /404");exit;
 }
 $dpoints = $database->query("SELECT * FROM (SELECT * FROM updates WHERE serverID = '$server[ID]' ORDER BY time DESC) AS u ORDER BY u.time ASC");
 $uptimeavg = array();
@@ -143,18 +143,6 @@ $votes = $database->num_rows;
 ?>
 <div class="row">
 	<div class="twelve columns">
-		<?php
-			if($server['uptime'] <= 0 && count($dpoints) > 1){
-			?>
-				<div class="alert-box secondary" style="margin-top:20px;text-align:center;font-size:16px;padding:10px;">
-				<?php $rs = $database->query("SELECT ip FROM servers WHERE sponsorTime > UNIX_TIMESTAMP() AND uptime > 1 ORDER BY RAND(NOW()) LIMIT 1",DB::GET_ROW); ?>
-				  This server is currently offline, <a href="/server/<?php echo $rs['ip']; ?>">here's another while you're waiting</a>.
-				  <a href="" class="close">&times;</a>
-				</div>
-			<?php
-			}
-		?>
-		
 			<?php
 		if($vottry){
 			if($votfail != 'true'){
