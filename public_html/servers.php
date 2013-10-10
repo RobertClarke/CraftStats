@@ -18,6 +18,11 @@ if($server[blacklisted] == 1)
 	header('Location: /410');
 	exit;
 }
+if($server[removed] == 1)
+{
+	header('Location: /410');
+	exit;
+}
 if($server[game] == mcpe)
 {
 	header('Location: /404');
