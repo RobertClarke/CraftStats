@@ -78,6 +78,9 @@
 		if($this->desc == ''){
 			$this->setDesc('');
 		}
+		if($this->keys == ''){
+			$this->setKeys('');
+		}
 		$namef = strtoupper($name);
 		$this->modulecount++;
       $database = $this->db;
