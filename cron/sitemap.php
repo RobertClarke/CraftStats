@@ -38,7 +38,7 @@ $xml .='<?xml version="1.0" encoding="UTF-8"?>
    </url>
 ';
 
-$servers = $database->query("SELECT ip, lastUpdate FROM servers WHERE game = 'minecraft' AND uptime > -86400 AND blacklisted = '0' AND removed = '0'");
+$servers = $database->query("SELECT ip, lastUpdate FROM servers WHERE game = 'minecraft' AND uptime > -86400 AND blacklisted != 1 AND removed != 1");
 foreach($servers as $s){
 	$xml .= '<url>
       <loc>http://craftstats.com/server/'.$s['ip'].'</loc>
