@@ -33,7 +33,7 @@
     
     public function setTitle($title){
 		if(strlen($title) < 1){ 
-			$this->title = 'Minecraft Servers | Minecraft Servers List';  
+			$this->title = 'Minecraft Servers - Minecraft Server List';  
 		}else{
 			$this->title = $title.' | Minecraft Servers';  
 		}
@@ -51,9 +51,9 @@
 	
 	public function setKeys($keys){
 		if(strlen($keys) < 1){ 
-			$this->keys = 'minecraft servers, mcservers, mc servers, mc server list, minecraft server list, best minecraft servers, minecraft servers list';  
+			$this->keys = 'minecraft servers, minecraft server list, best minecraft servers, minecraft servers list, minecraft voting website';  
 		}else{
-			$this->keys = $keys.', '.'minecraft servers, mcservers, mc servers, mc server list, minecraft server list, best minecraft servers, minecraft servers list';  
+			$this->keys = $keys.', '.'minecraft servers, minecraft server list, best minecraft servers, minecraft servers list, minecraft voting website';  
 		}
     }
   
