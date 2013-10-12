@@ -33,7 +33,7 @@
     
     public function setTitle($title){
 		if(strlen($title) < 1){ 
-			$this->title = 'Minecraft Servers - Minecraft Server List';  
+			$this->title = 'Minecraft Servers | CraftStats';  
 		}else{
 			$this->title = $title.' | Minecraft Servers';  
 		}
