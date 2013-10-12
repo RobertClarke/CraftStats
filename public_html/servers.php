@@ -72,7 +72,7 @@ $server = $database->query("SELECT * FROM servers WHERE (resolved = '$_GET[ip]' 
 if($_GET['tab'] == 'vote'){
 	$template->setTitle('Vote for '.($server['name'] ? $server['name'] : $server['ip']));
 }else{
-	$template->setTitle($server['ip']);
+	$template->setTitle($server['name'] ? $server['name'] : $server['ip']);
 }
 if($server['ID'] == ''){
 	header("Location: /404");exit;
