@@ -45,7 +45,7 @@ if($_POST['addowner']){
 ?>
 <div class="row">
 	<div class="twelve columns">
-	<a href="http://minecraftservers.com/reset.php?pass=8712DSJaaa011" class="button" style="margin-top:30px;">Reset slaves</a>
+	<a href="http://craftstats.com/reset.php?pass=8712DSJaaa011" class="button" style="margin-top:30px;">Reset slaves</a>
 	<div class="twelve columns box">
 		<h4>Set announcement</h4>
 		<form action="/admin" method="post">
