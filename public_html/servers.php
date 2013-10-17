@@ -14,18 +14,18 @@ $template->setDesc($server['ip'].' | '.($sname != '' ? $sname.' | ':'').''.$serv
 //$template->setKeys(($scat != '' ? 'minecraft '.$scat.' server, ':'').($scat != '' ? 'mc '.$scat.' server, ':'').' minecraft '.($server['version'] != '' ? $server['version'].' ' : '').'servers, '.($scat != '' ? 'minecraft '.$server['version'].' '.$scat.' servers, ':'').' '.($scat != '' ? 'minecraft '.$server['version'].' '.$scat.' server ':''));
 if($server[blacklisted] == 1)
 {
-	header('Location: /410');
-	exit;
+	header($_SERVER["SERVER_PROTOCOL"]." 410 Removed");
 }
 if($server[removed] == 1)
 {
-	header('Location: /410');
-	exit;
+	header($_SERVER["SERVER_PROTOCOL"]." 410 Removed");
 }
 if($server[game] == mcpe)
 {
-	header('Location: /404');
-	exit;
+	header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+}
+if($server['ID'] == ''){
+	header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
 }
 $database->query("SELECT * FROM users WHERE id = '$_SESSION[id]' AND admin = 1");
 if($database->num_rows == 1){
@@ -72,9 +72,6 @@ if($_GET['tab'] == 'vote'){
 	$template->setTitle('Vote for '.($server['name'] ? $server['name'] : $server['ip']));
 }else{
 	$template->setTitle($server['name'] ? $server['name'] : $server['ip']);
-}
-if($server['ID'] == ''){
-	header("Location: /404");exit;
 }
 $dpoints = $database->query("SELECT * FROM (SELECT * FROM updates WHERE serverID = '$server[ID]' ORDER BY time DESC) AS u ORDER BY u.time ASC");
 $uptimeavg = array();
