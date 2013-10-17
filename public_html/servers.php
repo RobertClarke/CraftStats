@@ -31,11 +31,23 @@ if($server['ID'] == ''){
 
 if($notfoundError == true){
 	header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
-	echo '404 stuff';
+	$template->setTitle('404');
+	$template->show('header');
+	$template->show('nav');
+	echo '<h1 style="position:absolute;left:40px;top:50px;font-size:190px;">404</h1>';
+	echo '<h2 style="position:absolute;left:40px;top:310px;font-size:16px;">The page you\'re looking for cannot be found.</h2>';
+	$template->show('footer');
+	exit;
 }
 if($removedError == true){
 	header($_SERVER["SERVER_PROTOCOL"]." 410 Removed");
-	echo '404 stuff';
+	$template->setTitle('410');
+	$template->show('header');
+	$template->show('nav');
+	echo '<h1 style="position:absolute;left:40px;top:50px;font-size:190px;">410</h1>';
+	echo '<h2 style="position:absolute;left:40px;top:310px;font-size:16px;">The page you\'re looking has been removed.</h2>';
+	$template->show('footer');
+	exit;
 }
 $database->query("SELECT * FROM users WHERE id = '$_SESSION[id]' AND admin = 1");
 if($database->num_rows == 1){
