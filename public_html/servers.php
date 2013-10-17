@@ -7,25 +7,35 @@ if($_POST['advc'] == true){
 
 $data = array();
 
+$notfoundError = false;
+$removedError = false;
+
 $server = $database->query("SELECT * FROM servers WHERE (resolved = '$_GET[ip]' AND resolved != '') OR ip = '$_GET[ip]' LIMIT 0,1",db::GET_ROW);
 $sname = $server['name'];
 $scat = $server['category'];
 $template->setDesc($server['ip'].' | '.($sname != '' ? $sname.' | ':'').''.$server['connPlayers'].' players online | '.($scat != '' ? 'Minecraft '.($server['version'] != '' ? $server['version'].' ' : '').''.$scat.' server | ':'').'Come join one of the minecraft servers on CraftStats today!');
 //$template->setKeys(($scat != '' ? 'minecraft '.$scat.' server, ':'').($scat != '' ? 'mc '.$scat.' server, ':'').' minecraft '.($server['version'] != '' ? $server['version'].' ' : '').'servers, '.($scat != '' ? 'minecraft '.$server['version'].' '.$scat.' servers, ':'').' '.($scat != '' ? 'minecraft '.$server['version'].' '.$scat.' server ':''));
-if($server[blacklisted] == 1)
-{
-	header($_SERVER["SERVER_PROTOCOL"]." 410 Removed");
+
+if($server[blacklisted] == 1){
+	$removedError = true;
 }
-if($server[removed] == 1)
-{
-	header($_SERVER["SERVER_PROTOCOL"]." 410 Removed");
+if($server[removed] == 1){
+	$removedError = true;
 }
-if($server[game] == mcpe)
-{
-	header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+if($server[game] == mcpe){
+	$notfoundError = true;
 }
 if($server['ID'] == ''){
+	$notfoundError = true;
+}
+
+if($notfoundError == true){
 	header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+	echo '404 stuff';
+}
+if($removedError == true){
+	header($_SERVER["SERVER_PROTOCOL"]." 410 Removed");
+	echo '404 stuff';
 }
 $database->query("SELECT * FROM users WHERE id = '$_SESSION[id]' AND admin = 1");
 if($database->num_rows == 1){
