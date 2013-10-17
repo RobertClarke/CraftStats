@@ -460,6 +460,7 @@ if(time() > $server['sponsorTime'] && ($instock2 || $instock)){ ?>
           				'PVE',
 					'PVP',
 					'Roleplaying',
+					'RPG',
 					'Skyblock',
           				'Spoutcraft',
 					'Survival',
