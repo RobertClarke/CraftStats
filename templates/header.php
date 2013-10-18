@@ -78,4 +78,5 @@
   </script>
 <link rel="shortcut icon" href="http://craftstats.com/images/favicon.ico" type="image/x-icon" />
   <?php echo $this->headscripts; ?>
+<!-- Site online -->
 </head>
