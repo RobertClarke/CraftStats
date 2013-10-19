@@ -1,5 +1,6 @@
 <?php
 include '../inc/global.inc.php'; 
+header($_SERVER["SERVER_PROTOCOL"]." 404 Removed");
 $template->setTitle('410');
 $template->show('header');
 $template->show('nav');
