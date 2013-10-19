@@ -26,7 +26,7 @@ if($server[game] == mcpe){
 	$notfoundError = true;
 }
 if($server['ID'] == ''){
-	$notfoundError = true;
+	$removedError = true;
 }
 
 if($notfoundError == true){
