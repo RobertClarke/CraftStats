@@ -1,5 +1,6 @@
 <?php
-include '../inc/global.inc.php'; 
+include '../inc/global.inc.php';
+header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
 $template->setTitle('404');
 $template->show('header');
 $template->show('nav');
