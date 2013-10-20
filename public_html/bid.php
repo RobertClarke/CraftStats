@@ -134,6 +134,7 @@ if($haspaid){
 		</div>
 	</div>
 </div>
+<?php echo mktime(0,0,0,date("n"),24); ?>
 <div class="row">
 	<div class="twelve columns">
 		<div class="servers">
