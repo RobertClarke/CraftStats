@@ -140,7 +140,7 @@ if($haspaid){
 		<div class="servers">
 			<div class="row table">
 				<div class="six columns">
-					<b>Top Bids</b>
+					<b>Top Bids <?php echo $auctionid;?></b>
 					
 					<table class="twelve">
 						<thead>
