@@ -140,7 +140,7 @@ if($haspaid){
 		<div class="servers">
 			<div class="row table">
 				<div class="six columns">
-					<b>Top Bids <?php echo $auctionid;?></b>
+					<b>Top Bids</b>
 					
 					<table class="twelve">
 						<thead>
@@ -152,7 +152,7 @@ if($haspaid){
 						</thead>
 						<tbody>
 							<?php
-								if($database->num_rows == 0){
+								if($bids != ''){
 								?>
 								<tr>
 									<td></td>
