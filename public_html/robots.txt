@@ -3,4 +3,5 @@ Disallow: /banner/
 Disallow: /admin
 Disallow: /refer
 Disallow: /myservers
+Disallow: /login
 Sitemap: http://craftstats.com/sitemap.xml
