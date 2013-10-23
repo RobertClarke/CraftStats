@@ -38,18 +38,6 @@ $xml .='<?xml version="1.0" encoding="UTF-8"?>
    </url>
 ';
 
-$servers = $database->query("SELECT ip, lastUpdate FROM servers WHERE game = 'minecraft' AND uptime > -86400 AND blacklisted != 1 AND removed != 1");
-foreach($servers as $s){
-	$xml .= '<url>
-      <loc>http://craftstats.com/server/'.$s['ip'].'</loc>
-	  <lastmod>'.date(DATE_ATOM,($s['lastUpdate'] == 0 ? time() : $s['lastUpdate'])).'</lastmod>
-   </url>';
-   $xml .= '<url>
-      <loc>http://craftstats.com/server/'.$s['ip'].'/vote</loc>
-	  <lastmod>'.date(DATE_ATOM,($s['lastUpdate'] == 0 ? time() : $s['lastUpdate'])).'</lastmod>
-   </url>';
-}
-
 $host = $database->query("SELECT slug FROM hosts");
 foreach($host as $h){
 	$xml .= '<url>
@@ -75,6 +63,18 @@ foreach($host as $h){
       <changefreq>always</changefreq>
    </url>';
   }
+
+$servers = $database->query("SELECT ip, lastUpdate FROM servers WHERE game = 'minecraft' AND uptime > -86400 AND blacklisted != 1 AND removed != 1");
+foreach($servers as $s){
+	$xml .= '<url>
+      <loc>http://craftstats.com/server/'.$s['ip'].'</loc>
+	  <lastmod>'.date(DATE_ATOM,($s['lastUpdate'] == 0 ? time() : $s['lastUpdate'])).'</lastmod>
+   </url>';
+   $xml .= '<url>
+      <loc>http://craftstats.com/server/'.$s['ip'].'/vote</loc>
+	  <lastmod>'.date(DATE_ATOM,($s['lastUpdate'] == 0 ? time() : $s['lastUpdate'])).'</lastmod>
+   </url>';
+}
 
 $xml .= '
 
