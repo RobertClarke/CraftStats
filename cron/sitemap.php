@@ -55,7 +55,7 @@ foreach($host as $h){
    </url>';
   }
   
-   $vs = array_reverse($database->query("SELECT version FROM versions ORDER BY time DESC, percent DESC LIMIT 5")); 
+   $vs = array_reverse($database->query("SELECT version FROM versions ORDER BY time DESC, percent DESC LIMIT 10")); 
   foreach($vs as $vb){
 	$xml .= '<url>
       <loc>http://craftstats.com/version/'.urlencode($vb['version']).'</loc>
