@@ -4,4 +4,5 @@ Disallow: /admin
 Disallow: /refer
 Disallow: /myservers
 Disallow: /login
+Disallow: /promote/bid
 Sitemap: http://craftstats.com/sitemap.xml

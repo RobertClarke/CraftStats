@@ -4,6 +4,7 @@
     
     public $templatename;
     public $title;
+    public $mainH1;
 	public $desc;
     public $scripts;
     public $onload;
@@ -16,6 +17,7 @@
     public $headscripts;
     public $content;
 	public $keys;
+    public $index;
     private $assets;
   
     public function __construct($db,$logger){
@@ -33,11 +35,21 @@
     
     public function setTitle($title){
 		if(strlen($title) < 1){ 
-			$this->title = 'Minecraft Servers | CraftStats';  
+			$this->title = 'Minecraft Servers | Minecraft Servers List';  
 		}else{
 			$this->title = $title.' | Minecraft Servers';  
 		}
 		$this->logger->log('template', 'title', $this->title, 'template');
+      
+    }
+
+    public function setMainH1($mainH1){
+		if(strlen($mainH1) < 1){ 
+			$this->mainH1 = 'CraftStats';  
+		}else{
+			$this->mainH1 = $mainH1;  
+		}
+		$this->logger->log('template', 'mainH1', $this->mainH1, 'template');
       
     }
 	
@@ -49,13 +61,13 @@
 		}
     }
 	
-	public function setKeys($keys){
-		if(strlen($keys) < 1){ 
-			$this->keys = 'minecraft servers, minecraft server list, best minecraft servers, minecraft servers list, minecraft voting website';  
-		}else{
-			$this->keys = $keys.', '.'minecraft servers, minecraft server list, best minecraft servers, minecraft servers list, minecraft voting website';  
-		}
-    }
+    public function setKeys($keys){
+        if(strlen($keys) < 1){ 
+            $this->keys = 'minecraft servers, minecraft server list, best minecraft servers, minecraft servers list, minecraft voting website';  
+        }else{
+            $this->keys = $keys.', '.'minecraft servers, minecraft server list, best minecraft servers, minecraft servers list, minecraft voting website';  
+        }
+	}
   
     public function setOnload($onload){
       
@@ -75,12 +87,15 @@
 		if($this->title == ''){
 			$this->setTitle('');
 		}
+		if($this->mainH1 == ''){
+			$this->setMainH1('');
+		}
 		if($this->desc == ''){
 			$this->setDesc('');
 		}
-		if($this->keys == ''){
-			$this->setKeys('');
-		}
+        if($this->keys == ''){
+                $this->setKeys('');
+        }
 		$namef = strtoupper($name);
 		$this->modulecount++;
       $database = $this->db;

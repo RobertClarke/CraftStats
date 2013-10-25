@@ -91,7 +91,7 @@ if($_POST['action'] == 'reset' && count($errors) == 0){
 	$database->query("UPDATE users SET resetcode = '$code',resetexpire = $expire WHERE username = '$_POST[user]'");
 	$user = $database->query("SELECT * FROM users WHERE username = '$_POST[user]'",db::GET_ROW);
 	$to      = $user['email'];
-	$subject = 'Minecraft Servers Password Reset';
+	$subject = 'CraftStats Password Reset';
 	$message = 'Click this link to reset your password, link will work for the next 24 hours: <a href="http://craftstats.com/login?fpc=1&code='.$code.'">Reset Password</a>';
 	$headers = 'From: noreply@craftstats.com'."\r\n";
 	$headers  .= 'MIME-Version: 1.0' . "\r\n";
@@ -111,103 +111,51 @@ if($_POST['action'] && $_POST['action'] != 'reset' && count($errors) == 0){
 		$_SESSION['username'] = $user['username'];
 		$_SESSION['mcuser'] = $user['mcuser'];
 	}
-	header('Location: '.($_SESSION['loginredirect'] ? $_SESSION['loginredirect'] : '/account'));
+	header('Location: '.($_SESSION['loginredirect'] ? $_SESSION['loginredirect'] : '/'));
 }
 
-
-
 $template->setTitle(($reset? 'Reset Password' : ($_GET['r'] ? 'Register':($_GET['u'] ? 'Upgrade Account' : 'Login'))));
+$template->setMainH1(($reset? 'Reset Password' : ($_GET['r'] ? 'Register':($_GET['u'] ? 'Upgrade Account' : 'Login'))));
+
 $template->show('header');
-$template->show('nav');
 ?>
-<div class="row">
-	<div class="twelve columns">
-		<?php
-		if(count($errors) > 0){
-		?>
-		<div class="alert-box" style="margin-top:20px;">
-			<?php
-				foreach($errors as $e){
+	<?php
+	if(count($errors) > 0){
+	?>
+   <div class="alert-box negative">
+				<?php foreach($errors as $e){
 					echo $e.'<br/>';
 				}
 			?>
-		</div>
-		<?php 
+    </div>
+    <?php 
 		}
-		?>
-		<div class="twelve columns box">
-			<div class="row">
-				<div class="twelve columns">
-					<h5><?php echo (($resetconfirm || $reset) ? 'Reset Password' : ($register ? 'Sign Up':($upgrade?'Upgrade Account':'Login'))); ?></h5>
-				</div>
-			</div>
-			<div class="row">
-				<div class="six columns">
-					<?php if($_GET['se']){ ?>
-					<div class="alert-box alert">
-					<?php echo $_GET['se']; ?>
-					</div>
-					<?php } ?>
-					<form action="/login" method="post">
-					<?php
-						if($resetconfirm){
-							echo '<input type="hidden" name="code" value="'.($_GET['code']?$_GET['code']:$_POST['code']).'"/>';
-						}
-					?>
-					<input type="hidden" name="action" value="<?php echo ($resetconfirm ? 'resetconfirm' : ($reset ? 'reset' : ($register ? 'register':($upgrade? 'upgrade' : 'login')))); ?>" />
-						<?php if(!$reset && !$resetconfirm){ ?><div class="row collapse">
-								<div class="eight columns">
-									<input type="text" name="email" placeholder="Email" />
-								</div>
-						</div>
-						<?php } ?>
-						<?php if($upgrade || $register || $reset){ ?>
-						<div class="row collapse">
-								<div class="eight columns">
-								  <input type="text" name="user" placeholder="<?php echo($reset ? 'Username or Email':'Username')?>" />
-								</div>
-								<?php
-									if($reset){
-									?>
-									<div class="four mobile-one columns">
-								  <button class="button expand postfix" style="padding:0px;">Submit</button>
-								</div>
-									<?php
-									}
-								?>
-						</div>
-								<?php } ?>
-								<?php if(!$reset){ ?>
-						<div class="row collapse">
-								<div class="eight mobile-three columns">
-								  <input type="password" name="pass" placeholder="Password" />
-								</div>
-								<?php if($upgrade || $register ||  $resetconfirm){ ?>
-								<div class="eight mobile-three columns">
-								  <input type="password" name="pass2" placeholder="Confirm Password" />
-								</div>
-								<?php }  ?>
-								<div class="four mobile-one columns">
-								  <button class="button expand postfix" style="padding:0px;">Submit</button>
-								</div>
-								<?php if(!$upgrade && !$register && !$resetconfirm){ ?>
-								<div class="twelve columns">
-									<a href="/login/reset" style="font-size:12px;">Forgot your password?</a>
-								</div>
-								<?php } }?>
-						</div>
-					</form>
-				</div>
-				<?php if(!$upgrade && !$register && !$reset && !$resetconfirm){ ?>
-				<div class="six columns">
-					<a href="/login?r=1" class="button expand secondary" >Register with Email</a>
-					<a href="/oauth?login=twitter" class="button expand secondary" style="margin-top:5px;">Sign in with Twitter</a>
-				</div>
-				<?php } ?>
-			</div>
-		</div>
-	</div>
-</div>
+	?>
+    <section class="content main_content">
+      <div class="sub_content">
+        <div class="wrap" style="margin-bottom: 1em">
+          <h3><?php echo (($resetconfirm || $reset) ? 'Reset Password' : ($register ? 'Sign Up':($upgrade?'Upgrade Account':'Login'))); ?></h3>
+        </div>
+        <div class="half_width">
+          <form action="/login" method="post">
+			<?php
+				if($resetconfirm){
+					echo '<input type="hidden" name="code" value="'.($_GET['code']?$_GET['code']:$_POST['code']).'"/>';
+				}
+			?>
+			<input type="hidden" name="action" value="<?php echo ($resetconfirm ? 'resetconfirm' : ($reset ? 'reset' : ($register ? 'register':($upgrade? 'upgrade' : 'login')))); ?>" />
+            <input name="email" type="text" placeholder="Email"></input>
+            <input name="pass" type="password" placeholder="Password"></input>
+            <input type="submit"></input>
+          </form>
+        </div>
+        <div class="half_width">
+          <a href="/login?r=1" class="btn btn-block">Login with email</a>
+          <a href="/oauth?login=twitter" class="btn btn-block">Login with Twitter</a>
+        </div>
+      </div>
+    </section>
+  </div>
 <?php
 $template->show('footer');
 ?>

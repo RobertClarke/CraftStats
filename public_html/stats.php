@@ -53,60 +53,6 @@ function updateStats(){
 
 </script>
 ');
-$template->show('header');
-/*$data = array();
-$dpoints = $database->query("SELECT * FROM (SELECT * FROM serviceinfo ORDER BY time DESC LIMIT 0,200) AS u ORDER BY u.time ASC");
-$i = 0;
-foreach($dpoints as $update){
-array_push($data,array('new Date('.($update['time']*1000).')',(($dpoints[$i]['avgUpdate']+$dpoints[$i-1]['avgUpdate']+$dpoints[$i-2]['avgUpdate']+$dpoints[$i-3]['avgUpdate'])/(min(4,$i+1))),$update['load'],$update['queueSize']));
-$i++;
-}
-
-foreach($data as $row){
-	$rows .= "[$row[0], $row[1], $row[2],$row[3]],";
-}
-$template->setHeadScripts('<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-		var data = new google.visualization.DataTable();
-        data.addColumn("datetime", "Time");
-        data.addColumn("number", "Average Server Processing Time (ms)");
-		data.addColumn("number", "Server Load %");
-		data.addColumn("number", "Servers Remaining in Processing Queue");
-		data.addRows([
-          '.$rows.'
-        ]);
-
-        var options = {
-          title: \'MinecraftServers.com Server Activity\',
-		  focusTarget: \'category\',
-		  curveType: "function",
-		  interpolateNulls: false,
-		  backgroundColor: \'#EAEAEA\',
-		  vAxis: {viewWindow:{min:0}},
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById(\'chart_div\'));
-        chart.draw(data, options);
-      }
-    </script>');
-$template->show('header');
-$template->show('nav');
-$template->show('logo');
-?>
-</div>
-<div id="container">
-
-<div class="box">
-<div id="chart_div" style="width: 943px; height: 500px;"></div>
-
-
-</div>
-<?php
-$template->show('footer');
-?>*/
 
 ?>
 <style type="text/css">

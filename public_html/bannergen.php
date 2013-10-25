@@ -42,7 +42,7 @@ if($_GET['switch'] == 1){
 	$offline = !$offline;
 }
 
-$cache = FALSE;//($memcache_disable ? false:$memcache->get(md5('banner'.($offline?'offline':'online').$banneroption1.$sip)));
+$cache = FALSE;
 if(!$cache){
 	
 
@@ -54,12 +54,7 @@ if(!$cache){
 	$uptime = round((($allcount-$downcount)/$allcount)*100);
 	$servername = $server['ip'];
 
-	
-	
-
-	
-
-	$image = imagecreatefrompng('images/banner/back' . $banneroption1 . '.png');
+	$image = imagecreatefrompng('assets/img/banner/back' . $banneroption1 . '.png');
 	imagealphablending($image, true);
 	imagesavealpha($image, true);
 
@@ -153,9 +148,8 @@ if(!$cache){
 		imagefilter($image, IMG_FILTER_GRAYSCALE);
 	}
 
-	$bigtext = 'fonts/bebas.ttf';
-	$smalltext = 'fonts/arial.ttf';
-
+	$bigtext = 'assets/font/bebas.ttf';
+	$smalltext = 'assets/font/arial.ttf';
 
 
 	if(!$offline){
