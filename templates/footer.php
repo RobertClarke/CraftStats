@@ -1,4 +1,3 @@
-
 <div class="footer_area">
   <footer>
     <section class="links_area">
@@ -17,7 +16,8 @@
     <section class="links_area r_align">
       <h3><a href="/" class="site_logo_mini">CraftStats</a></h3>
       <ul>
-        <li>Revision <?php include 'build.php'; ?></li>
+        <li>Revision 3.0</li>
+        <!--<li>Revision <?php include 'build.php'; ?></li>-->
         <li>&copy; 2013 CraftStats</li>
       </ul>
     </section>
