@@ -51,7 +51,7 @@ RewriteRule ^login/reset?$ login.php?fp=1 [L]
 
 # Externally redirect direct client requests for .php files to non-.php URLs
 rewriteCond %{THE_REQUEST} ^GET\ /([^/]+/)*[^.]+\.php(\?[^\ ]*)?\ HTTP/
-rewriteRule ^(([^/]+/)*[^.]+)\.php$ http://dev.craftstats.com/$1 [R=301,L]
+rewriteRule ^(([^/]+/)*[^.]+)\.php$ http://craftstats.com/$1 [R=301,L]
 #
 # Internally rewrite extensionless page URLs to php files
 # if no extension or trailing slash on requested URL
