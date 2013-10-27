@@ -77,6 +77,9 @@ if($notfoundError == true){
 
 $template->show('header');
 ?>
+    <div class="alert-box positive">
+      The new 1.7 update, along with new site changes are causing issues with the site. We're working on them!
+    </div>
     <section class="content main_content">
       <ul class="server_list_large"><?php 
       foreach($sponsoredp as $sp){?>
