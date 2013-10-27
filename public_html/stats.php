@@ -89,3 +89,5 @@ $i++;
 
 </div>
 </div>
+
+<?php $template->show('footer'); ?>
