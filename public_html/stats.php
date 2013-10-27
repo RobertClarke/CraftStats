@@ -53,8 +53,7 @@ function updateStats(){
 
 </script>
 ');
-
-?>
+$template->show('header');
 <style type="text/css">
 *{
 	font-size:14px !important;
