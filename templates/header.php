@@ -7,6 +7,7 @@
   <link rel='stylesheet' href='/assets/css/fontello.css'>
   <link rel='stylesheet' href='/assets/css/style.css'>
 
+  <script src="/assets/js/jquery-1.8.3.min.js"></script>
   <?php echo $this->headscripts; ?>
 
   <title><?php echo $this->title; ?></title>
