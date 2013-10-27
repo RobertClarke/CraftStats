@@ -53,7 +53,7 @@ function updateStats(){
 
 </script>
 ');
-$template->show('header');
+$template->show('header'); ?>
     <section class="content main_content">
       <div class="sub_content">
         <div class="wrap">
