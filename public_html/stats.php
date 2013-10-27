@@ -59,8 +59,8 @@ $template->show('header'); ?>
         <div class="wrap">
                       Minecraft Server Activity</h1> 
                       <h3>currently averaging <span class="srate">0</span> servers/min (each server updated every <span class="ptrate">0</span> minutes)</h3>
-                      <h3 style="position:absolute;top:50px;left:250px;"><span class="updating">0</span> servers currently being updated</h3>
-                      <h3 style="position:absolute;top:70px;left:250px;"><span class="waiting">0</span> servers have not been updated for 10 minutes</h3>
+                      <h3><span class="updating">0</span> servers currently being updated</h3>
+                      <h3><span class="waiting">0</span> servers have not been updated for 10 minutes</h3>
         </div>
       </div>
     </section>
