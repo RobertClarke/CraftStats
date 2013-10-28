@@ -249,6 +249,7 @@ $votes = $database->num_rows;
           <li>Server version: <span><?php echo $server['version']; ?></span></li>
           <li>Server type: <span><?php if($server['category'] != ''){echo $server['category'];}else{echo 'None';} ?></span></li>
           <li>Players online: <span><?php echo $server['connPlayers'].'/'.$server['maxPlayers']; ?></span></li>
+          <li>Last ping: <span><?php echo ($time - $server['lastUpdate'] > 60 ? round(($time - $server['lastUpdate'])/60).'m' : $time - $server['lastUpdate'].'s'); ?> minutes ago</span>
         </ul>
         <ul class="half_width">
           <li>Server rank: <span><?php echo '#'.$server['ranking']; ?></span></li>
