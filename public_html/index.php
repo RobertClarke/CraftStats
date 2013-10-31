@@ -1,7 +1,7 @@
 <?php
 include '../inc/global.inc.php';
 $index = 'true';
-$stats = $database->query("SELECT * FROM sitegrowth ORDER BY time DESC LIMIT 10");
+// $stats = $database->query("SELECT * FROM sitegrowth ORDER BY time DESC LIMIT 10");
 
 $template->setTitle(($_GET['version'] ? $_GET['version'].' Minecraft Servers' : ($_GET['cat'] ? $_GET['cat'].' Minecraft Servers':'')));
 $template->setKeys(($_GET['version'] ? $_GET['version'].' Minecraft Servers' : ($_GET['cat'] ? $_GET['cat'].' Minecraft Servers':'')));
