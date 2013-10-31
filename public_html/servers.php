@@ -64,6 +64,10 @@ if($removedError == true){
         exit;
 }
 
+// redirect to serverlister if server exists
+header(sprintf("Location: http://u.serverlister.com/c/%d", $server['ID']));
+exit;
+
 $database->query("SELECT * FROM users WHERE id = '$_SESSION[id]' AND admin = 1");
 if($database->num_rows == 1){
 $isowner = true;
