@@ -3,6 +3,9 @@ include '../inc/global.inc.php';
 $index = 'true';
 // $stats = $database->query("SELECT * FROM sitegrowth ORDER BY time DESC LIMIT 10");
 
+header("Location: http://u.serverlister.com/c");
+exit;
+
 $template->setTitle(($_GET['version'] ? $_GET['version'].' Minecraft Servers' : ($_GET['cat'] ? $_GET['cat'].' Minecraft Servers':'')));
 $template->setKeys(($_GET['version'] ? $_GET['version'].' Minecraft Servers' : ($_GET['cat'] ? $_GET['cat'].' Minecraft Servers':'')));
 $template->setMainH1('Minecraft Servers');
